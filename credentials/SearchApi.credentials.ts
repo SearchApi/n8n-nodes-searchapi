@@ -4,9 +4,9 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class SearchAPI implements ICredentialType {
+export class SearchApi implements ICredentialType {
 	name = 'searchApi';
-	displayName = 'SearchAPI';
+	displayName = 'SearchAPI API';
 	
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
@@ -16,11 +16,12 @@ export class SearchAPI implements ICredentialType {
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',
+			typeOptions: { password: true },
 			default: '',
             required: true,
 		},
 	];
-	authenticate = {
+	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
         properties: {
 			qs: { api_key: '={{ $credentials.apiKey }}' },
@@ -28,5 +29,5 @@ export class SearchAPI implements ICredentialType {
                 "X-SearchApi-Source": "N8N"
             }
         }
-	} as IAuthenticateGeneric;
+	};
 }
