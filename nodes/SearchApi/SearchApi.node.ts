@@ -7,14 +7,18 @@ export class SearchApi implements INodeType {
 		icon: 'file:searchApi.svg',
 		group: ['output'],
 		version: 1,
-		description: 'Search the web via SearchAPI.io (declarative)',
+		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. \
+Set the `engine` to the required backend (default: `google`). Always include `q` (the user’s query) and your \
+`api_key`; add optional parameters to localize, paginate, filter by date, or change device-type as needed. \
+Return the raw JSON response, then cite sources in the final reply. ',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchAPI' },
+		// @ts-ignore
 		inputs: ['main'],
+		// @ts-ignore
 		outputs: ['main'],
-
 		credentials: [{ name: 'searchApi', required: true }],
-
+		usableAsTool: true,
 		requestDefaults: {
 			baseURL: 'https://www.searchapi.io/api/v1',
 			method: 'GET',
@@ -24,7 +28,14 @@ export class SearchApi implements INodeType {
 				api_key: '={{ $credentials.apiKey }}', // generic-auth pattern :contentReference[oaicite:3]{index=3}
 			},
 		},
-
+		hints: [
+			{
+			  message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
+			  type: 'info',
+			  whenToDisplay: 'beforeExecution',
+			  location: 'inputPane',
+			},
+		  ],
 		properties: [
 			{
 				displayName: 'Engine (Engine)',
@@ -32,7 +43,9 @@ export class SearchApi implements INodeType {
 				type: 'string',
 				default: 'google',
 				required: true,
+				
 				description: 'Search engine to use for the query',
+				hint: 'Check https://www.searchapi.io/docs/google for the available engines',
 				routing: {
 					request: {
 						qs: {
@@ -47,8 +60,7 @@ export class SearchApi implements INodeType {
 				type: 'fixedCollection',
 				typeOptions: { multipleValues: true },
 				default: {},
-				hint: 'You can pass a paramters object to this node, to use the parameters in the search',
-				description: 'Add the parameters you want to use for the search, refer to the SearchAPI.io documentation for the available parameters',
+				description: 'Add the parameters you want to use for the search, refer to the SearchAPI.io documentation for the available parameters for the selected engine',
 				options: [
 					{
 						displayName: 'Parameter',
@@ -59,12 +71,14 @@ export class SearchApi implements INodeType {
 								name: 'name',
 								type: 'string',
 								default: '',
+								placeholder: 'q',
 							},
 							{
 								displayName: 'Value',
 								name: 'value',
 								type: 'string',
 								default: '',
+								placeholder: 'pizza near me',
 							},
 						],
 					},
@@ -78,7 +92,7 @@ export class SearchApi implements INodeType {
 						// We are doing this cast here because we need to
 						// build an object out of the collection entries
 						// and merge it into qs, but qs expects an object.
-						qs: '={{ Object.fromEntries(($value.parameter ?? $json.parameters ?? []).map(p => [p.name, p.value]))  }}' as unknown as IDataObject,
+						qs: '={{ Object.fromEntries(($value.parameter ?? []).map(p => [p.name, p.value])) }}' as unknown as IDataObject,
 					},
 				},
 			},

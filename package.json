@@ -49,7 +49,8 @@
     "gulp": "^4.0.2",
     "prettier": "^3.3.2",
     "sqlite3": "^5.1.7",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "n8n-workflow": "^1.70.0"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
