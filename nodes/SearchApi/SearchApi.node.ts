@@ -7,10 +7,7 @@ export class SearchApi implements INodeType {
 		icon: 'file:searchApi.svg',
 		group: ['output'],
 		version: 1,
-		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. \
-Set the `engine` to the required backend (default: `google`). Always include `q` (the user’s query) and your \
-`api_key`; add optional parameters to localize, paginate, filter by date, or change device-type as needed. \
-Return the raw JSON response, then cite sources in the final reply. ',
+		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. Make sure to always cite the sources in the final reply. ',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchAPI' },
 		// @ts-ignore
