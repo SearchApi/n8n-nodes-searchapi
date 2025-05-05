@@ -1,14 +1,14 @@
 {
   "name": "@searchapi/n8n-nodes-searchapi",
   "version": "1.0.0",
-  "description": "SearchAPI.io nodes for n8n",
+  "description": "SearchApi.io nodes for n8n",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "https://www.searchapi.io",
   "author": {
-    "name": "SearchAPI",
+    "name": "SearchApi",
     "email": "support@searchapi.io"
   },
   "repository": {

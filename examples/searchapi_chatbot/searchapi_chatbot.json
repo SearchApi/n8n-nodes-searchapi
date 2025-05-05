@@ -69,7 +69,7 @@
       },
       {
         "id": "73d024bd-aab3-491c-afc4-79194f4ac7fc",
-        "name": "SearchAPI",
+        "name": "SearchApi",
         "type": "CUSTOM.searchApiTool",
         "position": [
           260,
@@ -91,7 +91,7 @@
         "credentials": {
           "searchApi": {
             "id": "rTFvdffzP7fPVaVr",
-            "name": "SearchAPI account"
+            "name": "SearchApi account"
           }
         },
         "typeVersion": 1
@@ -107,7 +107,7 @@
         "parameters": {
           "color": 5,
           "width": 340,
-          "content": "## SearchAPI AI Agent\nWhenever you ask a question that should be searched on the web, the AI Agent will use SearchAPI to do it. To run this workflow, you need to have the credentials for Searchapi.io and some LLM provider."
+          "content": "## SearchApi AI Agent\nWhenever you ask a question that should be searched on the web, the AI Agent will use SearchApi to do it. To run this workflow, you need to have the credentials for Searchapi.io and some LLM provider."
         },
         "typeVersion": 1
       },
@@ -122,7 +122,7 @@
         "parameters": {
           "width": 260,
           "height": 120,
-          "content": "## Tip\nYou can change the node to use any of the engines available on [SearchAPI.io](https://www.searchapi.io/)"
+          "content": "## Tip\nYou can change the node to use any of the engines available on [SearchApi.io](https://www.searchapi.io/)"
         },
         "typeVersion": 1
       }
@@ -134,7 +134,7 @@
     },
     "versionId": "1f42e7e2-32ca-4ceb-8f1e-1de26f09d525",
     "connections": {
-      "SearchAPI": {
+      "SearchApi": {
         "ai_tool": [
           [
             {

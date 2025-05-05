@@ -20,7 +20,7 @@
       },
       {
         "id": "3df790f2-4c6d-47d2-9b88-7967eb3bb78f",
-        "name": "SearchAPI",
+        "name": "SearchApi",
         "type": "CUSTOM.searchApi",
         "position": [
           60,
@@ -45,7 +45,7 @@
         "credentials": {
           "searchApi": {
             "id": "rTFvdffzP7fPVaVr",
-            "name": "SearchAPI account"
+            "name": "SearchApi account"
           }
         },
         "typeVersion": 1
@@ -171,7 +171,7 @@
     },
     "versionId": "bbfb7334-6f7b-4638-9efb-346b318fffee",
     "connections": {
-      "SearchAPI": {
+      "SearchApi": {
         "main": [
           [
             {
@@ -230,7 +230,7 @@
         "main": [
           [
             {
-              "node": "SearchAPI",
+              "node": "SearchApi",
               "type": "main",
               "index": 0
             }

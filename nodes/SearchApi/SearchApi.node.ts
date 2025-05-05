@@ -2,14 +2,14 @@ import { IDataObject, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'SearchAPI',
+		displayName: 'SearchApi',
 		name: 'searchApi',
 		icon: 'file:searchApi.svg',
 		group: ['output'],
 		version: 1,
 		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. Make sure to always cite the sources in the final reply. ',
 		subtitle: '={{ $parameter["engine"] }}',
-		defaults: { name: 'SearchAPI' },
+		defaults: { name: 'SearchApi' },
 		// @ts-ignore
 		inputs: ['main'],
 		// @ts-ignore
