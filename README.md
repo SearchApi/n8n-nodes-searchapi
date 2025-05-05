@@ -79,10 +79,14 @@ You can also pass a parameters object directly to the node, instead of the UI:
 
 ## Example workflows
 
-To easily see how to work with SearchApi on n8n, refer to the examples we've prepared:
+To easily see how to work with SearchApi on n8n, refer to the examples we've prepared. To use them you can download the json file and import on n8n, or you can paste the url for the, you can also copy the contents and paste inside a workflow. Refer to [n8n docs](https://docs.n8n.io/courses/level-one/chapter-6/#exporting-and-importing-workflows_1) on how to import workflows.
 
 - [Youtube video summarization with SearchApi](/examples/searchapi_youtube_transcripts/)
 - [Chatbot that searchs the web with SearchApi](/examples/searchapi_chatbot/)
+
+### Importing workflow
+
+
 
 ---
 
