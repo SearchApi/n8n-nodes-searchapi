@@ -77,13 +77,12 @@ You can also pass a parameters object directly to the node, instead of the UI:
 
 ---
 
-## Example workflow
+## Example workflows
 
-The sample below searches Google for “n8n community nodes” and extracts the first organic result.
+To easily see how to work with SearchApi on n8n, refer to the examples we've prepared:
 
-
-
-You can import the full `.json` from `/examples/searchapi_google_basic.json` in this repo.
+- [Youtube video summarization with SearchApi](/examples/searchapi_youtube_transcripts/)
+- [Chatbot that searchs the web with SearchApi](/examples/searchapi_chatbot/)
 
 ---
 
@@ -105,7 +104,7 @@ The node returns the raw JSON received from SearchAPI.io. See the [official docs
 
 ## Resources
 
-- **SearchAPI.io documentation** – [https://www.searchapi.io/docs](https://www.searchapi.io/docs)
+- **SearchAPI.io documentation** – [https://www.searchapi.io/](https://www.searchapi.io/docs/google)
 - **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
 - **Community nodes installation** – [https://docs.n8n.io/integrations/community-nodes/installation/](https://docs.n8n.io/integrations/community-nodes/installation/)
 
