@@ -1,46 +1,108 @@
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
-# n8n-nodes-starter
+# n8n SearchApi.io Node
 
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](n8n.io). It includes the node linter and other dependencies.
+Search the web with [SearchApi.io](https://www.searchapi.io/) directly from your n8n workflows. The node exposes the full power of the `/api/v1/search` endpoint and supports **all engines and query parameters** offered by the service.
 
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+> **Why SearchApi.io?**\
+> Real‑time SERP data from Google, Bing, DuckDuckGo, Yahoo, Yandex and more – no captchas, no proxies, one simple API.
 
-## Prerequisites
+---
 
-You need the following installed on your development machine:
+## Installation
 
-* [git](https://git-scm.com/downloads)
-* Node.js and pnpm. Minimum version Node 18. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
+### Via the n8n UI (recommended)
+
+1. Open **Settings → Community Nodes** inside your self‑hosted n8n instance.
+2. Click **Install → Browse** and search for `n8n-nodes-searchapi`.
+3. Select the package, accept the risk prompt, and hit **Install**.
+
+### Via the command line
+
+```bash
+# inside your n8n installation folder
+npm install n8n-nodes-searchapi
+# or with pnpm
+pnpm add n8n-nodes-searchapi
+```
+
+Restart n8n after the install finishes.
+
+> **Compatibility**
+>
+> - n8n ≥ 1.30.0
+> - Node.js ≥ 18
+
+---
+
+## Credentials
+
+1. Sign up at **[SearchApi.io](https://www.searchapi.io/)** and copy your **API Key**.
+2. In n8n go to **Credentials → + New Credential → SearchApi**.
+3. Paste the key and save.\
+   The new credential will now appear in the node’s **Credential** dropdown.
+
+---
+
+## Usage
+
+### 1. Drag‑and‑drop UI
+
+1. Add the **SearchApi** node to your workflow.
+2. Choose your **Credential** and the **Engine**.
+3. Under **Parameters,** click **Add Parameter** for each query string field you need. To determine which fields to add, refer to the engine's documentation.
+   - **Name**: `q`
+   - **Value**: `weather new york`
+4. Execute the workflow to receive the response as JSON.
+
+### 2. Pass a parameters object (programmatic)
+
+You can also pass a parameters object directly to the node, instead of the UI:
+
+```json
+{
+  "parameters": {
+    "q": "n8n workflow automation",
+    "device": "mobile",
+    "location": "Berlin"
+  }
+}
+```
+
+- Feed the object through a **Set** node or any previous node.
   ```
-  pnpm install n8n -g
+  {{$json.parameters}}
   ```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+- The node will give preference to the parameters object.
 
-## Using this starter
+---
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+## Example workflows
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-   ```
-   git clone https://github.com/<your organization>/<your-repo-name>.git
-   ```
-3. Run `pnpm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `pnpm lint` to check for errors or `pnpm lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+To easily see how to work with SearchApi on n8n, refer to the examples we've prepared. To use them you can download the json file and import on n8n, or you can paste the url for the, you can also copy the contents and paste inside a workflow. Refer to [n8n docs](https://docs.n8n.io/courses/level-one/chapter-6/#exporting-and-importing-workflows_1) on how to import workflows.
 
-## More information
+- [Youtube video summarization with SearchApi](/examples/searchapi_youtube_transcripts/)
+- [Chatbot that searchs the web with SearchApi](/examples/searchapi_chatbot/)
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+## Output
 
-## License
+The node returns the raw JSON received from SearchApi.io. See the [official docs](https://www.searchapi.io/docs/google) for complete schemas.
 
-[MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+---
+
+## Troubleshooting
+
+| Error message                | Likely cause                 | Fix                                                                         |
+| ---------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
+| **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                               |
+| **400 Bad Request** | Missing required parameter | Verify against SearchApi docs.                                              |
+| **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
+
+---
+
+## Resources
+
+- **SearchApi.io documentation** – [https://www.searchapi.io/](https://www.searchapi.io/docs/google)
+- **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
+- **Community nodes installation** – [https://docs.n8n.io/integrations/community-nodes/installation/](https://docs.n8n.io/integrations/community-nodes/installation/)
+

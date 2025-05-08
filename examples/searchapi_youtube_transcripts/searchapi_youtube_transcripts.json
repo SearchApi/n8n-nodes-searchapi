@@ -1,0 +1,241 @@
+{
+    "id": "RPlqIyKOfS4uviYK",
+    "meta": {
+      "instanceId": "54299f860163fe60974599588ae4c20ee888191a431346b258503c2db8b536ed",
+      "templateCredsSetupCompleted": true
+    },
+    "name": "Get Youtube Video Summary Using Searchapi",
+    "tags": [],
+    "nodes": [
+      {
+        "id": "4c889838-9062-4797-9b40-e966a3d1d1d4",
+        "name": "When clicking ‘Test workflow’",
+        "type": "n8n-nodes-base.manualTrigger",
+        "position": [
+          -160,
+          0
+        ],
+        "parameters": {},
+        "typeVersion": 1
+      },
+      {
+        "id": "3df790f2-4c6d-47d2-9b88-7967eb3bb78f",
+        "name": "SearchApi",
+        "type": "CUSTOM.searchApi",
+        "position": [
+          60,
+          0
+        ],
+        "parameters": {
+          "engine": "youtube_transcripts",
+          "parameters": {
+            "parameter": [
+              {
+                "name": "video_id",
+                "value": "2XTdEG0Sus0"
+              },
+              {
+                "name": "lang",
+                "value": "en"
+              }
+            ]
+          },
+          "requestOptions": {}
+        },
+        "credentials": {
+          "searchApi": {
+            "id": "rTFvdffzP7fPVaVr",
+            "name": "SearchApi account"
+          }
+        },
+        "typeVersion": 1
+      },
+      {
+        "id": "f5a5352b-07d7-4fff-b5c2-2512cabd3497",
+        "name": "OpenRouter Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+        "position": [
+          748,
+          220
+        ],
+        "parameters": {
+          "model": "qwen/qwen3-0.6b-04-28:free",
+          "options": {}
+        },
+        "credentials": {
+          "openRouterApi": {
+            "id": "tDWBerCVn0gOn7YX",
+            "name": "OpenRouter account"
+          }
+        },
+        "typeVersion": 1
+      },
+      {
+        "id": "cd5b5f49-5187-4b97-959f-e1662f0bc3d5",
+        "name": "Summarization Chain",
+        "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+        "position": [
+          720,
+          0
+        ],
+        "parameters": {
+          "options": {},
+          "chunkingMode": "advanced"
+        },
+        "typeVersion": 2
+      },
+      {
+        "id": "e6ba0b10-7b96-46c6-ae0d-fb3c112edab9",
+        "name": "Recursive Character Text Splitter",
+        "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+        "position": [
+          868,
+          220
+        ],
+        "parameters": {
+          "options": {},
+          "chunkSize": 6000
+        },
+        "typeVersion": 1
+      },
+      {
+        "id": "6bd07e32-e41d-4513-bfbe-d5ee93f18ddb",
+        "name": "Split Out",
+        "type": "n8n-nodes-base.splitOut",
+        "position": [
+          280,
+          0
+        ],
+        "parameters": {
+          "options": {},
+          "fieldToSplitOut": "transcripts"
+        },
+        "typeVersion": 1
+      },
+      {
+        "id": "52f39b7e-dfb0-469f-9b61-64fd0343e972",
+        "name": "Summarize",
+        "type": "n8n-nodes-base.summarize",
+        "position": [
+          500,
+          0
+        ],
+        "parameters": {
+          "options": {},
+          "fieldsToSummarize": {
+            "values": [
+              {
+                "field": "text",
+                "separateBy": " ",
+                "aggregation": "concatenate"
+              }
+            ]
+          }
+        },
+        "typeVersion": 1.1
+      },
+      {
+        "id": "589f34cd-852c-46f9-98b6-811622fd96fa",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -180,
+          -280
+        ],
+        "parameters": {
+          "color": 5,
+          "width": 320,
+          "content": "## Youtube Video Summary\nGiven a **video_id** from Youtube, we concatenate the data and pass it to a summarization chain. To run this workflow, you need to have the credentials for Searchapi.io and some LLM provider."
+        },
+        "typeVersion": 1
+      },
+      {
+        "id": "08e946b4-824d-4dff-a5f1-ce11d05c8727",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          40,
+          220
+        ],
+        "parameters": {
+          "height": 120,
+          "content": "## Tip \nYou can pass the **video_id** from previous nodes to make a better automation"
+        },
+        "typeVersion": 1
+      }
+    ],
+    "active": false,
+    "pinData": {},
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "versionId": "bbfb7334-6f7b-4638-9efb-346b318fffee",
+    "connections": {
+      "SearchApi": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Summarize",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Summarize": {
+        "main": [
+          [
+            {
+              "node": "Summarization Chain",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenRouter Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Summarization Chain",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Recursive Character Text Splitter": {
+        "ai_textSplitter": [
+          [
+            {
+              "node": "Summarization Chain",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Test workflow’": {
+        "main": [
+          [
+            {
+              "node": "SearchApi",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    }
+  }

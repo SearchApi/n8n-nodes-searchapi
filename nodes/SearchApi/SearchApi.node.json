@@ -1,8 +1,8 @@
 {
-	"node": "n8n-nodes-base.httpbin",
+	"node": "n8n-nodes-searchapi",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Development", "Developer Tools"],
+	"categories": ["Development", "Communication", "Utility"],
 	"resources": {
 		"credentialDocumentation": [
 			{
