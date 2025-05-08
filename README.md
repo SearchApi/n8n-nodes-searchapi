@@ -1,10 +1,10 @@
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
-# n8n SearchAPI.io Node
+# n8n SearchApi.io Node
 
-Search the web with [SearchAPI.io](https://www.searchapi.io/) directly from your n8n workflows. The node exposes the full power of the `/api/v1/search` endpoint and supports **all engines and query parameters** offered by the service.
+Search the web with [SearchApi.io](https://www.searchapi.io/) directly from your n8n workflows. The node exposes the full power of the `/api/v1/search` endpoint and supports **all engines and query parameters** offered by the service.
 
-> **Why SearchAPI.io?**\
+> **Why SearchApi.io?**\
 > Real‑time SERP data from Google, Bing, DuckDuckGo, Yahoo, Yandex and more – no captchas, no proxies, one simple API.
 
 ---
@@ -37,8 +37,8 @@ Restart n8n after the install finishes.
 
 ## Credentials
 
-1. Sign up at **[SearchAPI.io](https://www.searchapi.io/)** and copy your **API Key**.
-2. In n8n go to **Credentials → + New Credential → SearchAPI**.
+1. Sign up at **[SearchApi.io](https://www.searchapi.io/)** and copy your **API Key**.
+2. In n8n go to **Credentials → + New Credential → SearchApi**.
 3. Paste the key and save.\
    The new credential will now appear in the node’s **Credential** dropdown.
 
@@ -48,7 +48,7 @@ Restart n8n after the install finishes.
 
 ### 1. Drag‑and‑drop UI
 
-1. Add the **SearchAPI** node to your workflow.
+1. Add the **SearchApi** node to your workflow.
 2. Choose your **Credential** and the **Engine**.
 3. Under **Parameters,** click **Add Parameter** for each query string field you need. To determine which fields to add, refer to the engine's documentation.
    - **Name**: `q`
@@ -84,15 +84,9 @@ To easily see how to work with SearchApi on n8n, refer to the examples we've pre
 - [Youtube video summarization with SearchApi](/examples/searchapi_youtube_transcripts/)
 - [Chatbot that searchs the web with SearchApi](/examples/searchapi_chatbot/)
 
-### Importing workflow
-
-
-
----
-
 ## Output
 
-The node returns the raw JSON received from SearchAPI.io. See the [official docs](https://www.searchapi.io/docs/google) for complete schemas.
+The node returns the raw JSON received from SearchApi.io. See the [official docs](https://www.searchapi.io/docs/google) for complete schemas.
 
 ---
 
@@ -101,14 +95,14 @@ The node returns the raw JSON received from SearchAPI.io. See the [official docs
 | Error message                | Likely cause                 | Fix                                                                         |
 | ---------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
 | **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                               |
-| **422 Unprocessable Entity** | Wrong parameter name / value | Verify against SearchAPI docs.                                              |
+| **400 Bad Request** | Missing required parameter | Verify against SearchApi docs.                                              |
 | **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
 
 ---
 
 ## Resources
 
-- **SearchAPI.io documentation** – [https://www.searchapi.io/](https://www.searchapi.io/docs/google)
+- **SearchApi.io documentation** – [https://www.searchapi.io/](https://www.searchapi.io/docs/google)
 - **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
 - **Community nodes installation** – [https://docs.n8n.io/integrations/community-nodes/installation/](https://docs.n8n.io/integrations/community-nodes/installation/)
 
