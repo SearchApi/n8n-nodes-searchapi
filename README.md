@@ -14,16 +14,17 @@ Search the web with [SearchApi.io](https://www.searchapi.io/) directly from your
 ### Via the n8n UI (recommended)
 
 1. Open **Settings → Community Nodes** inside your self‑hosted n8n instance.
-2. Click **Install → Browse** and search for `n8n-nodes-searchapi`.
+2. Fill **npm Package Name** with `@searchapi/n8n-nodes-searchapi`.
 3. Select the package, accept the risk prompt, and hit **Install**.
+4. It should now appear as a node when you search for it.
 
 ### Via the command line
 
 ```bash
 # inside your n8n installation folder
-npm install n8n-nodes-searchapi
+npm install @searchapi/n8n-nodes-searchapi
 # or with pnpm
-pnpm add n8n-nodes-searchapi
+pnpm add @searchapi/n8n-nodes-searchapi
 ```
 
 Restart n8n after the install finishes.
@@ -50,7 +51,7 @@ Restart n8n after the install finishes.
 
 1. Add the **SearchApi** node to your workflow.
 2. Choose your **Credential** and the **Engine**.
-3. Under **Parameters,** click **Add Parameter** for each query string field you need. To determine which fields to add, refer to the engine's documentation.
+3. Under **Parameters,** click **Add Parameter** for each query string field you need. To determine which fields to add, refer to the engine's documentation. Example:
    - **Name**: `q`
    - **Value**: `weather new york`
 4. Execute the workflow to receive the response as JSON.
