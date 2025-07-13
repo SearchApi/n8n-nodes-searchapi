@@ -1,5 +1,8 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { google } from './engines/google';
+import { google_images } from './engines/google_images';
+import { google_maps } from './engines/google_maps';
+import { google_shopping } from './engines/google_shopping';
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -8,7 +11,8 @@ export class SearchApi implements INodeType {
 		icon: 'file:searchApi.svg',
 		group: ['output'],
 		version: 1,
-		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. Make sure to always cite the sources in the final reply. ',
+		description:
+			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
 		// @ts-ignore
@@ -28,23 +32,28 @@ export class SearchApi implements INodeType {
 		},
 		hints: [
 			{
-			  message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
-			  type: 'info',
-			  whenToDisplay: 'beforeExecution',
-			  location: 'inputPane',
+				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
+				type: 'info',
+				whenToDisplay: 'beforeExecution',
+				location: 'inputPane',
 			},
-		  ],
+		],
 		properties: [
-			{  
+			// eslint-disable-next-line n8n-nodes-base/node-param-default-missing
+			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
 				description: 'The search engine to use',
 				noDataExpression: true,
 				options: [
-					google.resource
+					google.resource,
+					google_images.resource,
+					google_maps.resource,
+					google_shopping.resource,
+					
 				],
-				default: '',
+				default: google.resource.value,
 			},
 			{
 				displayName: 'Operation Name',
@@ -55,20 +64,23 @@ export class SearchApi implements INodeType {
 					{
 						name: 'Search',
 						value: 'search',
-						action: 'Search the web',
+						action: 'Search',
 						description: 'Search using the engine specified in the resource',
 						routing: {
 							request: {
 								qs: {
-									engine: '={{ $parameter["resource"] }}'
-								}
-							}
-						}
+									engine: '={{ $parameter["resource"] }}',
+								},
+							},
+						},
 					},
 				],
 				default: 'search',
 			},
 			...google.properties,
+			...google_images.properties,
+			...google_maps.properties,
+			...google_shopping.properties,
 		],
 	};
 }
