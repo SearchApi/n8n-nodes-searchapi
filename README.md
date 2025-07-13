@@ -107,3 +107,9 @@ The node returns the raw JSON received from SearchApi.io. See the [official docs
 - **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
 - **Community nodes installation** – [https://docs.n8n.io/integrations/community-nodes/installation/](https://docs.n8n.io/integrations/community-nodes/installation/)
 
+## Contributing
+
+1. Run `pnpm build && pnpm link` on the project root
+2. Run `pnpm link @searchapi/n8n-nodes-searchapi`
+
+After that build the node on each change and it should be reflected in n8n local interface.

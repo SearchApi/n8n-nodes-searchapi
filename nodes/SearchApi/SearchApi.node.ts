@@ -1,4 +1,8 @@
-import { IDataObject, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { google } from './engines/google';
+import { google_images } from './engines/google_images';
+import { google_maps } from './engines/google_maps';
+import { google_shopping } from './engines/google_shopping';
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -7,7 +11,8 @@ export class SearchApi implements INodeType {
 		icon: 'file:searchApi.svg',
 		group: ['output'],
 		version: 1,
-		description: 'Call this tool whenever the answer might require fresh, niche, or externally-verifiable information. Make sure to always cite the sources in the final reply. ',
+		description:
+			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
 		// @ts-ignore
@@ -17,7 +22,7 @@ export class SearchApi implements INodeType {
 		credentials: [{ name: 'searchApi', required: true }],
 		usableAsTool: true,
 		requestDefaults: {
-			baseURL: 'https://www.searchapi.io/api/v1',
+			baseURL: 'http://localhost:3000/api/v1', // TODO: Change to https://www.searchapi.io/api/v1
 			method: 'GET',
 			url: '/search',
 			headers: { Accept: 'application/json' },
@@ -27,72 +32,55 @@ export class SearchApi implements INodeType {
 		},
 		hints: [
 			{
-			  message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
-			  type: 'info',
-			  whenToDisplay: 'beforeExecution',
-			  location: 'inputPane',
+				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
+				type: 'info',
+				whenToDisplay: 'beforeExecution',
+				location: 'inputPane',
 			},
-		  ],
+		],
 		properties: [
+			// eslint-disable-next-line n8n-nodes-base/node-param-default-missing
 			{
-				displayName: 'Engine (Engine)',
-				name: 'engine',
-				type: 'string',
-				default: 'google',
-				required: true,
-				
-				description: 'Search engine to use for the query',
-				hint: 'Check https://www.searchapi.io/docs/google for the available engines',
-				routing: {
-					request: {
-						qs: {
-							engine: '={{ $value }}',
-						},
-					},
-				},
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				description: 'The search engine to use',
+				noDataExpression: true,
+				options: [
+					google.resource,
+					google_images.resource,
+					google_maps.resource,
+					google_shopping.resource,
+					
+				],
+				default: google.resource.value,
 			},
 			{
-				displayName: 'Parameters',
-				name: 'parameters',
-				type: 'fixedCollection',
-				typeOptions: { multipleValues: true },
-				default: {},
-				description: 'Add the parameters you want to use for the search, refer to the SearchAPI.io documentation for the available parameters for the selected engine',
+				displayName: 'Operation Name',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
 				options: [
 					{
-						displayName: 'Parameter',
-						name: 'parameter',
-						values: [
-							{
-								displayName: 'Name',
-								name: 'name',
-								type: 'string',
-								default: '',
-								placeholder: 'q',
+						name: 'Search',
+						value: 'search',
+						action: 'Search',
+						description: 'Search using the engine specified in the resource',
+						routing: {
+							request: {
+								qs: {
+									engine: '={{ $parameter["resource"] }}',
+								},
 							},
-							{
-								displayName: 'Value',
-								name: 'value',
-								type: 'string',
-								default: '',
-								placeholder: 'pizza near me',
-							},
-						],
+						},
 					},
 				],
-				/**
-				 * Build an object like { hl: 'en', gl: 'us' } out of
-				 * the collection entries and merge it into qs.
-				 */
-				routing: {
-					request: {
-						// We are doing this cast here because we need to
-						// build an object out of the collection entries
-						// and merge it into qs, but qs expects an object.
-						qs: '={{ Object.fromEntries(($value.parameter ?? []).map(p => [p.name, p.value])) }}' as unknown as IDataObject,
-					},
-				},
+				default: 'search',
 			},
+			...google.properties,
+			...google_images.properties,
+			...google_maps.properties,
+			...google_shopping.properties,
 		],
 	};
 }
