@@ -31,7 +31,7 @@ export class SearchApi implements ICredentialType {
             }
         }
 	};
-	test?: ICredentialTestRequest | undefined = {
+	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://www.searchapi.io/api/v1/me',
 			method: 'GET',
