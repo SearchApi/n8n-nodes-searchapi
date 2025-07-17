@@ -1,6 +1,6 @@
 {
   "name": "@searchapi/n8n-nodes-searchapi",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "SearchApi.io nodes for n8n",
   "keywords": [
     "n8n-community-node-package"
