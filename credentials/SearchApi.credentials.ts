@@ -1,5 +1,6 @@
 import {
 	IAuthenticateGeneric,
+	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
@@ -30,4 +31,14 @@ export class SearchApi implements ICredentialType {
             }
         }
 	};
+	test?: ICredentialTestRequest | undefined = {
+		request: {
+			baseURL: 'https://www.searchapi.io/api/v1/me',
+			method: 'GET',
+			qs: { api_key: '={{ $credentials.apiKey }}' },
+			headers: {
+				"X-SearchApi-Source": "N8N"
+			}
+		}
+	}
 }
