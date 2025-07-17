@@ -22,7 +22,7 @@ export class SearchApi implements INodeType {
 		credentials: [{ name: 'searchApi', required: true }],
 		usableAsTool: true,
 		requestDefaults: {
-			baseURL: 'http://localhost:3000/api/v1', // TODO: Change to https://www.searchapi.io/api/v1
+			baseURL: 'https://www.searchapi.io/api/v1', 
 			method: 'GET',
 			url: '/search',
 			headers: { Accept: 'application/json' },
