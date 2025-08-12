@@ -25,9 +25,6 @@ export class SearchApi implements INodeType {
 			method: 'GET',
 			url: '/search',
 			headers: { Accept: 'application/json' },
-			qs: {
-				api_key: '={{ $credentials.apiKey }}', // generic-auth pattern :contentReference[oaicite:3]{index=3}
-			},
 		},
 		hints: [
 			{

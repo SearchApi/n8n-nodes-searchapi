@@ -1,5 +1,6 @@
 import {
 	IAuthenticateGeneric,
+	Icon,
 	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
@@ -8,10 +9,11 @@ import {
 export class SearchApi implements ICredentialType {
 	name = 'searchApi';
 	displayName = 'SearchApi API';
-	
+
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
 	documentationUrl = 'https://www.searchapi.io/docs/google';
+	icon: Icon = 'file:../nodes/SearchApi/searchApi.svg';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Key',

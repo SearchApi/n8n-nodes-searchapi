@@ -1,6 +1,6 @@
 {
   "name": "@searchapi/n8n-nodes-searchapi",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "SearchApi.io nodes for n8n",
   "keywords": [
     "n8n-community-node-package"
@@ -47,11 +47,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^4.0.2",
-    "n8n-workflow": "^1.70.0",
     "prettier": "^3.3.2",
     "typescript": "^5.5.3"
-  },
-  "peerDependencies": {
-    "n8n-workflow": "*"
   }
 }
