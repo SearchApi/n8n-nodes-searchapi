@@ -109,7 +109,8 @@ The node returns the raw JSON received from SearchApi.io. See the [official docs
 
 ## Contributing
 
-1. Run `pnpm build && pnpm link` on the project root
-2. Run `pnpm link @searchapi/n8n-nodes-searchapi`
+1. Run build with `pnpm build`
+2. Run `npm link` on the project root
+3. Run `npm link @searchapi/n8n-nodes-searchapi` on `$HOME/.n8n/custom`
 
-After that build the node on each change and it should be reflected in n8n local interface.
+After that build the node on each change and it should be reflected in n8n local interface. Note: You can see we are using pnpm to build, and npm to test. With asdf this seems to be the best approach.

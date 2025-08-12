@@ -6,9 +6,9 @@ const displayOptions = {
 	},
 };
 
-const resource: INodePropertyOptions = { 
-	name: 'Google Images', 
-	value: 'google_images' 
+const resource: INodePropertyOptions = {
+	name: 'Google Images',
+	value: 'google_images'
 };
 
 const properties: INodeProperties[] = [
@@ -501,6 +501,54 @@ const properties: INodeProperties[] = [
 		default: {},
 		options: [
 			{
+				displayName: 'Content Filter',
+				name: 'filter',
+				type: 'options',
+				default: '1',
+				description: 'This parameter controls whether the \'Duplicate Content\' and \'Host Crowding\' filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
+				options: [
+					{ name: 'Disable Filters', value: '0' },
+					{ name: 'Enable Filters', value: '1' },
+				],
+				routing: {
+					request: {
+						qs: {
+							filter: '={{$value}}',
+						},
+					},
+				},
+			},
+
+			{
+				displayName: 'Country Restriction',
+				name: 'cr',
+				type: 'string',
+				default: '',
+				description: 'The cr parameter restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location. Check the full list of supported Google cr countries.',
+
+				routing: {
+					request: {
+						qs: {
+							cr: '={{$value}}',
+						},
+					},
+				},
+			},
+			{
+				displayName: 'Encoded Filters',
+				name: 'tbs',
+				type: 'string',
+				default: '',
+				description: 'This parameter restricts results to URLs based on encoded values. Parameter is normally constructed using size, color, image_type, time_period, usage_rights values. For instance, isz:l would return only results that has large image size.',
+				routing: {
+					request: {
+						qs: {
+							tbs: '={{$value}}',
+						},
+					},
+				},
+			},
+			{
 				displayName: 'Language Restriction',
 				name: 'lr',
 				type: 'string',
@@ -510,20 +558,6 @@ const properties: INodeProperties[] = [
 					request: {
 						qs: {
 							lr: '={{$value}}',
-						},
-					},
-				},
-			},
-			{
-				displayName: 'Country Restriction',
-				name: 'cr',
-				type: 'string',
-				default: '',
-				description: 'The cr parameter restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location. Check the full list of supported Google cr countries.',
-				routing: {
-					request: {
-						qs: {
-							cr: '={{$value}}',
 						},
 					},
 				},
@@ -547,24 +581,6 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Content Filter',
-				name: 'filter',
-				type: 'options',
-				default: '1',
-				description: 'This parameter controls whether the \'Duplicate Content\' and \'Host Crowding\' filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
-				options: [
-					{ name: 'Disable Filters', value: '0' },
-					{ name: 'Enable Filters', value: '1' },
-				],
-				routing: {
-					request: {
-						qs: {
-							filter: '={{$value}}',
-						},
-					},
-				},
-			},
-			{
 				displayName: 'SafeSearch',
 				name: 'safe',
 				type: 'options',
@@ -582,20 +598,7 @@ const properties: INodeProperties[] = [
 					},
 				},
 			},
-			{
-				displayName: 'Encoded Filters',
-				name: 'tbs',
-				type: 'string',
-				default: '',
-				description: 'This parameter restricts results to URLs based on encoded values. Parameter is normally constructed using size, color, image_type, time_period, usage_rights values. For instance, isz:l would return only results that has large image size.',
-				routing: {
-					request: {
-						qs: {
-							tbs: '={{$value}}',
-						},
-					},
-				},
-			},
+
 		],
 		displayOptions,
 	},
@@ -606,6 +609,58 @@ const properties: INodeProperties[] = [
 		placeholder: 'Add Image Option',
 		default: {},
 		options: [
+			{
+				displayName: 'Aspect Ratio',
+				name: 'aspect_ratio',
+				type: 'options',
+				default: 'panoramic',
+				description: 'This parameter filters images based on aspect ratio. Supported values are: square - width equals height. tall - height greater than width. wide - width greater than height. panoramic - width is at least twice the height.',
+				options: [
+					{ name: 'Panoramic', value: 'panoramic' },
+					{ name: 'Square', value: 'square' },
+					{ name: 'Tall', value: 'tall' },
+					{ name: 'Wide', value: 'wide' },
+				],
+				routing: {
+					request: {
+						qs: {
+							aspect_ratio: '={{$value}}',
+						},
+					},
+				},
+			},
+
+			{
+				displayName: 'Color Filter',
+				name: 'color',
+				type: 'options',
+				default: 'black',
+				description: 'This parameter controls the color of your search results. These options are available: black_and_white, color, transparent, red, orange, yellow, green, teal, blue, purple, pink, white, gray, black, brown.',
+				options: [
+					{ name: 'Black', value: 'black' },
+					{ name: 'Black and White', value: 'black_and_white' },
+					{ name: 'Blue', value: 'blue' },
+					{ name: 'Brown', value: 'brown' },
+					{ name: 'Color', value: 'color' },
+					{ name: 'Gray', value: 'gray' },
+					{ name: 'Green', value: 'green' },
+					{ name: 'Orange', value: 'orange' },
+					{ name: 'Pink', value: 'pink' },
+					{ name: 'Purple', value: 'purple' },
+					{ name: 'Red', value: 'red' },
+					{ name: 'Teal', value: 'teal' },
+					{ name: 'Transparent', value: 'transparent' },
+					{ name: 'White', value: 'white' },
+					{ name: 'Yellow', value: 'yellow' },
+				],
+				routing: {
+					request: {
+						qs: {
+							color: '={{$value}}',
+						},
+					},
+				},
+			},
 			{
 				displayName: 'Image Size',
 				name: 'size',
@@ -639,37 +694,6 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Color Filter',
-				name: 'color',
-				type: 'options',
-				default: 'black',
-				description: 'This parameter controls the color of your search results. These options are available: black_and_white, color, transparent, red, orange, yellow, green, teal, blue, purple, pink, white, gray, black, brown.',
-				options: [
-					{ name: 'Black', value: 'black' },
-					{ name: 'Black and White', value: 'black_and_white' },
-					{ name: 'Blue', value: 'blue' },
-					{ name: 'Brown', value: 'brown' },
-					{ name: 'Color', value: 'color' },
-					{ name: 'Gray', value: 'gray' },
-					{ name: 'Green', value: 'green' },
-					{ name: 'Orange', value: 'orange' },
-					{ name: 'Pink', value: 'pink' },
-					{ name: 'Purple', value: 'purple' },
-					{ name: 'Red', value: 'red' },
-					{ name: 'Teal', value: 'teal' },
-					{ name: 'Transparent', value: 'transparent' },
-					{ name: 'White', value: 'white' },
-					{ name: 'Yellow', value: 'yellow' },
-				],
-				routing: {
-					request: {
-						qs: {
-							color: '={{$value}}',
-						},
-					},
-				},
-			},
-			{
 				displayName: 'Image Type',
 				name: 'image_type',
 				type: 'options',
@@ -691,21 +715,22 @@ const properties: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Aspect Ratio',
-				name: 'aspect_ratio',
+				displayName: 'Time Period',
+				name: 'time_period',
 				type: 'options',
-				default: 'panoramic',
-				description: 'This parameter filters images based on aspect ratio. Supported values are: square - width equals height. tall - height greater than width. wide - width greater than height. panoramic - width is at least twice the height.',
+				default: 'last_day',
+				description: 'This parameter restricts results to URLs based on date. Supported values are: last_hour, last_day, last_week, last_month, last_year.',
 				options: [
-					{ name: 'Panoramic', value: 'panoramic' },
-					{ name: 'Square', value: 'square' },
-					{ name: 'Tall', value: 'tall' },
-					{ name: 'Wide', value: 'wide' },
+					{ name: 'Last Day', value: 'last_day' },
+					{ name: 'Last Hour', value: 'last_hour' },
+					{ name: 'Last Month', value: 'last_month' },
+					{ name: 'Last Week', value: 'last_week' },
+					{ name: 'Last Year', value: 'last_year' },
 				],
 				routing: {
 					request: {
 						qs: {
-							aspect_ratio: '={{$value}}',
+							time_period: '={{$value}}',
 						},
 					},
 				},
@@ -724,27 +749,6 @@ const properties: INodeProperties[] = [
 					request: {
 						qs: {
 							usage_rights: '={{$value}}',
-						},
-					},
-				},
-			},
-			{
-				displayName: 'Time Period',
-				name: 'time_period',
-				type: 'options',
-				default: 'last_day',
-				description: 'This parameter restricts results to URLs based on date. Supported values are: last_hour, last_day, last_week, last_month, last_year.',
-				options: [
-					{ name: 'Last Day', value: 'last_day' },
-					{ name: 'Last Hour', value: 'last_hour' },
-					{ name: 'Last Month', value: 'last_month' },
-					{ name: 'Last Week', value: 'last_week' },
-					{ name: 'Last Year', value: 'last_year' },
-				],
-				routing: {
-					request: {
-						qs: {
-							time_period: '={{$value}}',
 						},
 					},
 				},
@@ -814,4 +818,4 @@ const properties: INodeProperties[] = [
 export const google_images = {
 	resource,
 	properties,
-}; 
+};
