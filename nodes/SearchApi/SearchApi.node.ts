@@ -3,6 +3,12 @@ import { google } from './engines/google';
 import { google_images } from './engines/google_images';
 import { google_maps } from './engines/google_maps';
 import { google_shopping } from './engines/google_shopping';
+import { youtube } from './engines/youtube';
+import { youtube_transcripts } from './engines/youtube_transcripts';
+import { youtube_comments } from './engines/youtube_comments';
+import { youtube_channel } from './engines/youtube_channel';
+import { youtube_video } from './engines/youtube_video';
+import { youtube_channel_videos } from './engines/youtube_channel_videos';
 
 
 export class SearchApi implements INodeType {
@@ -47,7 +53,12 @@ export class SearchApi implements INodeType {
 					google_images.resource,
 					google_maps.resource,
 					google_shopping.resource,
-
+					youtube.resource,
+					youtube_transcripts.resource,
+					youtube_comments.resource,
+					youtube_channel.resource,
+					youtube_video.resource,
+					youtube_channel_videos.resource,
 				],
 				default: google.resource.value,
 			},
@@ -77,6 +88,12 @@ export class SearchApi implements INodeType {
 			...google_images.properties,
 			...google_maps.properties,
 			...google_shopping.properties,
+			...youtube.properties,
+			...youtube_transcripts.properties,
+			...youtube_comments.properties,
+			...youtube_channel.properties,
+			...youtube_video.properties,
+			...youtube_channel_videos.properties,
 		],
 	};
 }
