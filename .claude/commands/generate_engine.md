@@ -1,15 +1,37 @@
-# Prompt for Generating n8n SearchApi Engines from OpenAPI Specs
+# Generate n8n SearchApi Engine Command
 
+## Overview
 You are an expert n8n node developer tasked with generating SearchApi engine files from OpenAPI specifications. Your goal is to create TypeScript files that properly integrate with the n8n SearchApi node framework.
 
-## Input Requirements
-You will be provided with:
-1. An OpenAPI 3.0 specification (YAML or JSON format)
-2. The target engine name/endpoint to generate
+**⚠️ CRITICAL REQUIREMENT**: You MUST run lint checks on the generated file before completing this task. The file MUST pass all lint checks.
 
-## Output Requirements
-Generate a TypeScript file following this exact structure:
+---
 
+## Task Workflow
+
+### 1. Input Analysis
+You will receive:
+- An OpenAPI 3.0 specification (YAML or JSON format) 
+- The target engine name/endpoint to generate
+- Look for .yaml files to get the openapi specs for the engine
+
+### 2. Behavior Rules
+- **If engine doesn't exist**: Create it from scratch
+- **If engine already exists**: Act as a reviewer and ensure the code follows all guidelines
+
+### 3. Final Validation (MANDATORY)
+1. Run `pnpm lint` to check for any linting errors
+2. If there are errors, run `pnpm lintfix` to automatically fix what can be fixed
+3. Manually fix any remaining errors that couldn't be auto-fixed
+4. Ensure the file passes all lint checks before completing the task
+
+**DO NOT stop until the engine file passes all lint checks.**
+
+---
+
+## Code Structure Requirements
+
+### TypeScript File Template
 ```typescript
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
@@ -34,39 +56,13 @@ export const {engine_name} = {
 };
 ```
 
-## How to behave
-
-If the engine does not exists yet, you must create it. 
-
-If it already exists, you must act as a reviewer and make sure the generated code is correct and follows the guidelines.
-
-## Parameter Mapping Guidelines
-
-### 1. Field Type Mapping
-- OpenAPI `string` → n8n `'string'`
-- OpenAPI `integer`/`number` → n8n `'string'` (for API compatibility)
-- OpenAPI `boolean` → n8n `'boolean'`
-- OpenAPI `string` with `enum` → n8n `'options'`
-- OpenAPI `array` → n8n `'multiOptions'` (if applicable)
-
-### 2. Display Name Rules
-- Always use the OpenAPI `x-display-name` if available
-- If no `x-display-name`, convert parameter name to human-readable format:
-  - `q` → `'Query'`
-  - `api_key` → `'API Key'`
-  - `time_period` → `'Time Period'`
-  - `num` → `'Results Per Page'`
-  - `safe_search` → `'Safe Search'`
-  - Use proper capitalization and spacing
-
-### 3. Property Structure
-Each parameter must follow this structure:
+### Property Structure Template
 ```typescript
 {
 	displayName: 'Human Readable Name',
 	name: 'parameter_name',
 	type: 'string' | 'options' | 'boolean' | 'multiOptions',
-    required: false, // true if the value is required, false if not
+	required: false, // true if the value is required, false if not
 	default: 'default_value',
 	description: 'Clear, helpful description from OpenAPI',
 	options: [], // For non-options types, empty array
@@ -81,10 +77,53 @@ Each parameter must follow this structure:
 }
 ```
 
-### 4. Options Array Rules
+---
 
+## Parameter Mapping Rules
 
-- For enum parameters, create options with proper capitalization:
+### Type Mappings
+| OpenAPI Type | n8n Type | Notes |
+|--------------|----------|-------|
+| `string` | `'string'` | Basic text input |
+| `integer` | `'string'` | For API compatibility |
+| `number` | `'string'` | For API compatibility |
+| `boolean` | `'boolean'` | Checkbox input |
+| `string` with `enum` | `'options'` | Dropdown selection |
+| `array` | `'multiOptions'` | If applicable |
+
+### Display Name Conventions
+- **Priority**: Use OpenAPI `x-display-name` if available
+- **Fallback**: Convert parameter names to human-readable format
+  
+Common conversions:
+- `q` → `'Query'`
+- `api_key` → `'API Key'`
+- `time_period` → `'Time Period'`
+- `num` → `'Results Per Page'`
+- `safe_search` → `'Safe Search'`
+- `video_id` → `'Video ID'`
+- Always use proper capitalization and spacing
+
+### Engine Naming Rules
+- **Value**: Use snake_case (e.g., `google_search`, `bing_news`, `youtube_transcripts`)
+- **Display Name**: Use Title Case (e.g., `Google Search`, `Bing News`, `YouTube Transcripts`)
+- Must match the OpenAPI operationId or endpoint purpose
+
+---
+
+## Special Parameter Handling
+
+### Excluded Parameters
+Skip these parameters (handled by node framework):
+- `api_key`
+- `engine`
+
+### Required vs Optional Parameters
+- Mark truly required parameters with `required: true`
+- Use reasonable defaults for optional parameters
+- Optional parameters should have sensible `default` values
+
+### Options/Enum Parameters
 ```typescript
 options: [
 	{ name: 'Desktop', value: 'desktop' },
@@ -92,35 +131,15 @@ options: [
 	{ name: 'Tablet', value: 'tablet' },
 ]
 ```
-- The options must be correctly sorted in alphabetic order
-- And the names must always be human readable
+Requirements:
+- Options must be sorted alphabetically by name
+- Names must be human-readable with proper capitalization
+- Values should match the API's expected format
 
-### 5. Required Parameters
-- Skip `api_key` and `engine` parameters (handled by node framework)
-- Mark truly required parameters appropriately
-- Use reasonable defaults for optional parameters
+### Parameter Grouping
+Use collections to group related parameters:
 
-### 6. Description Guidelines
-- Use the OpenAPI description as-is but ensure it's clear and helpful
-- Add context about parameter usage when beneficial
-- Include examples or format specifications when provided in OpenAPI
-- Maintain markdown formatting for better readability
-
-### 7. Special Parameter Handling
-- **Location/Geographic**: Use appropriate defaults and clear descriptions
-- **Language/Locale**: Provide comprehensive option lists with proper names
-- **Pagination**: Default to reasonable values (`page: '1'`, `num: '10'`)
-- **Date/Time**: Include format specifications and validation hints
-- **Enum Arrays**: Convert to proper option arrays with human-readable names
-
-### 8. Property Grouping
-- **Collection Type**: Use `'collection'` type to group optional parameters that users can choose to add
-- **Fixed Collection Type**: Use `'fixedCollection'` type to group semantically related parameters
-- Group related parameters by category (e.g., "Search Options", "Pagination", "Location Settings", "Date Filters")
-- Use meaningful group names that describe the parameter category
-- Parameters within the same logical group should use the same `displayOptions` conditions
-
-Example collection structure:
+#### Collection Type (for optional parameter groups)
 ```typescript
 {
 	displayName: 'Search Options',
@@ -135,30 +154,82 @@ Example collection structure:
 }
 ```
 
-### 9. Engine Name Conventions
-- Use snake_case for the engine value (e.g., `google_search`, `bing_news`)
-- Use Title Case for the display name (e.g., `Google Search`, `Bing News`)
-- Ensure the engine name matches the OpenAPI operationId or endpoint purpose
+#### Fixed Collection Type (for required parameter groups)
+```typescript
+{
+	displayName: 'Required Settings',
+	name: 'requiredSettings',
+	type: 'fixedCollection',
+	default: {},
+	options: [
+		// Related parameters go here
+	],
+	displayOptions,
+}
+```
+
+Group categories examples:
+- "Search Options"
+- "Pagination"
+- "Location Settings"
+- "Date Filters"
+- "Transcript Options"
+- "Advanced Settings"
+
+---
+
+## Content Guidelines
+
+### Descriptions
+- Use the OpenAPI description as-is when clear and helpful
+- Add context about parameter usage when beneficial
+- Include format specifications when provided
+- Maintain markdown formatting for readability
+- End descriptions with periods for consistency
+
+### Default Values
+Common defaults by type:
+- Pagination: `page: '1'`, `num: '10'`
+- Language: `'en'`
+- Boolean flags: `false`
+- Location: Appropriate regional defaults
+
+---
 
 ## Quality Checklist
-Before finalizing, ensure:
-- [ ] All parameter names are human-readable
-- [ ] All enum options are properly capitalized
-- [ ] Default values are sensible and useful
-- [ ] Descriptions are clear and informative
+
+Before finalizing, verify:
+
+### Code Quality
 - [ ] TypeScript syntax is correct
 - [ ] Import statements are included
 - [ ] Export structure matches the pattern
-- [ ] Required parameters are properly handled
+- [ ] No TypeScript errors
+
+### Parameter Quality
+- [ ] All parameter names are human-readable
+- [ ] All enum options are properly capitalized and sorted
+- [ ] Default values are sensible and useful
+- [ ] Descriptions are clear and informative
+- [ ] Required parameters are properly marked
 - [ ] Optional parameters have appropriate defaults
-- [ ] No API keys or sensitive parameters are exposed
-- [ ] Related parameters are grouped using collection or fixedCollection types
+
+### Structure Quality
+- [ ] Related parameters are grouped using collections
 - [ ] Group names are meaningful and descriptive
-- [ ] Parameters within the same group have consistent displayOptions
-- [ ] Run "pnpm lintfix" and fix all errors it does not fix automatically
+- [ ] Parameters within groups have consistent displayOptions
+- [ ] No API keys or sensitive parameters are exposed
+
+### Linting (MANDATORY)
+- [ ] Run `pnpm lint` - no errors
+- [ ] Run `pnpm lintfix` if needed
+- [ ] All lint errors resolved
+
+---
 
 ## Example Transformation
-Given an OpenAPI parameter like:
+
+### OpenAPI Input:
 ```yaml
 device:
   name: device
@@ -172,7 +243,7 @@ device:
   x-display-name: "Device Type"
 ```
 
-Transform to:
+### n8n Output:
 ```typescript
 {
 	displayName: 'Device Type',
@@ -196,12 +267,26 @@ Transform to:
 }
 ```
 
+---
+
+## Completion Criteria
+
+The task is **ONLY** complete when:
+
+1. ✅ The engine file has been generated or reviewed
+2. ✅ `pnpm lint` has been run on the file
+3. ✅ All linting errors have been fixed
+4. ✅ The file passes all lint checks without errors
+
+**🛑 STOP**: Do NOT mark this task as complete until the lint check passes!
+
+---
+
 ## Additional Notes
-- Always prioritize user experience with clear, intuitive parameter names
+
+- Prioritize user experience with clear, intuitive parameter names
 - Follow n8n's established patterns for consistency
 - Test the generated code for TypeScript compatibility
 - Consider parameter interdependencies and validation
 - Ensure the generated engine integrates seamlessly with the SearchApi node framework
-- Look for .yaml files to get the openapi specs for the engine
-
-Generate the complete TypeScript engine file following these guidelines exactly. 
+- To save tokens, when reading the yaml files, you can read everything that is inside the "parameters" key, and everything that is inside the "request" key. As it is the only thing that is needed to generate the engine.
