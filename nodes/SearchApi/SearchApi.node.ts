@@ -2,7 +2,6 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { google } from './engines/google';
 import { google_images } from './engines/google_images';
 import { google_maps } from './engines/google_maps';
-import { google_shopping } from './engines/google_shopping';
 
 
 export class SearchApi implements INodeType {
@@ -46,7 +45,6 @@ export class SearchApi implements INodeType {
 					google.resource,
 					google_images.resource,
 					google_maps.resource,
-					google_shopping.resource,
 
 				],
 				default: google.resource.value,
@@ -76,7 +74,6 @@ export class SearchApi implements INodeType {
 			...google.properties,
 			...google_images.properties,
 			...google_maps.properties,
-			...google_shopping.properties,
 		],
 	};
 }
