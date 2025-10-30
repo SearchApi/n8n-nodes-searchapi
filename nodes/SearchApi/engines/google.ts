@@ -1,5 +1,6 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { GL, HL, LR, TIME_PERIODS, GOOGLE_DOMAINS } from '../constants/google';
+import { GL, HL, LR, TIME_PERIODS, GOOGLE_DOMAINS, NFPR, OPTIMIZATION_STRATEGY, SAFE, FILTER, CR } from '../constants/google';
+import { DEVICE_TYPE } from '../constants/common';
 
 const displayOptions = {
 	show: {
@@ -55,8 +56,9 @@ const properties: INodeProperties[] = [
 			{
 				displayName: 'Country Restriction',
 				name: 'cr',
-				type: 'string',
-				default: '',
+				type: 'options',
+				default: 'us',
+				options: CR,
 				description: 'The cr parameter restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location. Check the full list of supported Google cr countries.',
 				routing: {
 					request: {
@@ -167,10 +169,7 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				default: '1',
 				description: 'This parameter controls whether the \'Duplicate Content\' and \'Host Crowding\' filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
-				options: [
-					{ name: 'Disable Filters', value: '0' },
-					{ name: 'Enable Filters', value: '1' },
-				],
+				options: FILTER,
 				routing: {
 					request: {
 						qs: {
@@ -185,11 +184,7 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				default: 'desktop',
 				description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
-				options: [
-					{ name: 'Desktop', value: 'desktop' },
-					{ name: 'Mobile', value: 'mobile' },
-					{ name: 'Tablet', value: 'tablet' },
-				],
+				options: DEVICE_TYPE,
 				routing: {
 					request: {
 						qs: {
@@ -204,10 +199,7 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				default: '0',
 				description: 'This parameter controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
-				options: [
-					{ name: 'Include Auto-Corrected Results', value: '0' },
-					{ name: 'Exclude Auto-Corrected Results', value: '1' },
-				],
+				options: NFPR,
 				routing: {
 					request: {
 						qs: {
@@ -222,10 +214,7 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				default: 'performance',
 				description: 'Controls how the search request is optimized. Available options: performance (Default), ads - optimizes for higher ad collection success rate, which may result in longer request processing times.',
-				options: [
-					{ name: 'Ads', value: 'ads' },
-					{ name: 'Performance', value: 'performance' },
-				],
+				options: OPTIMIZATION_STRATEGY,
 				routing: {
 					request: {
 						qs: {
@@ -240,10 +229,7 @@ const properties: INodeProperties[] = [
 				type: 'options',
 				default: 'off',
 				description: 'This parameter toggles the SafeSearch feature for the results. SafeSearch operates by filtering out adult content from your search results. Google\'s filters use proprietary technology to check keywords, phrases and URLs. While no filters are 100 percent accurate, SafeSearch will remove the overwhelming majority of adult content from your search results. Set the value to active to enable SafeSearch. To disable it, set the value to off. By default, SafeSearch is disabled.',
-				options: [
-					{ name: 'Active', value: 'active' },
-					{ name: 'Off', value: 'off' },
-				],
+				options: SAFE,
 				routing: {
 					request: {
 						qs: {
