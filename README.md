@@ -1,3 +1,6 @@
+![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+
+
 # n8n-nodes-searchapi
 
 SearchApi is a fast, reliable SERP and data extraction API that focuses on performance, parsing quality, and competitive pricing. We offer realtime structured data from many different sources like Google, Bing, Amazon and others...
@@ -9,6 +12,8 @@ SearchApi is a fast, reliable SERP and data extraction API that focuses on perfo
 [Usage](#usage)  <!-- delete if not using this section -->  
 [Resources](#resources)  
 [Version history](#version-history)  <!-- delete if not using this section -->  
+[Troubleshooting](#troubleshooting)  
+[Development](#development)
 
 ## Installation
 
@@ -39,6 +44,20 @@ The node supports one main operation: `Search`. You can use it to search from al
 - **n8n Community Nodes Documentation** – [https://docs.n8n.io/integrations/#community-nodes](https://docs.n8n.io/integrations/#community-nodes)
 - **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
 
+## Troubleshooting
+
+| Error message                | Likely cause                 | Fix                                                                         |
+| ---------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
+| **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                           |
+| **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
+
 ## Version history
 
 You can see the version history [here](https://github.com/SearchApi/n8n-nodes-searchapi/releases).
+
+## Development
+
+1. Run `npm install` to install the dependencies
+2. Run `npm run dev` to start the development server
+
+You will be able to see the the node in the local n8n http://localhost:5678.
