@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Q',
+    displayName: 'Query (q)',
     name: 'q',
     type: 'string',
     required: true,
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Ll',
+    displayName: 'GPS Coordinates (ll)',
     name: 'll',
     type: 'string',
     default: '',
@@ -43,6 +43,21 @@ const properties: INodeProperties[] = [
       },
     },
   },
+	{
+    displayName: 'Page (page)',
+    name: 'page',
+    type: 'string',
+    default: '1',
+    description: 'Page number of results to return',
+    displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
+  },
   {
     displayName: 'Localization',
     name: 'localization',
@@ -51,7 +66,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Google Domain',
+      displayName: 'Google Domain (google_domain)',
       name: 'google_domain',
       type: 'string',
       default: 'google.com',
@@ -65,7 +80,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Hl',
+      displayName: 'Language (hl)',
       name: 'hl',
       type: 'string',
       default: 'en',
@@ -80,21 +95,6 @@ const properties: INodeProperties[] = [
     }
     ],
     displayOptions,
-  },
-  {
-    displayName: 'Page',
-    name: 'page',
-    type: 'string',
-    default: '1',
-    description: 'Page number of results to return',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
-        },
-      },
-    },
   }
 ];
 

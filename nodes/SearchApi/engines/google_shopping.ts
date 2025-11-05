@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Q',
+    displayName: 'Query (q)',
     name: 'q',
     type: 'string',
     required: true,
@@ -28,6 +28,21 @@ const properties: INodeProperties[] = [
       },
     },
   },
+	{
+    displayName: 'Page (page)',
+    name: 'page',
+    type: 'string',
+    default: '1',
+    description: 'Page number of results to return (default: 1)',
+    displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
+  },
   {
     displayName: 'Localization',
     name: 'localization',
@@ -36,7 +51,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Gl',
+      displayName: 'Country (gl)',
       name: 'gl',
       type: 'string',
       default: 'us',
@@ -50,7 +65,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Google Domain',
+      displayName: 'Google Domain (google_domain)',
       name: 'google_domain',
       type: 'string',
       default: 'google.com',
@@ -64,7 +79,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Hl',
+      displayName: 'Language (hl)',
       name: 'hl',
       type: 'string',
       default: 'en',
@@ -88,7 +103,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Location',
+      displayName: 'Location (location)',
       name: 'location',
       type: 'string',
       default: '',
@@ -102,7 +117,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Uule',
+      displayName: 'Encoded Location (uule)',
       name: 'uule',
       type: 'string',
       default: '',
@@ -126,7 +141,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Condition',
+      displayName: 'Condition (condition)',
       name: 'condition',
       type: 'string',
       default: '',
@@ -139,8 +154,22 @@ const properties: INodeProperties[] = [
         },
       },
     },
+		{
+			displayName: 'Free Delivery (is_free_delivery)',
+			name: 'is_free_delivery',
+			type: 'string',
+			default: '',
+			description: 'Show only products with free shipping. Can be combined with is_on_sale, is_small_business, and sort_by. Ignored if shoprs parameter is provided',
+			routing: {
+				request: {
+					qs: {
+						is_free_delivery: '={{$value}}',
+					},
+				},
+			},
+		},
     {
-      displayName: 'Include Base Images',
+      displayName: 'Include Base Images (include_base_images)',
       name: 'include_base_images',
       type: 'string',
       default: 'false',
@@ -154,7 +183,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Include Favicon',
+      displayName: 'Include Favicon (include_favicon)',
       name: 'include_favicon',
       type: 'string',
       default: 'false',
@@ -168,21 +197,35 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Is Free Delivery',
-      name: 'is_free_delivery',
+      displayName: 'Maximum Price (price_max)',
+      name: 'price_max',
       type: 'string',
       default: '',
-      description: 'Show only products with free shipping. Can be combined with is_on_sale, is_small_business, and sort_by. Ignored if shoprs parameter is provided',
+      description: 'Maximum price of the products returned (must include currency, e.g., 100). Must be used as a strict filter before applying shoprs.',
       routing: {
         request: {
           qs: {
-            is_free_delivery: '={{$value}}',
+            price_max: '={{$value}}',
           },
         },
       },
     },
-    {
-      displayName: 'Is On Sale',
+		{
+      displayName: 'Minimum Price (price_min)',
+      name: 'price_min',
+      type: 'string',
+      default: '',
+      description: 'Minimum price of the products returned (must include currency, e.g., 2.50). Must be used as a strict filter before applying shoprs.',
+      routing: {
+        request: {
+          qs: {
+            price_min: '={{$value}}',
+          },
+        },
+      },
+    },
+		{
+      displayName: 'On Sale (is_on_sale)',
       name: 'is_on_sale',
       type: 'string',
       default: '',
@@ -195,8 +238,8 @@ const properties: INodeProperties[] = [
         },
       },
     },
-    {
-      displayName: 'Is Small Business',
+		{
+      displayName: 'Small Business (is_small_business)',
       name: 'is_small_business',
       type: 'string',
       default: '',
@@ -210,35 +253,21 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Price Max',
-      name: 'price_max',
+      displayName: 'Sort By (sort_by)',
+      name: 'sort_by',
       type: 'string',
       default: '',
-      description: 'Maximum price of the products returned (must include currency, e.g., 100). Must be used as a strict filter before applying shoprs.',
+      description: 'Sort shopping results. Options: price_low_to_high, price_high_to_low, rating_high_to_low. Can be combined with is_on_sale, is_small_business, and is_free_delivery. Ignored if shoprs parameter is provided',
       routing: {
         request: {
           qs: {
-            price_max: '={{$value}}',
+            sort_by: '={{$value}}',
           },
         },
       },
     },
-    {
-      displayName: 'Price Min',
-      name: 'price_min',
-      type: 'string',
-      default: '',
-      description: 'Minimum price of the products returned (must include currency, e.g., 2.50). Must be used as a strict filter before applying shoprs.',
-      routing: {
-        request: {
-          qs: {
-            price_min: '={{$value}}',
-          },
-        },
-      },
-    },
-    {
-      displayName: 'Shoprs',
+		{
+      displayName: 'Strict Filters (shoprs)',
       name: 'shoprs',
       type: 'string',
       default: '',
@@ -251,37 +280,8 @@ const properties: INodeProperties[] = [
         },
       },
     },
-    {
-      displayName: 'Sort By',
-      name: 'sort_by',
-      type: 'string',
-      default: '',
-      description: 'Sort shopping results. Options: price_low_to_high, price_high_to_low, rating_high_to_low. Can be combined with is_on_sale, is_small_business, and is_free_delivery. Ignored if shoprs parameter is provided',
-      routing: {
-        request: {
-          qs: {
-            sort_by: '={{$value}}',
-          },
-        },
-      },
-    }
     ],
     displayOptions,
-  },
-  {
-    displayName: 'Page',
-    name: 'page',
-    type: 'string',
-    default: '1',
-    description: 'Page number of results to return (default: 1)',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
-        },
-      },
-    },
   }
 ];
 

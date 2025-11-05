@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Q',
+    displayName: 'Query (q)',
     name: 'q',
     type: 'string',
     required: true,
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Device',
+    displayName: 'Device (device)',
     name: 'device',
     type: 'string',
     default: 'desktop',
@@ -43,6 +43,21 @@ const properties: INodeProperties[] = [
       },
     },
   },
+	{
+    displayName: 'Page (page)',
+    name: 'page',
+    type: 'string',
+    default: '1',
+    description: 'Page number of results to return (default: 1)',
+    displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
+  },
   {
     displayName: 'Geographic Location',
     name: 'geographic_location',
@@ -51,7 +66,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Location',
+      displayName: 'Location (location)',
       name: 'location',
       type: 'string',
       default: '',
@@ -65,7 +80,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Uule',
+      displayName: 'Encoded Location (uule)',
       name: 'uule',
       type: 'string',
       default: '',
@@ -89,21 +104,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Cr',
-      name: 'cr',
-      type: 'string',
-      default: '',
-      description: 'Restricts results to documents from a specific country based on TLD or IP address',
-      routing: {
-        request: {
-          qs: {
-            cr: '={{$value}}',
-          },
-        },
-      },
-    },
-    {
-      displayName: 'Gl',
+      displayName: 'Country (gl)',
       name: 'gl',
       type: 'string',
       default: 'us',
@@ -117,7 +118,21 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Google Domain',
+      displayName: 'Country Restrict (cr)',
+      name: 'cr',
+      type: 'string',
+      default: '',
+      description: 'Restricts results to documents from a specific country based on TLD or IP address',
+      routing: {
+        request: {
+          qs: {
+            cr: '={{$value}}',
+          },
+        },
+      },
+    },
+    {
+      displayName: 'Google Domain (google_domain)',
       name: 'google_domain',
       type: 'string',
       default: 'google.com',
@@ -131,7 +146,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Hl',
+      displayName: 'Language (hl)',
       name: 'hl',
       type: 'string',
       default: 'en',
@@ -145,7 +160,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Lr',
+      displayName: 'Language Restrict (lr)',
       name: 'lr',
       type: 'string',
       default: '',
@@ -169,7 +184,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Aspect Ratio',
+      displayName: 'Aspect Ratio (aspect_ratio)',
       name: 'aspect_ratio',
       type: 'string',
       default: '',
@@ -183,7 +198,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Color',
+      displayName: 'Color (color)',
       name: 'color',
       type: 'color',
       default: '',
@@ -197,7 +212,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Filter',
+      displayName: 'Duplicate Filter (filter)',
       name: 'filter',
       type: 'string',
       default: '1',
@@ -211,7 +226,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Image Type',
+      displayName: 'Image Type (image_type)',
       name: 'image_type',
       type: 'string',
       default: '',
@@ -225,7 +240,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Nfpr',
+      displayName: 'No Auto-Correct (nfpr)',
       name: 'nfpr',
       type: 'string',
       default: '0',
@@ -239,7 +254,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Safe',
+      displayName: 'SafeSearch (safe)',
       name: 'safe',
       type: 'string',
       default: 'off',
@@ -253,7 +268,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Size',
+      displayName: 'Size (size)',
       name: 'size',
       type: 'string',
       default: '',
@@ -267,21 +282,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Tbs',
-      name: 'tbs',
-      type: 'string',
-      default: '',
-      description: 'Restricts results based on encoded values. Normally constructed using size, color, image_type, time_period, usage_rights values (e.g., isz:l for large images).',
-      routing: {
-        request: {
-          qs: {
-            tbs: '={{$value}}',
-          },
-        },
-      },
-    },
-    {
-      displayName: 'Time Period',
+      displayName: 'Time Period (time_period)',
       name: 'time_period',
       type: 'string',
       default: '',
@@ -295,7 +296,21 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Usage Rights',
+      displayName: 'Time-Based Search (tbs)',
+      name: 'tbs',
+      type: 'string',
+      default: '',
+      description: 'Restricts results based on encoded values. Normally constructed using size, color, image_type, time_period, usage_rights values (e.g., isz:l for large images).',
+      routing: {
+        request: {
+          qs: {
+            tbs: '={{$value}}',
+          },
+        },
+      },
+    },
+    {
+      displayName: 'Usage Rights (usage_rights)',
       name: 'usage_rights',
       type: 'string',
       default: '',
@@ -311,21 +326,6 @@ const properties: INodeProperties[] = [
     ],
     displayOptions,
   },
-  {
-    displayName: 'Page',
-    name: 'page',
-    type: 'string',
-    default: '1',
-    description: 'Page number of results to return (default: 1)',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
-        },
-      },
-    },
-  }
 ];
 
 export const google_images = {

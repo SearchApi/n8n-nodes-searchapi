@@ -12,59 +12,64 @@ const resource: INodePropertyOptions = {
 };
 
 const properties: INodeProperties[] = [
+	{
+		displayName: 'Query (q)',
+		name: 'q',
+		type: 'string',
+		default: '',
+		description: 'Search terms for Google query. Supports operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, OR.',
+		routing: {
+			request: {
+				qs: {
+					q: '={{$value}}',
+				},
+			},
+		},
+	},
   {
-    displayName: 'Search Query',
-    name: 'search_query',
-    type: 'collection',
-    placeholder: 'Add Search Query',
-    default: {},
-    options: [
-    {
-      displayName: 'Kgmid',
-      name: 'kgmid',
-      type: 'string',
-      default: '',
-      description: 'Knowledge Graph identifier (kgmid) representing entities in Google\'s Knowledge Graph. Location Identifier (/m/) followed by 2-7 characters for locations (e.g., /m/02_286 for New York), or Google Knowledge Graph Identifier (/g/) with longer alphanumeric string for general entities (e.g., /g/11f555cn8l for TikTok). Find identifiers by searching for "Freebase ID" on Wikidata',
-      routing: {
-        request: {
-          qs: {
-            kgmid: '={{$value}}',
-          },
-        },
-      },
-    },
-    {
-      displayName: 'Q',
-      name: 'q',
-      type: 'string',
-      default: '',
-      description: 'Search terms for Google query. Supports operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, OR.',
-      routing: {
-        request: {
-          qs: {
-            q: '={{$value}}',
-          },
-        },
-      },
-    }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Device',
-    name: 'device',
-    type: 'string',
-    default: 'desktop',
-    description: 'Device type for search: desktop (default), mobile, or tablet',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          device: '={{$value}}',
-        },
-      },
-    },
-  },
+		displayName: 'Knowledge Graph ID (kgmid)',
+		name: 'kgmid',
+		type: 'string',
+		default: '',
+		description: 'Knowledge Graph identifier (kgmid) representing entities in Google\'s Knowledge Graph. Location Identifier (/m/) followed by 2-7 characters for locations (e.g., /m/02_286 for New York), or Google Knowledge Graph Identifier (/g/) with longer alphanumeric string for general entities (e.g., /g/11f555cn8l for TikTok). Find identifiers by searching for "Freebase ID" on Wikidata',
+		routing: {
+			request: {
+				qs: {
+					kgmid: '={{$value}}',
+				},
+			},
+		},
+	},
+	{
+		displayName: 'Device (device)',
+		name: 'device',
+		type: 'string',
+		default: 'desktop',
+		description: 'Device type for search: desktop (default), mobile, or tablet',
+		displayOptions,
+		routing: {
+			request: {
+				qs: {
+					device: '={{$value}}',
+				},
+			},
+		},
+	},
+	{
+		displayName: 'Optimization Strategy (optimization_strategy)',
+		name: 'optimization_strategy',
+		type: 'string',
+		default: 'performance',
+		description: 'Controls search request optimization. Options: performance (default), ads (optimizes for higher ad collection success rate, may increase processing time).',
+		displayOptions,
+		routing: {
+			request: {
+				qs: {
+					optimization_strategy: '={{$value}}',
+				},
+			},
+		},
+	},
   {
     displayName: 'Geographic Location',
     name: 'geographic_location',
@@ -73,7 +78,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Location',
+      displayName: 'Location (location)',
       name: 'location',
       type: 'string',
       default: '',
@@ -87,7 +92,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Uule',
+      displayName: 'Encoded Location (uule)',
       name: 'uule',
       type: 'string',
       default: '',
@@ -111,21 +116,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Cr',
-      name: 'cr',
-      type: 'string',
-      default: '',
-      description: 'Restricts results to documents from a particular country. Determined by top-level domain (TLD) or web server IP geographic location.',
-      routing: {
-        request: {
-          qs: {
-            cr: '={{$value}}',
-          },
-        },
-      },
-    },
-    {
-      displayName: 'Gl',
+      displayName: 'Country (gl)',
       name: 'gl',
       type: 'string',
       default: 'us',
@@ -139,7 +130,21 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Google Domain',
+      displayName: 'Country Restrict (cr)',
+      name: 'cr',
+      type: 'string',
+      default: '',
+      description: 'Restricts results to documents from a particular country. Determined by top-level domain (TLD) or web server IP geographic location.',
+      routing: {
+        request: {
+          qs: {
+            cr: '={{$value}}',
+          },
+        },
+      },
+    },
+    {
+      displayName: 'Google Domain (google_domain)',
       name: 'google_domain',
       type: 'string',
       default: 'google.com',
@@ -153,7 +158,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Hl',
+      displayName: 'Language (hl)',
       name: 'hl',
       type: 'string',
       default: 'en',
@@ -167,7 +172,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Lr',
+      displayName: 'Language Restrict (lr)',
       name: 'lr',
       type: 'string',
       default: '',
@@ -191,7 +196,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Filter',
+      displayName: 'Duplicate Filter (filter)',
       name: 'filter',
       type: 'string',
       default: '1',
@@ -205,7 +210,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Nfpr',
+      displayName: 'No Auto-Correct (nfpr)',
       name: 'nfpr',
       type: 'string',
       default: '0',
@@ -219,7 +224,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Safe',
+      displayName: 'SafeSearch (safe)',
       name: 'safe',
       type: 'string',
       default: 'off',
@@ -233,7 +238,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Time Period',
+      displayName: 'Time Period (time_period)',
       name: 'time_period',
       type: 'string',
       default: '',
@@ -247,7 +252,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Time Period Max',
+      displayName: 'Time Period Max (time_period_max)',
       name: 'time_period_max',
       type: 'string',
       default: '',
@@ -261,7 +266,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Time Period Min',
+      displayName: 'Time Period Min (time_period_min)',
       name: 'time_period_min',
       type: 'string',
       default: '',
@@ -285,7 +290,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
     {
-      displayName: 'Num',
+      displayName: 'Results Per Page (num)',
       name: 'num',
       type: 'string',
       default: '10',
@@ -299,7 +304,7 @@ const properties: INodeProperties[] = [
       },
     },
     {
-      displayName: 'Page',
+      displayName: 'Page (page)',
       name: 'page',
       type: 'string',
       default: '1',
@@ -314,21 +319,6 @@ const properties: INodeProperties[] = [
     }
     ],
     displayOptions,
-  },
-  {
-    displayName: 'Optimization Strategy',
-    name: 'optimization_strategy',
-    type: 'string',
-    default: 'performance',
-    description: 'Controls search request optimization. Options: performance (default), ads (optimizes for higher ad collection success rate, may increase processing time).',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          optimization_strategy: '={{$value}}',
-        },
-      },
-    },
   }
 ];
 
