@@ -1,9 +1,7 @@
-import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
-import { google } from './engines/google';
-import { google_images } from './engines/google_images';
-import { google_maps } from './engines/google_maps';
-import { google_shopping } from './engines/google_shopping';
+import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import * as allEngines from './engines';
 
+const engines = Object.values(allEngines);
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -13,11 +11,11 @@ export class SearchApi implements INodeType {
 		group: ['output'],
 		version: 1,
 		description:
-			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
+			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data. oi',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [{ name: 'searchApi', required: true }],
 		usableAsTool: true,
 		requestDefaults: {
@@ -35,21 +33,15 @@ export class SearchApi implements INodeType {
 			},
 		],
 		properties: [
-			// eslint-disable-next-line n8n-nodes-base/node-param-default-missing
 			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
 				description: 'The search engine to use',
 				noDataExpression: true,
-				options: [
-					google.resource,
-					google_images.resource,
-					google_maps.resource,
-					google_shopping.resource,
-
-				],
-				default: google.resource.value,
+				options: engines.map((engine) => engine.resource),
+				// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
+				default: 'google', // We default to Google, but esling is not being able to detect that it is in the options.
 			},
 			{
 				displayName: 'Operation Name',
@@ -73,10 +65,7 @@ export class SearchApi implements INodeType {
 				],
 				default: 'search',
 			},
-			...google.properties,
-			...google_images.properties,
-			...google_maps.properties,
-			...google_shopping.properties,
+			...engines.flatMap((engine) => engine.properties),
 		],
 	};
 }
