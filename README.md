@@ -73,3 +73,5 @@ You can see the version history [here](https://github.com/SearchApi/n8n-nodes-se
 2. Run `npm run dev` to start the development server
 
 You will be able to see the the node in the local n8n http://localhost:5678.
+
+Obs: You might need to run `rm -rf ~/.n8n-node-cli`, to clear the cache of old n8n instances you might have installed, it might make the cli to timeout.
