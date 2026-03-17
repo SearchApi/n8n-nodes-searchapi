@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 import { google } from './engines/google';
 import { google_images } from './engines/google_images';
 import { google_maps } from './engines/google_maps';
@@ -16,8 +16,8 @@ export class SearchApi implements INodeType {
 			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: ['main'],
+		outputs: ['main'],
 		credentials: [{ name: 'searchApi', required: true }],
 		usableAsTool: true,
 		requestDefaults: {
