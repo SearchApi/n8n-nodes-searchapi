@@ -16,6 +16,7 @@ const properties: INodeProperties[] = [
 		displayName: 'Query (q)',
 		name: 'q',
 		type: 'string',
+		required: true,
 		default: '',
 		description: 'Search terms for Google query. Supports operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, OR.',
 		routing: {

@@ -200,9 +200,27 @@ const properties: INodeProperties[] = [
     {
       displayName: 'Color (color)',
       name: 'color',
-      type: 'color',
+      type: 'options',
       default: '',
-      description: 'Color filter for search results. Available options: black_and_white, color, transparent, red, orange, yellow, green, teal, blue, purple, pink, white, gray, black, brown.',
+      description: 'Color filter for search results',
+      options: [
+        { name: 'Any', value: '' },
+        { name: 'Black', value: 'black' },
+        { name: 'Black & White', value: 'black_and_white' },
+        { name: 'Blue', value: 'blue' },
+        { name: 'Brown', value: 'brown' },
+        { name: 'Color', value: 'color' },
+        { name: 'Gray', value: 'gray' },
+        { name: 'Green', value: 'green' },
+        { name: 'Orange', value: 'orange' },
+        { name: 'Pink', value: 'pink' },
+        { name: 'Purple', value: 'purple' },
+        { name: 'Red', value: 'red' },
+        { name: 'Teal', value: 'teal' },
+        { name: 'Transparent', value: 'transparent' },
+        { name: 'White', value: 'white' },
+        { name: 'Yellow', value: 'yellow' },
+      ],
       routing: {
         request: {
           qs: {

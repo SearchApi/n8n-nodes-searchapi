@@ -1,7 +1,12 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import * as allEngines from './engines';
+import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { google, google_images, google_maps, google_shopping } from './engines';
 
-const engines = Object.values(allEngines);
+interface Engine {
+	resource: INodePropertyOptions;
+	properties: INodeProperties[];
+}
+
+const engines: Engine[] = [google, google_images, google_maps, google_shopping];
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -11,7 +16,7 @@ export class SearchApi implements INodeType {
 		group: ['output'],
 		version: 1,
 		description:
-			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data. oi',
+			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
 		inputs: ['main'],
