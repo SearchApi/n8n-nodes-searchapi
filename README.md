@@ -31,11 +31,23 @@ The node supports one main operation: `Search`. You can use it to search from al
 
 ## Usage
 
-1. Go to the **SearchApi** node and select your **Credential**.
-2. Select the **Engine** you want to use. 
-3. Enter the parameters for the engine. After selection, you will see the parameters for the engine. There are also optional parameters that you can use to further refine your search.
-4. Enter the **Query** you want to search for.
+### Credentials
+
+1. Go to **Credentials → + New Credential → SearchApi**.
+2. Paste the **API Key**.
+3. Click **Save**.
+
+![Credentials](images/credentials.png)
+
+### Search
+
+1. Create a SearchApi credential in n8n.
+2. Go to the **SearchApi** node and select your **Credential**.
+3. Select the **Engine** you want to use.
+4. Enter the parameters for the engine. After selection, you will see the parameters for the engine. There are also optional parameters that you can use to further refine your search.
 5. Click **Execute** to receive the response as JSON.
+
+![Usage](images/steps.png)
 
 ## Resources
 
@@ -67,3 +79,7 @@ Other useful commands:
 - `npm run lint` — run ESLint code quality checks
 - `npm run lint:fix` — auto-fix linting issues
 - `npm run release` — bump version, update changelog, and publish to npm
+
+You will be able to see the the node in the local n8n http://localhost:5678.
+
+Obs: You might need to run `rm -rf ~/.n8n-node-cli`, to clear the cache of old n8n instances you might have installed, it might make the cli to timeout.
