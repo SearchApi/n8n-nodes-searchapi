@@ -19,6 +19,7 @@ const properties: INodeProperties[] = [
 		required: true,
 		default: '',
 		description: 'Search terms for Google query. Supports operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, OR.',
+		displayOptions,
 		routing: {
 			request: {
 				qs: {
@@ -33,6 +34,7 @@ const properties: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		description: 'Knowledge Graph identifier (kgmid) representing entities in Google\'s Knowledge Graph. Location Identifier (/m/) followed by 2-7 characters for locations (e.g., /m/02_286 for New York), or Google Knowledge Graph Identifier (/g/) with longer alphanumeric string for general entities (e.g., /g/11f555cn8l for TikTok). Find identifiers by searching for "Freebase ID" on Wikidata',
+		displayOptions,
 		routing: {
 			request: {
 				qs: {
