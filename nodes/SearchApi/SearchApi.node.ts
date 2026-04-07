@@ -1,12 +1,24 @@
-import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions, IHttpRequestOptions, IExecuteSingleFunctions } from 'n8n-workflow';
 import { google, google_images, google_maps, google_shopping } from './engines';
 
 interface Engine {
 	resource: INodePropertyOptions;
 	properties: INodeProperties[];
+	docsUrl: string;
 }
 
 const engines: Engine[] = [google, google_images, google_maps, google_shopping];
+
+async function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
+	if (requestOptions.qs) {
+		for (const key of Object.keys(requestOptions.qs)) {
+			if (requestOptions.qs[key] === '' || requestOptions.qs[key] === undefined) {
+				delete requestOptions.qs[key];
+			}
+		}
+	}
+	return requestOptions;
+}
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -65,39 +77,21 @@ export class SearchApi implements INodeType {
 									engine: '={{ $parameter["resource"] }}',
 								},
 							},
+							send: {
+								preSend: [stripEmptyQueryParams],
+							},
 						},
 					},
 				],
 				default: 'search',
 			},
-			{
-				displayName: 'For all available parameters and detailed usage, see the <a href="https://www.searchapi.io/docs/google" target="_blank">Google API documentation</a>.',
-				name: 'google_docs_notice',
+			...engines.map((engine): INodeProperties => ({
+				displayName: `For all available parameters and detailed usage, see the <a href="${engine.docsUrl}" target="_blank">${engine.resource.name} API documentation</a>.`,
+				name: `${engine.resource.value}_docs_notice`,
 				type: 'notice',
 				default: '',
-				displayOptions: { show: { resource: ['google'] } },
-			},
-			{
-				displayName: 'For all available parameters and detailed usage, see the <a href="https://www.searchapi.io/docs/google-images" target="_blank">Google Images API documentation</a>.',
-				name: 'google_images_docs_notice',
-				type: 'notice',
-				default: '',
-				displayOptions: { show: { resource: ['google_images'] } },
-			},
-			{
-				displayName: 'For all available parameters and detailed usage, see the <a href="https://www.searchapi.io/docs/google-maps" target="_blank">Google Maps API documentation</a>.',
-				name: 'google_maps_docs_notice',
-				type: 'notice',
-				default: '',
-				displayOptions: { show: { resource: ['google_maps'] } },
-			},
-			{
-				displayName: 'For all available parameters and detailed usage, see the <a href="https://www.searchapi.io/docs/google-shopping" target="_blank">Google Shopping API documentation</a>.',
-				name: 'google_shopping_docs_notice',
-				type: 'notice',
-				default: '',
-				displayOptions: { show: { resource: ['google_shopping'] } },
-			},
+				displayOptions: { show: { resource: [engine.resource.value as string] } },
+			})),
 			...engines.flatMap((engine) => engine.properties),
 		],
 	};

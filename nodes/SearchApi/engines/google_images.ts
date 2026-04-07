@@ -349,4 +349,5 @@ const properties: INodeProperties[] = [
 export const google_images = {
   resource,
   properties,
+  docsUrl: 'https://www.searchapi.io/docs/google-images',
 };

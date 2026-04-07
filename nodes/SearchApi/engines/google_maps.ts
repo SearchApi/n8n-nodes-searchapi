@@ -101,4 +101,5 @@ const properties: INodeProperties[] = [
 export const google_maps = {
   resource,
   properties,
+  docsUrl: 'https://www.searchapi.io/docs/google-maps',
 };

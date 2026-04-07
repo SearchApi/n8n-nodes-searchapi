@@ -328,4 +328,5 @@ const properties: INodeProperties[] = [
 export const google = {
   resource,
   properties,
+  docsUrl: 'https://www.searchapi.io/docs/google',
 };

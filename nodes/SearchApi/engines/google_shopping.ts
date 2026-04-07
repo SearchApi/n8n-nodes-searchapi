@@ -288,4 +288,5 @@ const properties: INodeProperties[] = [
 export const google_shopping = {
   resource,
   properties,
+  docsUrl: 'https://www.searchapi.io/docs/google-shopping',
 };
