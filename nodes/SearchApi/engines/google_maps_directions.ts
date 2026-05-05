@@ -2,49 +2,181 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_maps'],
+    resource: ['google_maps_directions'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Maps',
-  value: 'google_maps'
+  name: 'Google Maps Directions',
+  value: 'google_maps_directions'
 };
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
-    name: 'q',
+    displayName: 'From (from)',
+    name: 'from',
     type: 'string',
     required: true,
     default: '',
-    description: 'Terms you want to search on Google Maps. Queries can include terms like "restaurants near me" or "Starbucks New York".',
+    description: 'Origin of the route. Can be a plain address, data ID, or coordinates (lat,long).',
     displayOptions,
     routing: {
       request: {
         qs: {
-          q: '={{$value}}',
+          from: '={{$value}}',
         },
       },
     },
   },
   {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
+    displayName: 'To (to)',
+    name: 'to',
+    type: 'string',
+    required: true,
+    default: '',
+    description: 'Destination of the route. Can be a plain address, data ID, or coordinates (lat,long).',
+    displayOptions,
+    routing: {
+      request: {
+        qs: {
+          to: '={{$value}}',
+        },
+      },
+    },
+  },
+  {
+    displayName: 'Search Query',
+    name: 'search_query',
     type: 'collection',
-    placeholder: 'Add Geographic Location',
+    placeholder: 'Add Search Query',
     default: {},
     options: [
       {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
-        type: 'string',
+        displayName: 'Avoid (avoid)',
+        name: 'avoid',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Ferries', value: 'ferries' },
+          { name: 'Highways', value: 'highways' },
+          { name: 'Tolls', value: 'tolls' },
+        ],
         default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
+        description: 'What to avoid when calculating routes. Options: tolls (driving/best only), highways (driving/best only), ferries (walking/cycling only). Example: ["tolls", "highways"].',
         routing: {
           request: {
             qs: {
-              ll: '={{$value}}',
+              avoid: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Distance Units (distance_units)',
+        name: 'distance_units',
+        type: 'options',
+        options: [
+          { name: 'Automatic', value: 'automatic' },
+          { name: 'km', value: 'km' },
+          { name: 'mi', value: 'mi' },
+        ],
+        default: 'automatic',
+        description: 'Unit of distance measurements in the response. Options: automatic (Default), km (Kilometers), mi (Miles). Not supported when travel_mode is flying or transit.',
+        routing: {
+          request: {
+            qs: {
+              distance_units: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Prefer (prefer)',
+        name: 'prefer',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Bus', value: 'bus' },
+          { name: 'Subway', value: 'subway' },
+          { name: 'Train', value: 'train' },
+          { name: 'Tram and light rail', value: 'tram_and_light_rail' },
+        ],
+        default: '',
+        description: 'Preferred transit types for transit directions. Options: bus, subway, train, tram_and_light_rail. Example: ["bus", "subway"]. Only supported when travel_mode is transit.',
+        routing: {
+          request: {
+            qs: {
+              prefer: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Route (route)',
+        name: 'route',
+        type: 'options',
+        options: [
+          { name: 'Best', value: 'best' },
+          { name: 'Fewer transfers', value: 'fewer_transfers' },
+          { name: 'Less walking', value: 'less_walking' },
+          { name: 'Wheelchair accessible', value: 'wheelchair_accessible' },
+        ],
+        default: 'best',
+        description: 'Route preference for transit directions. Options: best (Default), fewer_transfers, less_walking, wheelchair_accessible. Only supported when travel_mode is transit.',
+        routing: {
+          request: {
+            qs: {
+              route: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Time (time)',
+        name: 'time',
+        type: 'string',
+        default: '',
+        description: 'Departure or arrival time for the route. Formats: depart_at:<timestamp> (Unix timestamp), arrive_by:<timestamp> (Unix timestamp), or last_available (transit only). Cannot be used together with the waypoints parameter.',
+        routing: {
+          request: {
+            qs: {
+              time: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Travel Mode (travel_mode)',
+        name: 'travel_mode',
+        type: 'options',
+        options: [
+          { name: 'Best', value: 'best' },
+          { name: 'Cycling', value: 'cycling' },
+          { name: 'Driving', value: 'driving' },
+          { name: 'Flying', value: 'flying' },
+          { name: 'Transit', value: 'transit' },
+          { name: 'Walking', value: 'walking' },
+        ],
+        default: 'best',
+        description: 'Mode of travel. Options: best (Default), driving, cycling, walking, transit (not supported when waypoints is present), flying.',
+        routing: {
+          request: {
+            qs: {
+              travel_mode: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Waypoints (waypoints)',
+        name: 'waypoints',
+        type: 'string',
+        default: '',
+        description: 'Waypoints of the route. Should be an array of strings (plain address, data ID, or coordinates). Maximum 8 elements. Not supported when travel_mode is transit. Cannot be used together with the time parameter.',
+        routing: {
+          request: {
+            qs: {
+              waypoints: '={{$value}}',
             },
           },
         },
@@ -73,7 +205,6 @@ const properties: INodeProperties[] = [
           { name: 'Anguilla', value: 'ai' },
           { name: 'Antarctica', value: 'aq' },
           { name: 'Antigua and Barbuda', value: 'ag' },
-          { name: 'Any', value: '' },
           { name: 'Argentina', value: 'ar' },
           { name: 'Armenia', value: 'am' },
           { name: 'Aruba', value: 'aw' },
@@ -309,8 +440,8 @@ const properties: INodeProperties[] = [
           { name: 'Zambia', value: 'zm' },
           { name: 'Zimbabwe', value: 'zw' },
         ],
-        default: '',
-        description: 'Country of the search.',
+        default: 'us',
+        description: 'Country to use for the search. Check the full list of supported Google gl countries.',
         routing: {
           request: {
             qs: {
@@ -320,7 +451,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -480,39 +611,11 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Interface language of the search.',
+        description: 'Interface language of the search. Check the full list of supported Google hl languages.',
         routing: {
           request: {
             qs: {
               hl: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Defaults to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
             },
           },
         },
@@ -546,8 +649,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_maps = {
+export const google_maps_directions = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-maps',
+  docsUrl: 'https://www.searchapi.io/docs/google-maps-directions-api',
 };

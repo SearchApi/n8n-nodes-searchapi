@@ -2,49 +2,85 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_maps'],
+    resource: ['google_maps_reviews'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Maps',
-  value: 'google_maps'
+  name: 'Google Maps Reviews',
+  value: 'google_maps_reviews'
 };
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
-    name: 'q',
+    displayName: 'Place ID (place_id)',
+    name: 'place_id',
     type: 'string',
     required: true,
     default: '',
-    description: 'Terms you want to search on Google Maps. Queries can include terms like "restaurants near me" or "Starbucks New York".',
+    description: 'Unique identifier for locations on Google Maps, including businesses, landmarks, and more. For example, a place_id looks like ChIJhRwB-yFawokR5Phil-QQ3zM. Not required if data_id is being used.',
     displayOptions,
     routing: {
       request: {
         qs: {
-          q: '={{$value}}',
+          place_id: '={{$value}}',
         },
       },
     },
   },
   {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
+    displayName: 'Data ID (data_id)',
+    name: 'data_id',
+    type: 'string',
+    required: true,
+    default: '',
+    description: 'Unique identifier for locations on Google Maps, including businesses, landmarks, and more. For example, a data_id looks like 0x89c25a21fb011c85:0x33df10e49762f8e4. Not required if place_id is being used.',
+    displayOptions,
+    routing: {
+      request: {
+        qs: {
+          data_id: '={{$value}}',
+        },
+      },
+    },
+  },
+  {
+    displayName: 'Filters',
+    name: 'filters',
     type: 'collection',
-    placeholder: 'Add Geographic Location',
+    placeholder: 'Add Filters',
     default: {},
     options: [
       {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
-        type: 'string',
-        default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
+        displayName: 'Sort By (sort_by)',
+        name: 'sort_by',
+        type: 'options',
+        options: [
+          { name: 'Highest rating', value: 'highest_rating' },
+          { name: 'Lowest rating', value: 'lowest_rating' },
+          { name: 'Most relevant', value: 'most_relevant' },
+          { name: 'Newest', value: 'newest' },
+        ],
+        default: 'most_relevant',
+        description: 'Sorts results by relevance, recency, or rating.',
         routing: {
           request: {
             qs: {
-              ll: '={{$value}}',
+              sort_by: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Topic ID (topic_id)',
+        name: 'topic_id',
+        type: 'string',
+        default: '',
+        description: 'Filters reviews by topic. The value must be a KGMID (Knowledge Graph Machine ID), for example /m/06mbny for "Hospitality" or /m/016bn0 for "Service".',
+        routing: {
+          request: {
+            qs: {
+              topic_id: '={{$value}}',
             },
           },
         },
@@ -320,7 +356,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -500,19 +536,35 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Defaults to 1.',
+        displayName: 'Next Page Token (next_page_token)',
+        name: 'next_page_token',
+        type: 'string',
+        typeOptions: { password: true },
+        default: '',
+        description: 'Next page token used to retrieve the next page of reviews. Can be found in the JSON response under the pagination key.',
         routing: {
           request: {
             qs: {
-              page: '={{$value}}',
+              next_page_token: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Number of Reviews (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          maxValue: 20,
+          numberPrecision: 0,
+        },
+        default: 1,
+        description: 'Number of reviews to return. The default value is 10 and the maximum value is 20.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
             },
           },
         },
@@ -546,8 +598,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_maps = {
+export const google_maps_reviews = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-maps',
+  docsUrl: 'https://www.searchapi.io/docs/google-maps-reviews',
 };

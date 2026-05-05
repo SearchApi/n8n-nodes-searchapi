@@ -13,32 +13,17 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Query (q)',
+    displayName: 'Search Query (q)',
     name: 'q',
     type: 'string',
     required: true,
     default: '',
-    description: 'Search query. Filters embedded in the query act as hints rather than strict filters. If there are too few matching items, results outside the filters may appear. Examples: by price (tshirt under $30, jeans between $15 and $30), by size (mens size 8.5 nike air), by color (Playstation white), nearby stores (Apparel nearby), by condition (iphone used, macbook new), by brand (prada dress, gucci shoes), discounted products (laptop on sale)',
+    description: 'Specifies the search query. Filters embedded in the query act as hints rather than strict filters — if there are too few matching items, results outside the filters may appear.',
     displayOptions,
     routing: {
       request: {
         qs: {
           q: '={{$value}}',
-        },
-      },
-    },
-  },
-	{
-    displayName: 'Page (page)',
-    name: 'page',
-    type: 'string',
-    default: '1',
-    description: 'Page number of results to return (default: 1)',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
         },
       },
     },
@@ -50,48 +35,280 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Localization',
     default: {},
     options: [
-    {
-      displayName: 'Country (gl)',
-      name: 'gl',
-      type: 'string',
-      default: 'us',
-      description: 'Country of the search (default: us)',
-      routing: {
-        request: {
-          qs: {
-            gl: '={{$value}}',
+      {
+        displayName: 'Country (gl)',
+        name: 'gl',
+        type: 'options',
+        options: [
+          { name: 'Anguilla', value: 'ai' },
+          { name: 'Argentina', value: 'ar' },
+          { name: 'Aruba', value: 'aw' },
+          { name: 'Australia', value: 'au' },
+          { name: 'Austria', value: 'at' },
+          { name: 'Belgium', value: 'be' },
+          { name: 'Bermuda', value: 'bm' },
+          { name: 'Brazil', value: 'br' },
+          { name: 'British Indian Ocean Territory', value: 'io' },
+          { name: 'Canada', value: 'ca' },
+          { name: 'Cayman Islands', value: 'ky' },
+          { name: 'Chile', value: 'cl' },
+          { name: 'Christmas Island', value: 'cx' },
+          { name: 'Cocos (Keeling) Islands', value: 'cc' },
+          { name: 'Colombia', value: 'co' },
+          { name: 'Czech Republic', value: 'cz' },
+          { name: 'Denmark', value: 'dk' },
+          { name: 'Falkland Islands (Malvinas)', value: 'fk' },
+          { name: 'Finland', value: 'fi' },
+          { name: 'France', value: 'fr' },
+          { name: 'French Guiana', value: 'gf' },
+          { name: 'French Polynesia', value: 'pf' },
+          { name: 'French Southern Territories', value: 'tf' },
+          { name: 'Germany', value: 'de' },
+          { name: 'Greece', value: 'gr' },
+          { name: 'Guadeloupe', value: 'gp' },
+          { name: 'Heard Island and Mcdonald Islands', value: 'hm' },
+          { name: 'Hong Kong', value: 'hk' },
+          { name: 'Hungary', value: 'hu' },
+          { name: 'India', value: 'in' },
+          { name: 'Indonesia', value: 'id' },
+          { name: 'Ireland', value: 'ie' },
+          { name: 'Israel', value: 'il' },
+          { name: 'Italy', value: 'it' },
+          { name: 'Japan', value: 'jp' },
+          { name: 'Malaysia', value: 'my' },
+          { name: 'Martinique', value: 'mq' },
+          { name: 'Mayotte', value: 'yt' },
+          { name: 'Mexico', value: 'mx' },
+          { name: 'Montserrat', value: 'ms' },
+          { name: 'Netherlands', value: 'nl' },
+          { name: 'New Caledonia', value: 'nc' },
+          { name: 'New Zealand', value: 'nz' },
+          { name: 'Norfolk Island', value: 'nf' },
+          { name: 'Norway', value: 'no' },
+          { name: 'Philippines', value: 'ph' },
+          { name: 'Poland', value: 'pl' },
+          { name: 'Portugal', value: 'pt' },
+          { name: 'Reunion', value: 're' },
+          { name: 'Romania', value: 'ro' },
+          { name: 'Russian Federation', value: 'ru' },
+          { name: 'Saint Pierre and Miquelon', value: 'pm' },
+          { name: 'Saudi Arabia', value: 'sa' },
+          { name: 'Singapore', value: 'sg' },
+          { name: 'Slovakia', value: 'sk' },
+          { name: 'South Africa', value: 'za' },
+          { name: 'South Georgia and the South Sandwich Islands', value: 'gs' },
+          { name: 'South Korea', value: 'kr' },
+          { name: 'Spain', value: 'es' },
+          { name: 'Sweden', value: 'se' },
+          { name: 'Switzerland', value: 'ch' },
+          { name: 'Taiwan', value: 'tw' },
+          { name: 'Thailand', value: 'th' },
+          { name: 'Tokelau', value: 'tk' },
+          { name: 'Turkey', value: 'tr' },
+          { name: 'Turks and Caicos Islands', value: 'tc' },
+          { name: 'Ukraine', value: 'ua' },
+          { name: 'United Arab Emirates', value: 'ae' },
+          { name: 'United Kingdom (gb)', value: 'gb' },
+          { name: 'United Kingdom (uk)', value: 'uk' },
+          { name: 'United States', value: 'us' },
+          { name: 'Viet Nam', value: 'vn' },
+          { name: 'Virgin Islands, British', value: 'vg' },
+          { name: 'Wallis and Futuna', value: 'wf' },
+        ],
+        default: 'us',
+        description: 'Defines the country of the search',
+        routing: {
+          request: {
+            qs: {
+              gl: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Google Domain (google_domain)',
-      name: 'google_domain',
-      type: 'string',
-      default: 'google.com',
-      description: 'Google domain for the search (default: google.com)',
-      routing: {
-        request: {
-          qs: {
-            google_domain: '={{$value}}',
+      {
+        displayName: 'Google Domain (google_domain)',
+        name: 'google_domain',
+        type: 'string',
+        default: 'google.com',
+        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use gl (country) or hl (language) instead.',
+        routing: {
+          request: {
+            qs: {
+              google_domain: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Language (hl)',
-      name: 'hl',
-      type: 'string',
-      default: 'en',
-      description: 'Interface language of the search (default: en)',
-      routing: {
-        request: {
-          qs: {
-            hl: '={{$value}}',
+      {
+        displayName: 'Language (hl)',
+        name: 'hl',
+        type: 'options',
+        options: [
+          { name: 'Afrikaans', value: 'af' },
+          { name: 'Akan', value: 'ak' },
+          { name: 'Albanian', value: 'sq' },
+          { name: 'Amharic', value: 'am' },
+          { name: 'Arabic', value: 'ar' },
+          { name: 'Armenian', value: 'hy' },
+          { name: 'Azerbaijani', value: 'az' },
+          { name: 'Basque', value: 'eu' },
+          { name: 'Belarusian', value: 'be' },
+          { name: 'Bemba', value: 'bem' },
+          { name: 'Bengali', value: 'bn' },
+          { name: 'Bihari', value: 'bh' },
+          { name: 'Bork, bork, bork!', value: 'xx-bork' },
+          { name: 'Bosnian', value: 'bs' },
+          { name: 'Breton', value: 'br' },
+          { name: 'Bulgarian', value: 'bg' },
+          { name: 'Burmese', value: 'my' },
+          { name: 'Cambodian', value: 'km' },
+          { name: 'Catalan', value: 'ca' },
+          { name: 'Cherokee', value: 'chr' },
+          { name: 'Chichewa', value: 'ny' },
+          { name: 'Chinese (Simplified)', value: 'zh-cn' },
+          { name: 'Chinese (Traditional)', value: 'zh-tw' },
+          { name: 'Corsican', value: 'co' },
+          { name: 'Croatian', value: 'hr' },
+          { name: 'Czech', value: 'cs' },
+          { name: 'Danish', value: 'da' },
+          { name: 'Dutch', value: 'nl' },
+          { name: 'Elmer Fudd', value: 'xx-elmer' },
+          { name: 'English', value: 'en' },
+          { name: 'Esperanto', value: 'eo' },
+          { name: 'Estonian', value: 'et' },
+          { name: 'Ewe', value: 'ee' },
+          { name: 'Faroese', value: 'fo' },
+          { name: 'Filipino', value: 'tl' },
+          { name: 'Finnish', value: 'fi' },
+          { name: 'French', value: 'fr' },
+          { name: 'Frisian', value: 'fy' },
+          { name: 'Ga', value: 'gaa' },
+          { name: 'Galician', value: 'gl' },
+          { name: 'Georgian', value: 'ka' },
+          { name: 'German', value: 'de' },
+          { name: 'Greek', value: 'el' },
+          { name: 'Greenlandic', value: 'kl' },
+          { name: 'Guarani', value: 'gn' },
+          { name: 'Gujarati', value: 'gu' },
+          { name: 'Hacker', value: 'xx-hacker' },
+          { name: 'Haitian Creole', value: 'ht' },
+          { name: 'Hausa', value: 'ha' },
+          { name: 'Hawaiian', value: 'haw' },
+          { name: 'Hebrew', value: 'iw' },
+          { name: 'Hindi', value: 'hi' },
+          { name: 'Hungarian', value: 'hu' },
+          { name: 'Icelandic', value: 'is' },
+          { name: 'Igbo', value: 'ig' },
+          { name: 'Indonesian', value: 'id' },
+          { name: 'Interlingua', value: 'ia' },
+          { name: 'Irish', value: 'ga' },
+          { name: 'Italian', value: 'it' },
+          { name: 'Japanese', value: 'ja' },
+          { name: 'Javanese', value: 'jw' },
+          { name: 'Kannada', value: 'kn' },
+          { name: 'Kazakh', value: 'kk' },
+          { name: 'Kinyarwanda', value: 'rw' },
+          { name: 'Kirundi', value: 'rn' },
+          { name: 'Klingon', value: 'xx-klingon' },
+          { name: 'Kongo', value: 'kg' },
+          { name: 'Korean', value: 'ko' },
+          { name: 'Krio (Sierra Leone)', value: 'kri' },
+          { name: 'Kurdish', value: 'ku' },
+          { name: 'Kurdish (Soranî)', value: 'ckb' },
+          { name: 'Kyrgyz', value: 'ky' },
+          { name: 'Laothian', value: 'lo' },
+          { name: 'Latin', value: 'la' },
+          { name: 'Latvian', value: 'lv' },
+          { name: 'Lingala', value: 'ln' },
+          { name: 'Lithuanian', value: 'lt' },
+          { name: 'Lozi', value: 'loz' },
+          { name: 'Luganda', value: 'lg' },
+          { name: 'Luo', value: 'ach' },
+          { name: 'Macedonian', value: 'mk' },
+          { name: 'Malagasy', value: 'mg' },
+          { name: 'Malay', value: 'ms' },
+          { name: 'Malayalam', value: 'ml' },
+          { name: 'Maldives', value: 'mv' },
+          { name: 'Maltese', value: 'mt' },
+          { name: 'Maori', value: 'mi' },
+          { name: 'Marathi', value: 'mr' },
+          { name: 'Mauritian Creole', value: 'mfe' },
+          { name: 'Moldavian', value: 'mo' },
+          { name: 'Mongolian', value: 'mn' },
+          { name: 'Montenegrin', value: 'sr-me' },
+          { name: 'Nepali', value: 'ne' },
+          { name: 'Nigerian Pidgin', value: 'pcm' },
+          { name: 'Northern Sotho', value: 'nso' },
+          { name: 'Norwegian', value: 'no' },
+          { name: 'Norwegian (Nynorsk)', value: 'nn' },
+          { name: 'Occitan', value: 'oc' },
+          { name: 'Oriya', value: 'or' },
+          { name: 'Oromo', value: 'om' },
+          { name: 'Pashto', value: 'ps' },
+          { name: 'Persian', value: 'fa' },
+          { name: 'Pirate', value: 'xx-pirate' },
+          { name: 'Polish', value: 'pl' },
+          { name: 'Portuguese', value: 'pt' },
+          { name: 'Portuguese (Brazil)', value: 'pt-br' },
+          { name: 'Portuguese (Portugal)', value: 'pt-pt' },
+          { name: 'Punjabi', value: 'pa' },
+          { name: 'Quechua', value: 'qu' },
+          { name: 'Romanian', value: 'ro' },
+          { name: 'Romansh', value: 'rm' },
+          { name: 'Runyakitara', value: 'nyn' },
+          { name: 'Russian', value: 'ru' },
+          { name: 'Scots Gaelic', value: 'gd' },
+          { name: 'Serbian', value: 'sr' },
+          { name: 'Serbo-Croatian', value: 'sh' },
+          { name: 'Sesotho', value: 'st' },
+          { name: 'Setswana', value: 'tn' },
+          { name: 'Seychellois Creole', value: 'crs' },
+          { name: 'Shona', value: 'sn' },
+          { name: 'Sindhi', value: 'sd' },
+          { name: 'Sinhalese', value: 'si' },
+          { name: 'Slovak', value: 'sk' },
+          { name: 'Slovenian', value: 'sl' },
+          { name: 'Somali', value: 'so' },
+          { name: 'Spanish', value: 'es' },
+          { name: 'Spanish (Latin American)', value: 'es-419' },
+          { name: 'Sundanese', value: 'su' },
+          { name: 'Swahili', value: 'sw' },
+          { name: 'Swedish', value: 'sv' },
+          { name: 'Tajik', value: 'tg' },
+          { name: 'Tamil', value: 'ta' },
+          { name: 'Tatar', value: 'tt' },
+          { name: 'Telugu', value: 'te' },
+          { name: 'Thai', value: 'th' },
+          { name: 'Tigrinya', value: 'ti' },
+          { name: 'Tonga', value: 'to' },
+          { name: 'Tshiluba', value: 'lua' },
+          { name: 'Tumbuka', value: 'tum' },
+          { name: 'Turkish', value: 'tr' },
+          { name: 'Turkmen', value: 'tk' },
+          { name: 'Twi', value: 'tw' },
+          { name: 'Uighur', value: 'ug' },
+          { name: 'Ukrainian', value: 'uk' },
+          { name: 'Urdu', value: 'ur' },
+          { name: 'Uzbek', value: 'uz' },
+          { name: 'Vanuatu', value: 'vu' },
+          { name: 'Vietnamese', value: 'vi' },
+          { name: 'Welsh', value: 'cy' },
+          { name: 'Wolof', value: 'wo' },
+          { name: 'Xhosa', value: 'xh' },
+          { name: 'Yiddish', value: 'yi' },
+          { name: 'Yoruba', value: 'yo' },
+          { name: 'Zulu', value: 'zu' },
+        ],
+        default: 'en',
+        description: 'Defines the interface language of the search',
+        routing: {
+          request: {
+            qs: {
+              hl: '={{$value}}',
+            },
           },
         },
-      },
-    }
+      }
     ],
     displayOptions,
   },
@@ -102,34 +319,34 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Geographic Location',
     default: {},
     options: [
-    {
-      displayName: 'Location (location)',
-      name: 'location',
-      type: 'string',
-      default: '',
-      description: 'Canonical location of the search. If multiple locations match, the most popular one will be selected.',
-      routing: {
-        request: {
-          qs: {
-            location: '={{$value}}',
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Encoded Location (uule)',
-      name: 'uule',
-      type: 'string',
-      default: '',
-      description: 'Exact Google-encoded location for the search. Cannot be used with location parameter. Automatically built when using location parameter, but can be provided for precise control',
-      routing: {
-        request: {
-          qs: {
-            uule: '={{$value}}',
+      {
+        displayName: 'Encoded Location (uule)',
+        name: 'uule',
+        type: 'string',
+        default: '',
+        description: 'Sets the exact Google-encoded location for the search. Cannot be used together with location. SearchApi builds it automatically when you use location, but you can provide your own for precise control.',
+        routing: {
+          request: {
+            qs: {
+              uule: '={{$value}}',
+            },
           },
         },
-      },
-    }
+      }
     ],
     displayOptions,
   },
@@ -140,146 +357,210 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Filters',
     default: {},
     options: [
-    {
-      displayName: 'Condition (condition)',
-      name: 'condition',
-      type: 'string',
-      default: '',
-      description: 'Filters product condition. Options: new, used.',
-      routing: {
-        request: {
-          qs: {
-            condition: '={{$value}}',
+      {
+        displayName: 'Condition (condition)',
+        name: 'condition',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'New', value: 'new' },
+          { name: 'Used', value: 'used' },
+        ],
+        default: '',
+        description: 'Filters results by product condition',
+        routing: {
+          request: {
+            qs: {
+              condition: '={{$value}}',
+            },
           },
         },
       },
-    },
-		{
-			displayName: 'Free Delivery (is_free_delivery)',
-			name: 'is_free_delivery',
-			type: 'string',
-			default: '',
-			description: 'Show only products with free shipping. Can be combined with is_on_sale, is_small_business, and sort_by. Ignored if shoprs parameter is provided',
-			routing: {
-				request: {
-					qs: {
-						is_free_delivery: '={{$value}}',
-					},
-				},
-			},
-		},
-    {
-      displayName: 'Include Base Images (include_base_images)',
-      name: 'include_base_images',
-      type: 'string',
-      default: 'false',
-      description: 'Include base64-encoded product images in the shopping results (default: false)',
-      routing: {
-        request: {
-          qs: {
-            include_base_images: '={{$value}}',
+      {
+        displayName: 'Include Base Images (include_base_images)',
+        name: 'include_base_images',
+        type: 'boolean',
+        default: false,
+        description: 'Whether to include base64-encoded product images in the shopping results',
+        routing: {
+          request: {
+            qs: {
+              include_base_images: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Include Favicon (include_favicon)',
-      name: 'include_favicon',
-      type: 'string',
-      default: 'false',
-      description: 'Include seller\'s favicon in the shopping results (default: false)',
-      routing: {
-        request: {
-          qs: {
-            include_favicon: '={{$value}}',
+      {
+        displayName: 'Include Favicon (include_favicon)',
+        name: 'include_favicon',
+        type: 'boolean',
+        default: false,
+        description: "Whether to include the seller's favicon in the shopping results",
+        routing: {
+          request: {
+            qs: {
+              include_favicon: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Maximum Price (price_max)',
-      name: 'price_max',
-      type: 'string',
-      default: '',
-      description: 'Maximum price of the products returned (must include currency, e.g., 100). Must be used as a strict filter before applying shoprs.',
-      routing: {
-        request: {
-          qs: {
-            price_max: '={{$value}}',
+      {
+        displayName: 'Is Free Delivery (is_free_delivery)',
+        name: 'is_free_delivery',
+        type: 'boolean',
+        default: false,
+        description: 'Whether to filter results to only show products with free shipping. If shoprs is also provided, it takes priority and this parameter is ignored.',
+        routing: {
+          request: {
+            qs: {
+              is_free_delivery: '={{$value}}',
+            },
           },
         },
       },
-    },
-		{
-      displayName: 'Minimum Price (price_min)',
-      name: 'price_min',
-      type: 'string',
-      default: '',
-      description: 'Minimum price of the products returned (must include currency, e.g., 2.50). Must be used as a strict filter before applying shoprs.',
-      routing: {
-        request: {
-          qs: {
-            price_min: '={{$value}}',
+      {
+        displayName: 'Is On Sale (is_on_sale)',
+        name: 'is_on_sale',
+        type: 'boolean',
+        default: false,
+        description: 'Whether to filter results to only show products that are currently on sale. If shoprs is also provided, it takes priority and this parameter is ignored.',
+        routing: {
+          request: {
+            qs: {
+              is_on_sale: '={{$value}}',
+            },
           },
         },
       },
-    },
-		{
-      displayName: 'On Sale (is_on_sale)',
-      name: 'is_on_sale',
-      type: 'string',
-      default: '',
-      description: 'Show only products currently on sale. Can be combined with is_small_business, is_free_delivery, and sort_by. Ignored if shoprs parameter is provided',
-      routing: {
-        request: {
-          qs: {
-            is_on_sale: '={{$value}}',
+      {
+        displayName: 'Is Small Business (is_small_business)',
+        name: 'is_small_business',
+        type: 'boolean',
+        default: false,
+        description: 'Whether to filter results to only show products sold by small businesses. If shoprs is also provided, it takes priority and this parameter is ignored.',
+        routing: {
+          request: {
+            qs: {
+              is_small_business: '={{$value}}',
+            },
           },
         },
       },
-    },
-		{
-      displayName: 'Small Business (is_small_business)',
-      name: 'is_small_business',
-      type: 'string',
-      default: '',
-      description: 'Show only products sold by small businesses. Can be combined with is_on_sale, is_free_delivery, and sort_by. Ignored if shoprs parameter is provided',
-      routing: {
-        request: {
-          qs: {
-            is_small_business: '={{$value}}',
+      {
+        displayName: 'Price Max (price_max)',
+        name: 'price_max',
+        type: 'string',
+        default: '',
+        description: 'Specifies the maximum price of the products returned. This parameter must include the currency. For example, 100 filters results to products priced at $100 or less. Must be used as a strict filter before applying shoprs.',
+        routing: {
+          request: {
+            qs: {
+              price_max: '={{$value}}',
+            },
           },
         },
       },
-    },
-    {
-      displayName: 'Sort By (sort_by)',
-      name: 'sort_by',
-      type: 'string',
-      default: '',
-      description: 'Sort shopping results. Options: price_low_to_high, price_high_to_low, rating_high_to_low. Can be combined with is_on_sale, is_small_business, and is_free_delivery. Ignored if shoprs parameter is provided',
-      routing: {
-        request: {
-          qs: {
-            sort_by: '={{$value}}',
+      {
+        displayName: 'Price Min (price_min)',
+        name: 'price_min',
+        type: 'string',
+        default: '',
+        description: 'Specifies the minimum price of the products returned. This parameter must include the currency. For example, 2.50 filters results to products priced at $2.50 or higher. Must be used as a strict filter before applying shoprs.',
+        routing: {
+          request: {
+            qs: {
+              price_min: '={{$value}}',
+            },
           },
         },
       },
-    },
-		{
-      displayName: 'Strict Filters (shoprs)',
-      name: 'shoprs',
-      type: 'string',
-      default: '',
-      description: 'Strict filtering rules based on encoded values (e.g., CAEYFyoDcHM1MhwIFxISUHJpY2U6IGxvdyB0byBoaWdoKgQQARgBYAKIAQE for price sorting). Filters from JSON response can be used in subsequent requests.',
-      routing: {
-        request: {
-          qs: {
-            shoprs: '={{$value}}',
+      {
+        displayName: 'Shopping Filters (shoprs)',
+        name: 'shoprs',
+        type: 'string',
+        default: '',
+        description: 'Applies strict filtering rules based on encoded values. Example: CAEYFyoDcHM1MhwIFxISUHJpY2U6IGxvdyB0byBoaWdoKgQQARgBYAKIAQE sorts products by price (low to high). Filters provided in the JSON response can be used in subsequent requests to apply additional filters iteratively.',
+        routing: {
+          request: {
+            qs: {
+              shoprs: '={{$value}}',
+            },
           },
         },
       },
-    },
+      {
+        displayName: 'Sort By (sort_by)',
+        name: 'sort_by',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Price high to low', value: 'price_high_to_low' },
+          { name: 'Price low to high', value: 'price_low_to_high' },
+          { name: 'Relevance', value: 'relevance' },
+          { name: 'Review score', value: 'review_score' },
+        ],
+        default: '',
+        description: 'Sorts the shopping results by the specified criteria. If shoprs is also provided, it takes priority and this parameter is ignored.',
+        routing: {
+          request: {
+            qs: {
+              sort_by: '={{$value}}',
+            },
+          },
+        },
+      }
+    ],
+    displayOptions,
+  },
+  {
+    displayName: 'Pagination',
+    name: 'pagination',
+    type: 'collection',
+    placeholder: 'Add Pagination',
+    default: {},
+    options: [
+      {
+        displayName: 'Page Number (page)',
+        name: 'page',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          numberPrecision: 0,
+        },
+        default: 1,
+        description: 'Indicates which page of results to return',
+        routing: {
+          request: {
+            qs: {
+              page: '={{$value}}',
+            },
+          },
+        },
+      }
+    ],
+    displayOptions,
+  },
+  {
+    displayName: 'Zero Data Retention',
+    name: 'zero_data_retention',
+    type: 'collection',
+    placeholder: 'Add Zero Data Retention',
+    default: {},
+    options: [
+      {
+        displayName: 'Zero Retention (zero_retention)',
+        name: 'zero_retention',
+        type: 'boolean',
+        default: false,
+        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
+        routing: {
+          request: {
+            qs: {
+              zero_retention: '={{$value}}',
+            },
+          },
+        },
+      }
     ],
     displayOptions,
   }

@@ -2,13 +2,13 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_maps'],
+    resource: ['google_shopping_autocomplete'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Maps',
-  value: 'google_maps'
+  name: 'Google Shopping Autocomplete',
+  value: 'google_shopping_autocomplete'
 };
 
 const properties: INodeProperties[] = [
@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Terms you want to search on Google Maps. Queries can include terms like "restaurants near me" or "Starbucks New York".',
+    description: 'Search query that would produce autocomplete suggestions',
     displayOptions,
     routing: {
       request: {
@@ -29,22 +29,26 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
+    displayName: 'Filters',
+    name: 'filters',
     type: 'collection',
-    placeholder: 'Add Geographic Location',
+    placeholder: 'Add Filters',
     default: {},
     options: [
       {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
-        type: 'string',
-        default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
+        displayName: 'Cursor Position (cp)',
+        name: 'cp',
+        type: 'number',
+        typeOptions: {
+          minValue: 0,
+          numberPrecision: 0,
+        },
+        default: 0,
+        description: 'Determines the cursor position within the search query for autocomplete requests. A 0 value places the cursor at the start of the query (like |some query), whereas not including cp suggests the cursor is at the end of the query (like some query|). The location of the cursor affects the suggestions provided.',
         routing: {
           request: {
             qs: {
-              ll: '={{$value}}',
+              cp: '={{$value}}',
             },
           },
         },
@@ -73,7 +77,6 @@ const properties: INodeProperties[] = [
           { name: 'Anguilla', value: 'ai' },
           { name: 'Antarctica', value: 'aq' },
           { name: 'Antigua and Barbuda', value: 'ag' },
-          { name: 'Any', value: '' },
           { name: 'Argentina', value: 'ar' },
           { name: 'Armenia', value: 'am' },
           { name: 'Aruba', value: 'aw' },
@@ -309,8 +312,8 @@ const properties: INodeProperties[] = [
           { name: 'Zambia', value: 'zm' },
           { name: 'Zimbabwe', value: 'zw' },
         ],
-        default: '',
-        description: 'Country of the search.',
+        default: 'us',
+        description: 'Defines the country of the search. Check the full list of supported Google gl countries.',
         routing: {
           request: {
             qs: {
@@ -320,7 +323,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -480,39 +483,11 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Interface language of the search.',
+        description: 'Defines the interface language of the search. Check the full list of supported Google hl languages.',
         routing: {
           request: {
             qs: {
               hl: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Defaults to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
             },
           },
         },
@@ -546,8 +521,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_maps = {
+export const google_shopping_autocomplete = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-maps',
+  docsUrl: 'https://www.searchapi.io/docs/google-shopping-autocomplete-api',
 };

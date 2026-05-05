@@ -2,55 +2,47 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_maps'],
+    resource: ['google_maps_place'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Maps',
-  value: 'google_maps'
+  name: 'Google Maps Place',
+  value: 'google_maps_place'
 };
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
-    name: 'q',
+    displayName: 'Place ID (place_id)',
+    name: 'place_id',
     type: 'string',
     required: true,
     default: '',
-    description: 'Terms you want to search on Google Maps. Queries can include terms like "restaurants near me" or "Starbucks New York".',
+    description: 'Unique identifier for a place on Google Maps. Note: The place_id parameter is not required if data_id parameter is being used.',
     displayOptions,
     routing: {
       request: {
         qs: {
-          q: '={{$value}}',
+          place_id: '={{$value}}',
         },
       },
     },
   },
   {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
-    type: 'collection',
-    placeholder: 'Add Geographic Location',
-    default: {},
-    options: [
-      {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
-        type: 'string',
-        default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
-        routing: {
-          request: {
-            qs: {
-              ll: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Data ID (data_id)',
+    name: 'data_id',
+    type: 'string',
+    required: true,
+    default: '',
+    description: 'Unique identifier for a place on Google Maps. Note: The data_id parameter is not required if place_id parameter is being used.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          data_id: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Localization',
@@ -310,7 +302,7 @@ const properties: INodeProperties[] = [
           { name: 'Zimbabwe', value: 'zw' },
         ],
         default: '',
-        description: 'Country of the search.',
+        description: 'Defines the country of the search',
         routing: {
           request: {
             qs: {
@@ -320,7 +312,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -480,39 +472,11 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Interface language of the search.',
+        description: 'Defines the interface language of the search',
         routing: {
           request: {
             qs: {
               hl: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Defaults to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
             },
           },
         },
@@ -546,8 +510,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_maps = {
+export const google_maps_place = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-maps',
+  docsUrl: 'https://www.searchapi.io/docs/google-maps-place',
 };
