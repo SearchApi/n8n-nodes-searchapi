@@ -16,7 +16,6 @@ const properties: INodeProperties[] = [
     displayName: 'Search Query (q)',
     name: 'q',
     type: 'string',
-    required: true,
     default: '',
     description: 'Search terms for Bing News. Queries can include operators and advanced filters like "climate change", site:, inurl:, or intitle:. Optional when category is used — if both are provided, category takes priority.',
     displayOptions,
