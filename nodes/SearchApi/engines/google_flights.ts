@@ -16,9 +16,8 @@ const properties: INodeProperties[] = [
     displayName: 'Departure Airport (departure_id)',
     name: 'departure_id',
     type: 'string',
-    required: true,
     default: '',
-    description: 'Code for the departure airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286).',
+    description: 'Code for the departure airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286). Note: Not required if flight_type set to multi_city (legs are provided via multi_city_json).',
     displayOptions,
     routing: {
       request: {
@@ -32,9 +31,8 @@ const properties: INodeProperties[] = [
     displayName: 'Arrival Airport (arrival_id)',
     name: 'arrival_id',
     type: 'string',
-    required: true,
     default: '',
-    description: 'Code for the arrival airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286).',
+    description: 'Code for the arrival airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286). Note: Not required if flight_type set to multi_city (legs are provided via multi_city_json).',
     displayOptions,
     routing: {
       request: {
