@@ -64,7 +64,6 @@ const properties: INodeProperties[] = [
     displayName: 'Return Date (return_date)',
     name: 'return_date',
     type: 'string',
-    required: true,
     default: '',
     description: 'Defines the return date. The date format is YYYY-MM-DD.',
     displayOptions,
