@@ -411,7 +411,7 @@ const properties: INodeProperties[] = [
           maxValue: 100,
           numberPrecision: 0,
         },
-        default: 1,
+        default: 40,
         description: 'Specifies the number of results to return. Default is 40. The maximum is 100.',
         routing: {
           request: {
