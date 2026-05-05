@@ -97,7 +97,7 @@ const properties: INodeProperties[] = [
           numberPrecision: 0,
         },
         default: 10,
-        description: 'Number of results to display per page — maximum 50. Use with the page parameter to paginate',
+        description: 'Number of results to display per page — maximum 50. Use with the page parameter to paginate.',
         routing: {
           request: {
             qs: {
@@ -115,7 +115,7 @@ const properties: INodeProperties[] = [
           numberPrecision: 0,
         },
         default: 1,
-        description: 'Page of results to return. Use with the num parameter to paginate',
+        description: 'Page of results to return. Use with the num parameter to paginate.',
         routing: {
           request: {
             qs: {

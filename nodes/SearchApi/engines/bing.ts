@@ -83,7 +83,7 @@ const properties: INodeProperties[] = [
         name: 'location',
         type: 'string',
         default: '',
-        description: 'Canonical location for the search — if multiple locations match, the most popular one is selected. Example: "New York" selects New York, United States',
+        description: 'Canonical location for the search — if multiple locations match, the most popular one is selected. Example: "New York" selects New York, United States.',
         routing: {
           request: {
             qs: {
@@ -152,7 +152,7 @@ const properties: INodeProperties[] = [
           { name: 'zh-tw', value: 'zh-tw' },
         ],
         default: '',
-        description: 'Country for search results — format is language-country, like en-US. Cannot be used together with country_code',
+        description: 'Country for search results — format is language-country, like en-US. Cannot be used together with country_code.',
         routing: {
           request: {
             qs: {
@@ -215,7 +215,7 @@ const properties: INodeProperties[] = [
           { name: 'ZA', value: 'ZA' },
         ],
         default: '',
-        description: 'Country for search results when market_code is not set — defaults to US. Cannot be used together with market_code',
+        description: 'Country for search results when market_code is not set — defaults to US. Cannot be used together with market_code.',
         routing: {
           request: {
             qs: {
@@ -282,7 +282,7 @@ const properties: INodeProperties[] = [
           { name: 'zh-hant', value: 'zh-hant' },
         ],
         default: '',
-        description: 'Language for UI text — accepts 2-letter (ISO 639-1) or 4-letter codes. Defaults to en (English) if unspecified or unsupported',
+        description: 'Language for UI text — accepts 2-letter (ISO 639-1) or 4-letter codes. Defaults to en (English) if unspecified or unsupported.',
         routing: {
           request: {
             qs: {
@@ -349,7 +349,7 @@ const properties: INodeProperties[] = [
         name: 'num',
         type: 'string',
         default: '10',
-        description: 'Number of results per page — maximum 50. Use with page to paginate',
+        description: 'Number of results per page — maximum 50. Use with page to paginate.',
         routing: {
           request: {
             qs: {
@@ -363,7 +363,7 @@ const properties: INodeProperties[] = [
         name: 'page',
         type: 'string',
         default: '1',
-        description: 'Page of results to return — defaults to 1. Use with num to paginate',
+        description: 'Page of results to return — defaults to 1. Use with num to paginate.',
         routing: {
           request: {
             qs: {

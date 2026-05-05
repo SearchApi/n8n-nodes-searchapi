@@ -724,7 +724,7 @@ const properties: INodeProperties[] = [
           { name: 'Round trip', value: 'round_trip' },
         ],
         default: '',
-        description: 'Defines the type of the flights.',
+        description: 'Defines the type of the flights',
         routing: {
           request: {
             qs: {
@@ -874,7 +874,7 @@ const properties: INodeProperties[] = [
           { name: 'Show separate tickets', value: '0' },
         ],
         default: '',
-        description: 'Whether to hide separate and self-transfer tickets.',
+        description: 'Whether to hide separate and self-transfer tickets',
         routing: {
           request: {
             qs: {
@@ -892,7 +892,7 @@ const properties: INodeProperties[] = [
           { name: 'True', value: 'true' },
         ],
         default: '',
-        description: 'Whether to show the cheapest flights instead of best flights.',
+        description: 'Whether to show the cheapest flights instead of best flights',
         routing: {
           request: {
             qs: {
@@ -933,7 +933,7 @@ const properties: INodeProperties[] = [
           { name: 'Top flights', value: 'top_flights' },
         ],
         default: '',
-        description: 'Defines the sorting order of the flights.',
+        description: 'Defines the sorting order of the flights',
         routing: {
           request: {
             qs: {
@@ -953,7 +953,7 @@ const properties: INodeProperties[] = [
           { name: 'Two stops or fewer', value: 'two_stops_or_fewer' },
         ],
         default: 'any',
-        description: 'Defines the number of stops during the flight.',
+        description: 'Defines the number of stops during the flight',
         routing: {
           request: {
             qs: {
@@ -974,7 +974,7 @@ const properties: INodeProperties[] = [
           { name: 'Premium economy', value: 'premium_economy' },
         ],
         default: '',
-        description: 'Defines the travel class.',
+        description: 'Defines the travel class',
         routing: {
           request: {
             qs: {

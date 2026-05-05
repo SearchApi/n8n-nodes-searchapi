@@ -70,7 +70,7 @@ const properties: INodeProperties[] = [
         name: 'q',
         type: 'string',
         default: '',
-        description: 'Terms to search for on Google Hotels.',
+        description: 'Terms to search for on Google Hotels',
         routing: {
           request: {
             qs: {
@@ -763,7 +763,7 @@ const properties: INodeProperties[] = [
           { name: 'Any', value: '' },
         ],
         default: '',
-        description: 'Defines the minimum rating of results to return.',
+        description: 'Defines the minimum rating of results to return',
         routing: {
           request: {
             qs: {
@@ -783,7 +783,7 @@ const properties: INodeProperties[] = [
           { name: 'Relevance', value: 'relevance' },
         ],
         default: 'relevance',
-        description: 'Defines the sorting order of the results.',
+        description: 'Defines the sorting order of the results',
         routing: {
           request: {
             qs: {
@@ -821,7 +821,7 @@ const properties: INodeProperties[] = [
         name: 'eco_certified',
         type: 'boolean',
         default: false,
-        description: 'Whether to show only eco-certified hotels.',
+        description: 'Whether to show only eco-certified hotels',
         routing: {
           request: {
             qs: {
@@ -835,7 +835,7 @@ const properties: INodeProperties[] = [
         name: 'for_displaced_individuals',
         type: 'boolean',
         default: false,
-        description: 'Whether to show only hotels available for displaced individuals.',
+        description: 'Whether to show only hotels available for displaced individuals',
         routing: {
           request: {
             qs: {
@@ -849,7 +849,7 @@ const properties: INodeProperties[] = [
         name: 'free_cancellation',
         type: 'boolean',
         default: false,
-        description: 'Whether to show only hotels that offer free cancellation on bookings.',
+        description: 'Whether to show only hotels that offer free cancellation on bookings',
         routing: {
           request: {
             qs: {
@@ -884,7 +884,7 @@ const properties: INodeProperties[] = [
         name: 'special_offers',
         type: 'boolean',
         default: false,
-        description: 'Whether to show only hotels with special offers.',
+        description: 'Whether to show only hotels with special offers',
         routing: {
           request: {
             qs: {

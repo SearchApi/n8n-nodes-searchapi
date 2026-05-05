@@ -136,7 +136,7 @@ const properties: INodeProperties[] = [
         name: 'time',
         type: 'string',
         default: '',
-        description: 'Departure or arrival time for the route. Formats: depart_at:<timestamp> (Unix timestamp), arrive_by:<timestamp> (Unix timestamp), or last_available (transit only). Cannot be used together with the waypoints parameter.',
+        description: 'Departure or arrival time for the route. Formats: depart_at:&lt;timestamp&gt; (Unix timestamp), arrive_by:&lt;timestamp&gt; (Unix timestamp), or last_available (transit only). Cannot be used together with the waypoints parameter.',
         routing: {
           request: {
             qs: {
