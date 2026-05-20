@@ -1,9 +1,24 @@
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import { google } from './engines/google';
-import { google_images } from './engines/google_images';
-import { google_maps } from './engines/google_maps';
-import { google_shopping } from './engines/google_shopping';
+import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions, IHttpRequestOptions, IExecuteSingleFunctions } from 'n8n-workflow';
+import { google, google_images, google_maps, google_shopping } from './engines';
 
+interface Engine {
+	resource: INodePropertyOptions;
+	properties: INodeProperties[];
+	docsUrl: string;
+}
+
+const engines: Engine[] = [google, google_images, google_maps, google_shopping];
+
+async function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
+	if (requestOptions.qs) {
+		for (const key of Object.keys(requestOptions.qs)) {
+			if (requestOptions.qs[key] === '' || requestOptions.qs[key] === undefined) {
+				delete requestOptions.qs[key];
+			}
+		}
+	}
+	return requestOptions;
+}
 
 export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
@@ -35,21 +50,15 @@ export class SearchApi implements INodeType {
 			},
 		],
 		properties: [
-			// eslint-disable-next-line n8n-nodes-base/node-param-default-missing
 			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
 				description: 'The search engine to use',
 				noDataExpression: true,
-				options: [
-					google.resource,
-					google_images.resource,
-					google_maps.resource,
-					google_shopping.resource,
-
-				],
-				default: google.resource.value,
+				options: engines.map((engine) => engine.resource),
+				// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
+				default: 'google', // We default to Google, but esling is not being able to detect that it is in the options.
 			},
 			{
 				displayName: 'Operation Name',
@@ -68,15 +77,22 @@ export class SearchApi implements INodeType {
 									engine: '={{ $parameter["resource"] }}',
 								},
 							},
+							send: {
+								preSend: [stripEmptyQueryParams],
+							},
 						},
 					},
 				],
 				default: 'search',
 			},
-			...google.properties,
-			...google_images.properties,
-			...google_maps.properties,
-			...google_shopping.properties,
+			...engines.map((engine): INodeProperties => ({
+				displayName: `For all available parameters and detailed usage, see the <a href="${engine.docsUrl}" target="_blank">${engine.resource.name} API documentation</a>.`,
+				name: `${engine.resource.value}_docs_notice`,
+				type: 'notice',
+				default: '',
+				displayOptions: { show: { resource: [engine.resource.value as string] } },
+			})),
+			...engines.flatMap((engine) => engine.properties),
 		],
 	};
 }
