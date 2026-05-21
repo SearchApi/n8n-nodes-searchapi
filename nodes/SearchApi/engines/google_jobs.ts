@@ -2,13 +2,13 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_shopping'],
+    resource: ['google_jobs'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Shopping',
-  value: 'google_shopping'
+  name: 'Google Jobs',
+  value: 'google_jobs'
 };
 
 const properties: INodeProperties[] = [
@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Specifies the search query. Filters embedded in the query act as hints rather than strict filters — if there are too few matching items, results outside the filters may appear.',
+    description: 'Terms to search on Google Jobs. Queries can include terms like "software engineer" or "marketing manager in New York".',
     displayOptions,
     routing: {
       request: {
@@ -27,6 +27,44 @@ const properties: INodeProperties[] = [
         },
       },
     },
+  },
+  {
+    displayName: 'Geographic Location',
+    name: 'geographic_location',
+    type: 'collection',
+    placeholder: 'Add Geographic Location',
+    default: {},
+    options: [
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'This parameter is used to specify the canonical location of the search. For exact targeting or to see all available options, check out the Locations API. If multiple locations match your input, the most popular one will be selected.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Google-Encoded Location (uule)',
+        name: 'uule',
+        type: 'string',
+        default: '',
+        description: 'This parameter sets the exact Google-encoded location for the search, and uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
+        routing: {
+          request: {
+            qs: {
+              uule: '={{$value}}',
+            },
+          },
+        },
+      }
+    ],
+    displayOptions,
   },
   {
     displayName: 'Localization',
@@ -40,83 +78,147 @@ const properties: INodeProperties[] = [
         name: 'gl',
         type: 'options',
         options: [
+          { name: 'Algeria', value: 'dz' },
+          { name: 'American Samoa', value: 'as' },
+          { name: 'Angola', value: 'ao' },
           { name: 'Anguilla', value: 'ai' },
+          { name: 'Antigua and Barbuda', value: 'ag' },
           { name: 'Argentina', value: 'ar' },
           { name: 'Aruba', value: 'aw' },
-          { name: 'Australia', value: 'au' },
           { name: 'Austria', value: 'at' },
+          { name: 'Bahamas', value: 'bs' },
+          { name: 'Bahrain', value: 'bh' },
+          { name: 'Bangladesh', value: 'bd' },
+          { name: 'Belarus', value: 'by' },
           { name: 'Belgium', value: 'be' },
+          { name: 'Belize', value: 'bz' },
+          { name: 'Benin', value: 'bj' },
           { name: 'Bermuda', value: 'bm' },
+          { name: 'Bolivia', value: 'bo' },
+          { name: 'Botswana', value: 'bw' },
           { name: 'Brazil', value: 'br' },
           { name: 'British Indian Ocean Territory', value: 'io' },
+          { name: 'Burkina Faso', value: 'bf' },
+          { name: 'Burundi', value: 'bi' },
+          { name: 'Cameroon', value: 'cm' },
           { name: 'Canada', value: 'ca' },
+          { name: 'Cape Verde', value: 'cv' },
           { name: 'Cayman Islands', value: 'ky' },
+          { name: 'Central African Republic', value: 'cf' },
+          { name: 'Chad', value: 'td' },
           { name: 'Chile', value: 'cl' },
-          { name: 'Christmas Island', value: 'cx' },
-          { name: 'Cocos (Keeling) Islands', value: 'cc' },
           { name: 'Colombia', value: 'co' },
-          { name: 'Czech Republic', value: 'cz' },
+          { name: 'Congo, the Democratic Republic of the', value: 'cd' },
+          { name: 'Costa Rica', value: 'cr' },
+          { name: 'Cote D\'ivoire', value: 'ci' },
+          { name: 'Cuba', value: 'cu' },
           { name: 'Denmark', value: 'dk' },
+          { name: 'Djibouti', value: 'dj' },
+          { name: 'Dominica', value: 'dm' },
+          { name: 'Dominican Republic', value: 'do' },
+          { name: 'Ecuador', value: 'ec' },
+          { name: 'Egypt', value: 'eg' },
+          { name: 'El Salvador', value: 'sv' },
+          { name: 'Ethiopia', value: 'et' },
           { name: 'Falkland Islands (Malvinas)', value: 'fk' },
-          { name: 'Finland', value: 'fi' },
           { name: 'France', value: 'fr' },
           { name: 'French Guiana', value: 'gf' },
           { name: 'French Polynesia', value: 'pf' },
           { name: 'French Southern Territories', value: 'tf' },
+          { name: 'Gabon', value: 'ga' },
+          { name: 'Gambia', value: 'gm' },
           { name: 'Germany', value: 'de' },
+          { name: 'Ghana', value: 'gh' },
           { name: 'Greece', value: 'gr' },
           { name: 'Guadeloupe', value: 'gp' },
-          { name: 'Heard Island and Mcdonald Islands', value: 'hm' },
+          { name: 'Guatemala', value: 'gt' },
+          { name: 'Guyana', value: 'gy' },
+          { name: 'Haiti', value: 'ht' },
+          { name: 'Honduras', value: 'hn' },
           { name: 'Hong Kong', value: 'hk' },
-          { name: 'Hungary', value: 'hu' },
           { name: 'India', value: 'in' },
           { name: 'Indonesia', value: 'id' },
-          { name: 'Ireland', value: 'ie' },
-          { name: 'Israel', value: 'il' },
+          { name: 'Iraq', value: 'iq' },
           { name: 'Italy', value: 'it' },
+          { name: 'Jamaica', value: 'jm' },
           { name: 'Japan', value: 'jp' },
+          { name: 'Jordan', value: 'jo' },
+          { name: 'Kazakhstan', value: 'kz' },
+          { name: 'Kenya', value: 'ke' },
+          { name: 'Kuwait', value: 'kw' },
+          { name: 'Kyrgyzstan', value: 'kg' },
+          { name: 'Lebanon', value: 'lb' },
+          { name: 'Lesotho', value: 'ls' },
+          { name: 'Libyan Arab Jamahiriya', value: 'ly' },
+          { name: 'Madagascar', value: 'mg' },
+          { name: 'Malawi', value: 'mw' },
           { name: 'Malaysia', value: 'my' },
+          { name: 'Mali', value: 'ml' },
           { name: 'Martinique', value: 'mq' },
+          { name: 'Mauritius', value: 'mu' },
           { name: 'Mayotte', value: 'yt' },
           { name: 'Mexico', value: 'mx' },
           { name: 'Montserrat', value: 'ms' },
+          { name: 'Morocco', value: 'ma' },
+          { name: 'Mozambique', value: 'mz' },
+          { name: 'Namibia', value: 'na' },
           { name: 'Netherlands', value: 'nl' },
           { name: 'New Caledonia', value: 'nc' },
-          { name: 'New Zealand', value: 'nz' },
-          { name: 'Norfolk Island', value: 'nf' },
-          { name: 'Norway', value: 'no' },
+          { name: 'Nicaragua', value: 'ni' },
+          { name: 'Niger', value: 'ne' },
+          { name: 'Nigeria', value: 'ng' },
+          { name: 'Oman', value: 'om' },
+          { name: 'Pakistan', value: 'pk' },
+          { name: 'Palestinian Territory, Occupied', value: 'ps' },
+          { name: 'Panama', value: 'pa' },
+          { name: 'Paraguay', value: 'py' },
+          { name: 'Peru', value: 'pe' },
           { name: 'Philippines', value: 'ph' },
-          { name: 'Poland', value: 'pl' },
           { name: 'Portugal', value: 'pt' },
+          { name: 'Puerto Rico', value: 'pr' },
+          { name: 'Qatar', value: 'qa' },
           { name: 'Reunion', value: 're' },
-          { name: 'Romania', value: 'ro' },
           { name: 'Russian Federation', value: 'ru' },
+          { name: 'Rwanda', value: 'rw' },
+          { name: 'Saint Helena', value: 'sh' },
           { name: 'Saint Pierre and Miquelon', value: 'pm' },
+          { name: 'Saint Vincent and the Grenadines', value: 'vc' },
+          { name: 'Sao Tome and Principe', value: 'st' },
           { name: 'Saudi Arabia', value: 'sa' },
+          { name: 'Senegal', value: 'sn' },
+          { name: 'Seychelles', value: 'sc' },
+          { name: 'Sierra Leone', value: 'sl' },
           { name: 'Singapore', value: 'sg' },
-          { name: 'Slovakia', value: 'sk' },
+          { name: 'Somalia', value: 'so' },
           { name: 'South Africa', value: 'za' },
           { name: 'South Georgia and the South Sandwich Islands', value: 'gs' },
-          { name: 'South Korea', value: 'kr' },
           { name: 'Spain', value: 'es' },
-          { name: 'Sweden', value: 'se' },
+          { name: 'Sri Lanka', value: 'lk' },
+          { name: 'Suriname', value: 'sr' },
           { name: 'Switzerland', value: 'ch' },
-          { name: 'Taiwan', value: 'tw' },
+          { name: 'Taiwan, Province of China', value: 'tw' },
+          { name: 'Tanzania, United Republic of', value: 'tz' },
           { name: 'Thailand', value: 'th' },
-          { name: 'Tokelau', value: 'tk' },
-          { name: 'Turkey', value: 'tr' },
+          { name: 'Togo', value: 'tg' },
+          { name: 'Trinidad and Tobago', value: 'tt' },
+          { name: 'Tunisia', value: 'tn' },
           { name: 'Turks and Caicos Islands', value: 'tc' },
-          { name: 'Ukraine', value: 'ua' },
+          { name: 'Uganda', value: 'ug' },
           { name: 'United Arab Emirates', value: 'ae' },
           { name: 'United Kingdom (gb)', value: 'gb' },
           { name: 'United Kingdom (uk)', value: 'uk' },
           { name: 'United States', value: 'us' },
+          { name: 'Uruguay', value: 'uy' },
+          { name: 'Uzbekistan', value: 'uz' },
+          { name: 'Venezuela', value: 've' },
           { name: 'Viet Nam', value: 'vn' },
           { name: 'Virgin Islands, British', value: 'vg' },
-          { name: 'Wallis and Futuna', value: 'wf' },
+          { name: 'Virgin Islands, U.S.', value: 'vi' },
+          { name: 'Zambia', value: 'zm' },
+          { name: 'Zimbabwe', value: 'zw' },
         ],
         default: 'us',
-        description: 'Defines the country of the search',
+        description: 'Country of the search. Check the full list of supported Google Jobs gl countries.',
         routing: {
           request: {
             qs: {
@@ -130,7 +232,7 @@ const properties: INodeProperties[] = [
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use gl (country) or hl (language) instead.',
+        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead. Learn more in Google\'s official announcement. See the full list of supported Google domains.',
         routing: {
           request: {
             qs: {
@@ -140,7 +242,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Interface Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -300,211 +402,11 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Defines the interface language of the search',
+        description: 'Interface language of the search. Check the full list of supported Google hl languages.',
         routing: {
           request: {
             qs: {
               hl: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
-    type: 'collection',
-    placeholder: 'Add Geographic Location',
-    default: {},
-    options: [
-      {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Encoded Location (uule)',
-        name: 'uule',
-        type: 'string',
-        default: '',
-        description: 'Sets the exact Google-encoded location for the search. Cannot be used together with location. SearchApi builds it automatically when you use location, but you can provide your own for precise control.',
-        routing: {
-          request: {
-            qs: {
-              uule: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Filters',
-    name: 'filters',
-    type: 'collection',
-    placeholder: 'Add Filters',
-    default: {},
-    options: [
-      {
-        displayName: 'Condition (condition)',
-        name: 'condition',
-        type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'New', value: 'new' },
-          { name: 'Used', value: 'used' },
-        ],
-        default: '',
-        description: 'Filters results by product condition',
-        routing: {
-          request: {
-            qs: {
-              condition: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Include Base Images (include_base_images)',
-        name: 'include_base_images',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to include base64-encoded product images in the shopping results',
-        routing: {
-          request: {
-            qs: {
-              include_base_images: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Include Favicon (include_favicon)',
-        name: 'include_favicon',
-        type: 'boolean',
-        default: false,
-        description: "Whether to include the seller's favicon in the shopping results",
-        routing: {
-          request: {
-            qs: {
-              include_favicon: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Is Free Delivery (is_free_delivery)',
-        name: 'is_free_delivery',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to filter results to only show products with free shipping. If shoprs is also provided, it takes priority and this parameter is ignored.',
-        routing: {
-          request: {
-            qs: {
-              is_free_delivery: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Is On Sale (is_on_sale)',
-        name: 'is_on_sale',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to filter results to only show products that are currently on sale. If shoprs is also provided, it takes priority and this parameter is ignored.',
-        routing: {
-          request: {
-            qs: {
-              is_on_sale: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Is Small Business (is_small_business)',
-        name: 'is_small_business',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to filter results to only show products sold by small businesses. If shoprs is also provided, it takes priority and this parameter is ignored.',
-        routing: {
-          request: {
-            qs: {
-              is_small_business: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Price Max (price_max)',
-        name: 'price_max',
-        type: 'string',
-        default: '',
-        description: 'Specifies the maximum price of the products returned. This parameter must include the currency. For example, 100 filters results to products priced at $100 or less. Must be used as a strict filter before applying shoprs.',
-        routing: {
-          request: {
-            qs: {
-              price_max: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Price Min (price_min)',
-        name: 'price_min',
-        type: 'string',
-        default: '',
-        description: 'Specifies the minimum price of the products returned. This parameter must include the currency. For example, 2.50 filters results to products priced at $2.50 or higher. Must be used as a strict filter before applying shoprs.',
-        routing: {
-          request: {
-            qs: {
-              price_min: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Shopping Filters (shoprs)',
-        name: 'shoprs',
-        type: 'string',
-        default: '',
-        description: 'Applies strict filtering rules based on encoded values. Example: CAEYFyoDcHM1MhwIFxISUHJpY2U6IGxvdyB0byBoaWdoKgQQARgBYAKIAQE sorts products by price (low to high). Filters provided in the JSON response can be used in subsequent requests to apply additional filters iteratively.',
-        routing: {
-          request: {
-            qs: {
-              shoprs: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Sort By (sort_by)',
-        name: 'sort_by',
-        type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'Price high to low', value: 'price_high_to_low' },
-          { name: 'Price low to high', value: 'price_low_to_high' },
-          { name: 'Relevance', value: 'relevance' },
-          { name: 'Review score', value: 'review_score' },
-        ],
-        default: '',
-        description: 'Sorts the shopping results by the specified criteria. If shoprs is also provided, it takes priority and this parameter is ignored.',
-        routing: {
-          request: {
-            qs: {
-              sort_by: '={{$value}}',
             },
           },
         },
@@ -520,19 +422,16 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Indicates which page of results to return',
+        displayName: 'Next Page Token (next_page_token)',
+        name: 'next_page_token',
+        type: 'string',
+        typeOptions: { password: true },
+        default: '',
+        description: 'This parameter is used to retrieve the next page of results. It is returned in the response when there are more results to display. The next_page_token is a unique identifier for the next page of results. It is used to retrieve the next page of results.',
         routing: {
           request: {
             qs: {
-              page: '={{$value}}',
+              next_page_token: '={{$value}}',
             },
           },
         },
@@ -566,8 +465,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_shopping = {
+export const google_jobs = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-shopping',
+  docsUrl: 'https://www.searchapi.io/docs/google-jobs',
 };

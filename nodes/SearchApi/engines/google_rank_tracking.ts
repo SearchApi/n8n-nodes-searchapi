@@ -2,13 +2,13 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google_maps'],
+    resource: ['google_rank_tracking'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google Maps',
-  value: 'google_maps'
+  name: 'Google Rank Tracking',
+  value: 'google_rank_tracking'
 };
 
 const properties: INodeProperties[] = [
@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Terms you want to search on Google Maps. Queries can include terms like "restaurants near me" or "Starbucks New York".',
+    description: 'Terms you want to search on Google and track ranking positions',
     displayOptions,
     routing: {
       request: {
@@ -29,6 +29,35 @@ const properties: INodeProperties[] = [
     },
   },
   {
+    displayName: 'Device',
+    name: 'device',
+    type: 'collection',
+    placeholder: 'Add Device',
+    default: {},
+    options: [
+      {
+        displayName: 'Device (device)',
+        name: 'device',
+        type: 'options',
+        options: [
+          { name: 'Desktop', value: 'desktop' },
+          { name: 'Mobile', value: 'mobile' },
+          { name: 'Tablet', value: 'tablet' },
+        ],
+        default: 'desktop',
+        description: 'Defines the device type for the search',
+        routing: {
+          request: {
+            qs: {
+              device: '={{$value}}',
+            },
+          },
+        },
+      }
+    ],
+    displayOptions,
+  },
+  {
     displayName: 'Geographic Location',
     name: 'geographic_location',
     type: 'collection',
@@ -36,15 +65,29 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
+        displayName: 'Location (location)',
+        name: 'location',
         type: 'string',
         default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
+        description: 'Specifies the canonical location of the search (e.g., New York). If multiple locations match your input, the most popular one will be selected.',
         routing: {
           request: {
             qs: {
-              ll: '={{$value}}',
+              location: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Encoded Location (uule)',
+        name: 'uule',
+        type: 'string',
+        default: '',
+        description: 'Sets the exact Google-encoded location for the search. uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
+        routing: {
+          request: {
+            qs: {
+              uule: '={{$value}}',
             },
           },
         },
@@ -73,7 +116,6 @@ const properties: INodeProperties[] = [
           { name: 'Anguilla', value: 'ai' },
           { name: 'Antarctica', value: 'aq' },
           { name: 'Antigua and Barbuda', value: 'ag' },
-          { name: 'Any', value: '' },
           { name: 'Argentina', value: 'ar' },
           { name: 'Armenia', value: 'am' },
           { name: 'Aruba', value: 'aw' },
@@ -309,8 +351,8 @@ const properties: INodeProperties[] = [
           { name: 'Zambia', value: 'zm' },
           { name: 'Zimbabwe', value: 'zw' },
         ],
-        default: '',
-        description: 'Country of the search',
+        default: 'us',
+        description: 'Defines the country of the search',
         routing: {
           request: {
             qs: {
@@ -320,7 +362,21 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Google Domain (google_domain)',
+        name: 'google_domain',
+        type: 'string',
+        default: 'google.com',
+        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
+        routing: {
+          request: {
+            qs: {
+              google_domain: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
         options: [
@@ -480,11 +536,70 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Interface language of the search',
+        description: 'Defines the interface language of the search',
         routing: {
           request: {
             qs: {
               hl: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Language Restrict (lr)',
+        name: 'lr',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Lang', value: 'lang_id' },
+          { name: 'Lang ar', value: 'lang_ar' },
+          { name: 'Lang bg', value: 'lang_bg' },
+          { name: 'Lang ca', value: 'lang_ca' },
+          { name: 'Lang cs', value: 'lang_cs' },
+          { name: 'Lang da', value: 'lang_da' },
+          { name: 'Lang de', value: 'lang_de' },
+          { name: 'Lang el', value: 'lang_el' },
+          { name: 'Lang en', value: 'lang_en' },
+          { name: 'Lang es', value: 'lang_es' },
+          { name: 'Lang et', value: 'lang_et' },
+          { name: 'Lang fa', value: 'lang_fa' },
+          { name: 'Lang fi', value: 'lang_fi' },
+          { name: 'Lang fr', value: 'lang_fr' },
+          { name: 'Lang hi', value: 'lang_hi' },
+          { name: 'Lang hr', value: 'lang_hr' },
+          { name: 'Lang hu', value: 'lang_hu' },
+          { name: 'Lang hy', value: 'lang_hy' },
+          { name: 'Lang is', value: 'lang_is' },
+          { name: 'Lang it', value: 'lang_it' },
+          { name: 'Lang iw', value: 'lang_iw' },
+          { name: 'Lang ja', value: 'lang_ja' },
+          { name: 'Lang ko', value: 'lang_ko' },
+          { name: 'Lang lt', value: 'lang_lt' },
+          { name: 'Lang lv', value: 'lang_lv' },
+          { name: 'Lang nl', value: 'lang_nl' },
+          { name: 'Lang no', value: 'lang_no' },
+          { name: 'Lang pl', value: 'lang_pl' },
+          { name: 'Lang pt', value: 'lang_pt' },
+          { name: 'Lang ro', value: 'lang_ro' },
+          { name: 'Lang ru', value: 'lang_ru' },
+          { name: 'Lang sk', value: 'lang_sk' },
+          { name: 'Lang sl', value: 'lang_sl' },
+          { name: 'Lang sr', value: 'lang_sr' },
+          { name: 'Lang sv', value: 'lang_sv' },
+          { name: 'Lang th', value: 'lang_th' },
+          { name: 'Lang tl', value: 'lang_tl' },
+          { name: 'Lang tr', value: 'lang_tr' },
+          { name: 'Lang uk', value: 'lang_uk' },
+          { name: 'Lang vi', value: 'lang_vi' },
+          { name: 'lang_zh-cn', value: 'lang_zh-cn' },
+          { name: 'lang_zh-tw', value: 'lang_zh-tw' },
+        ],
+        default: '',
+        description: 'Restricts search results to documents written in a particular language. The accepted format is lang_{2-letter country code}.',
+        routing: {
+          request: {
+            qs: {
+              lr: '={{$value}}',
             },
           },
         },
@@ -493,26 +608,65 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Pagination',
-    name: 'pagination',
+    displayName: 'Search Settings',
+    name: 'search_settings',
     type: 'collection',
-    placeholder: 'Add Pagination',
+    placeholder: 'Add Search Settings',
     default: {},
     options: [
+      {
+        displayName: 'Results Count (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          maxValue: 100,
+          numberPrecision: 0,
+        },
+        default: 100,
+        description: 'Number of results to return. Can be customized from 1 to 100.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
+            },
+          },
+        },
+      },
       {
         displayName: 'Page (page)',
         name: 'page',
         type: 'number',
         typeOptions: {
           minValue: 1,
+          maxValue: 10,
           numberPrecision: 0,
         },
         default: 1,
-        description: 'Page of results to return. Defaults to 1.',
+        description: 'Page number for pagination (1-10). Each page contains 10 results. For example, page=2 fetches positions 11-20, and page=3 fetches positions 21-30. Note: Results are capped at position 100. If page=10 and num=100, only positions 91-100 are returned.',
         routing: {
           request: {
             qs: {
               page: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Safe (safe)',
+        name: 'safe',
+        type: 'options',
+        options: [
+          { name: 'Blur explicit images', value: 'blur' },
+          { name: 'Disable SafeSearch', value: 'off' },
+          { name: 'Enable strict SafeSearch', value: 'active' },
+        ],
+        default: 'blur',
+        description: 'Toggles the SafeSearch feature',
+        routing: {
+          request: {
+            qs: {
+              safe: '={{$value}}',
             },
           },
         },
@@ -546,8 +700,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google_maps = {
+export const google_rank_tracking = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google-maps',
+  docsUrl: 'https://www.searchapi.io/docs/google-rank-tracking-api',
 };

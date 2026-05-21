@@ -2,13 +2,13 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 const displayOptions = {
   show: {
-    resource: ['google'],
+    resource: ['google_news'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google',
-  value: 'google'
+  name: 'Google News',
+  value: 'google_news'
 };
 
 const properties: INodeProperties[] = [
@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR.',
+    description: 'Terms to search on Google News. Queries can include operators and advanced filters like "climate change", site:, inurl:, intitle:, as_dt, or as_eq.',
     displayOptions,
     routing: {
       request: {
@@ -27,30 +27,6 @@ const properties: INodeProperties[] = [
         },
       },
     },
-  },
-  {
-    displayName: 'Search Query',
-    name: 'search_query',
-    type: 'collection',
-    placeholder: 'Add Search Query',
-    default: {},
-    options: [
-      {
-        displayName: 'Kgmid (kgmid)',
-        name: 'kgmid',
-        type: 'string',
-        default: '',
-        description: 'Defines a Knowledge Graph identifier (kgmid), representing entities in Google\'s Knowledge Graph. Format: Location Identifier (/m/): Typically followed by 2 to 7 characters. Used primarily to represent specific locations. Find the identifier by searching for the "Freebase ID" on Wikidata. Example: kgmid=/m/02_286 refers to New York. Google Knowledge Graph Identifier (/g/): Typically followed by a longer alphanumeric string. Represents general entities in Google\'s Knowledge Graph. Find details on Wikidata. Example: kgmid=/g/11f555cn8l refers to TikTok.',
-        routing: {
-          request: {
-            qs: {
-              kgmid: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
   },
   {
     displayName: 'Device',
@@ -93,7 +69,7 @@ const properties: INodeProperties[] = [
         name: 'location',
         type: 'string',
         default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
+        description: 'Specifies the canonical location of the search. For exact targeting or to see all available options, check out the Locations API. If multiple locations match your input, the most popular one will be selected.',
         routing: {
           request: {
             qs: {
@@ -103,11 +79,11 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Encoded Location (uule)',
+        displayName: 'UULE (uule)',
         name: 'uule',
         type: 'string',
         default: '',
-        description: 'Sets the exact Google-encoded location for the search. Cannot be used together with the location parameter. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
+        description: 'Sets the exact Google-encoded location for the search. The uule and location parameters cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
         routing: {
           request: {
             qs: {
@@ -376,7 +352,7 @@ const properties: INodeProperties[] = [
           { name: 'Zimbabwe', value: 'zw' },
         ],
         default: 'us',
-        description: 'Defines the country of the search. Defaults to us.',
+        description: 'The default parameter us defines the country of the search. Check the full list of supported Google gl countries.',
         routing: {
           request: {
             qs: {
@@ -386,7 +362,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Country Restrict (cr)',
+        displayName: 'CR (cr)',
         name: 'cr',
         type: 'options',
         options: [
@@ -626,7 +602,7 @@ const properties: INodeProperties[] = [
           { name: 'Zimbabwe', value: 'countryZW' },
         ],
         default: '',
-        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by the web server\'s IP address geographic location.',
+        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location. Check the full list of supported Google cr countries.',
         routing: {
           request: {
             qs: {
@@ -640,7 +616,7 @@ const properties: INodeProperties[] = [
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
+        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead. Learn more in Google\'s official announcement. See the full list of supported Google domains.',
         routing: {
           request: {
             qs: {
@@ -654,163 +630,68 @@ const properties: INodeProperties[] = [
         name: 'hl',
         type: 'options',
         options: [
-          { name: 'Afrikaans', value: 'af' },
-          { name: 'Akan', value: 'ak' },
-          { name: 'Albanian', value: 'sq' },
-          { name: 'Amharic', value: 'am' },
           { name: 'Arabic', value: 'ar' },
-          { name: 'Armenian', value: 'hy' },
-          { name: 'Azerbaijani', value: 'az' },
-          { name: 'Basque', value: 'eu' },
           { name: 'Belarusian', value: 'be' },
-          { name: 'Bemba', value: 'bem' },
           { name: 'Bengali', value: 'bn' },
           { name: 'Bihari', value: 'bh' },
-          { name: 'Bork, bork, bork!', value: 'xx-bork' },
-          { name: 'Bosnian', value: 'bs' },
-          { name: 'Breton', value: 'br' },
           { name: 'Bulgarian', value: 'bg' },
-          { name: 'Burmese', value: 'my' },
-          { name: 'Cambodian', value: 'km' },
           { name: 'Catalan', value: 'ca' },
-          { name: 'Cherokee', value: 'chr' },
-          { name: 'Chichewa', value: 'ny' },
           { name: 'Chinese (Simplified)', value: 'zh-cn' },
           { name: 'Chinese (Traditional)', value: 'zh-tw' },
-          { name: 'Corsican', value: 'co' },
-          { name: 'Croatian', value: 'hr' },
           { name: 'Czech', value: 'cs' },
           { name: 'Danish', value: 'da' },
           { name: 'Dutch', value: 'nl' },
-          { name: 'Elmer Fudd', value: 'xx-elmer' },
           { name: 'English', value: 'en' },
-          { name: 'Esperanto', value: 'eo' },
-          { name: 'Estonian', value: 'et' },
-          { name: 'Ewe', value: 'ee' },
-          { name: 'Faroese', value: 'fo' },
-          { name: 'Filipino', value: 'tl' },
-          { name: 'Finnish', value: 'fi' },
           { name: 'French', value: 'fr' },
-          { name: 'Frisian', value: 'fy' },
-          { name: 'Ga', value: 'gaa' },
           { name: 'Galician', value: 'gl' },
-          { name: 'Georgian', value: 'ka' },
           { name: 'German', value: 'de' },
           { name: 'Greek', value: 'el' },
           { name: 'Greenlandic', value: 'kl' },
-          { name: 'Guarani', value: 'gn' },
           { name: 'Gujarati', value: 'gu' },
-          { name: 'Hacker', value: 'xx-hacker' },
-          { name: 'Haitian Creole', value: 'ht' },
           { name: 'Hausa', value: 'ha' },
-          { name: 'Hawaiian', value: 'haw' },
           { name: 'Hebrew', value: 'iw' },
           { name: 'Hindi', value: 'hi' },
           { name: 'Hungarian', value: 'hu' },
-          { name: 'Icelandic', value: 'is' },
-          { name: 'Igbo', value: 'ig' },
           { name: 'Indonesian', value: 'id' },
-          { name: 'Interlingua', value: 'ia' },
-          { name: 'Irish', value: 'ga' },
           { name: 'Italian', value: 'it' },
           { name: 'Japanese', value: 'ja' },
           { name: 'Javanese', value: 'jw' },
           { name: 'Kannada', value: 'kn' },
-          { name: 'Kazakh', value: 'kk' },
-          { name: 'Kinyarwanda', value: 'rw' },
-          { name: 'Kirundi', value: 'rn' },
-          { name: 'Klingon', value: 'xx-klingon' },
-          { name: 'Kongo', value: 'kg' },
           { name: 'Korean', value: 'ko' },
-          { name: 'Krio (Sierra Leone)', value: 'kri' },
-          { name: 'Kurdish', value: 'ku' },
-          { name: 'Kurdish (Soranî)', value: 'ckb' },
-          { name: 'Kyrgyz', value: 'ky' },
-          { name: 'Laothian', value: 'lo' },
-          { name: 'Latin', value: 'la' },
           { name: 'Latvian', value: 'lv' },
-          { name: 'Lingala', value: 'ln' },
           { name: 'Lithuanian', value: 'lt' },
-          { name: 'Lozi', value: 'loz' },
-          { name: 'Luganda', value: 'lg' },
-          { name: 'Luo', value: 'ach' },
-          { name: 'Macedonian', value: 'mk' },
-          { name: 'Malagasy', value: 'mg' },
           { name: 'Malay', value: 'ms' },
           { name: 'Malayalam', value: 'ml' },
-          { name: 'Maldives', value: 'mv' },
-          { name: 'Maltese', value: 'mt' },
-          { name: 'Maori', value: 'mi' },
+          { name: 'Maldivian', value: 'mv' },
           { name: 'Marathi', value: 'mr' },
-          { name: 'Mauritian Creole', value: 'mfe' },
           { name: 'Moldavian', value: 'mo' },
-          { name: 'Mongolian', value: 'mn' },
           { name: 'Montenegrin', value: 'sr-me' },
-          { name: 'Nepali', value: 'ne' },
-          { name: 'Nigerian Pidgin', value: 'pcm' },
-          { name: 'Northern Sotho', value: 'nso' },
           { name: 'Norwegian', value: 'no' },
-          { name: 'Norwegian (Nynorsk)', value: 'nn' },
-          { name: 'Occitan', value: 'oc' },
-          { name: 'Oriya', value: 'or' },
-          { name: 'Oromo', value: 'om' },
-          { name: 'Pashto', value: 'ps' },
           { name: 'Persian', value: 'fa' },
-          { name: 'Pirate', value: 'xx-pirate' },
           { name: 'Polish', value: 'pl' },
           { name: 'Portuguese', value: 'pt' },
           { name: 'Portuguese (Brazil)', value: 'pt-br' },
           { name: 'Portuguese (Portugal)', value: 'pt-pt' },
           { name: 'Punjabi', value: 'pa' },
-          { name: 'Quechua', value: 'qu' },
           { name: 'Romanian', value: 'ro' },
-          { name: 'Romansh', value: 'rm' },
-          { name: 'Runyakitara', value: 'nyn' },
           { name: 'Russian', value: 'ru' },
-          { name: 'Scots Gaelic', value: 'gd' },
           { name: 'Serbian', value: 'sr' },
           { name: 'Serbo-Croatian', value: 'sh' },
-          { name: 'Sesotho', value: 'st' },
-          { name: 'Setswana', value: 'tn' },
-          { name: 'Seychellois Creole', value: 'crs' },
-          { name: 'Shona', value: 'sn' },
-          { name: 'Sindhi', value: 'sd' },
-          { name: 'Sinhalese', value: 'si' },
           { name: 'Slovak', value: 'sk' },
           { name: 'Slovenian', value: 'sl' },
-          { name: 'Somali', value: 'so' },
           { name: 'Spanish', value: 'es' },
-          { name: 'Spanish (Latin American)', value: 'es-419' },
-          { name: 'Sundanese', value: 'su' },
-          { name: 'Swahili', value: 'sw' },
+          { name: 'Spanish (Latin America)', value: 'es-419' },
           { name: 'Swedish', value: 'sv' },
-          { name: 'Tajik', value: 'tg' },
           { name: 'Tamil', value: 'ta' },
-          { name: 'Tatar', value: 'tt' },
           { name: 'Telugu', value: 'te' },
           { name: 'Thai', value: 'th' },
-          { name: 'Tigrinya', value: 'ti' },
-          { name: 'Tonga', value: 'to' },
-          { name: 'Tshiluba', value: 'lua' },
-          { name: 'Tumbuka', value: 'tum' },
           { name: 'Turkish', value: 'tr' },
-          { name: 'Turkmen', value: 'tk' },
-          { name: 'Twi', value: 'tw' },
-          { name: 'Uighur', value: 'ug' },
           { name: 'Ukrainian', value: 'uk' },
-          { name: 'Urdu', value: 'ur' },
-          { name: 'Uzbek', value: 'uz' },
           { name: 'Vanuatu', value: 'vu' },
           { name: 'Vietnamese', value: 'vi' },
-          { name: 'Welsh', value: 'cy' },
-          { name: 'Wolof', value: 'wo' },
-          { name: 'Xhosa', value: 'xh' },
-          { name: 'Yiddish', value: 'yi' },
-          { name: 'Yoruba', value: 'yo' },
-          { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Defines the interface language of the search. Defaults to en.',
+        description: 'The default parameter en defines the interface language of the search. Check the full list of supported Google News hl languages.',
         routing: {
           request: {
             qs: {
@@ -820,7 +701,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language Restrict (lr)',
+        displayName: 'LR (lr)',
         name: 'lr',
         type: 'options',
         options: [
@@ -869,7 +750,7 @@ const properties: INodeProperties[] = [
           { name: 'Vietnamese', value: 'lang_vi' },
         ],
         default: '',
-        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter language code} — for example, lang_jp for Japanese. To restrict to multiple languages, combine with a pipe: lang_it|lang_de. Google identifies the document language from the URL\'s top-level domain, language meta tags, or the body text.',
+        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter country code}. For instance, to filter documents written in Japanese, the value should be set to lang_jp. To incorporate multiple languages, a value like lang_it|lang_de restricts the search to documents written in either Italian or German. Google identifies the document language based on the top-level domain (TLD) of the document\'s URL, any language meta tags present, or the language utilized within the document\'s body text. Check the full list of supported Google lr languages.',
         routing: {
           request: {
             qs: {
@@ -897,7 +778,7 @@ const properties: INodeProperties[] = [
           { name: 'Enable "Duplicate Content" and "Host Crowding" filters', value: '1' },
         ],
         default: '1',
-        description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Defaults to 1 (enabled).',
+        description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
         routing: {
           request: {
             qs: {
@@ -907,7 +788,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Nfpr (nfpr)',
+        displayName: 'NFPR (nfpr)',
         name: 'nfpr',
         type: 'options',
         options: [
@@ -915,7 +796,7 @@ const properties: INodeProperties[] = [
           { name: 'Include auto-corrected results', value: '0' },
         ],
         default: '0',
-        description: 'Controls whether results from auto-corrected spelling queries are included. Set to 1 to exclude auto-corrected results. Defaults to 0 (auto-corrected results included).',
+        description: 'Controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
         routing: {
           request: {
             qs: {
@@ -925,20 +806,19 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Safe (safe)',
-        name: 'safe',
+        displayName: 'Sort By (sort_by)',
+        name: 'sort_by',
         type: 'options',
         options: [
-          { name: 'Blur explicit images', value: 'blur' },
-          { name: 'Disable SafeSearch', value: 'off' },
-          { name: 'Enable strict SafeSearch', value: 'active' },
+          { name: 'Any', value: '' },
+          { name: 'Most recent', value: 'most_recent' },
         ],
-        default: 'blur',
-        description: 'Toggles the SafeSearch feature, which filters adult content from search results using Google\'s proprietary keyword, phrase, and URL analysis. Defaults to blur.',
+        default: '',
+        description: 'By default, news results are sorted by relevance. To get the most recent articles, set it to most_recent.',
         routing: {
           request: {
             qs: {
-              safe: '={{$value}}',
+              sort_by: '={{$value}}',
             },
           },
         },
@@ -960,7 +840,7 @@ const properties: INodeProperties[] = [
           { name: 'Last year', value: 'last_year' },
         ],
         default: '',
-        description: 'Restricts results to URLs based on date. Use time_period_min or time_period_max for a custom date range.',
+        description: 'Restricts results to URLs based on date. Supported values are: last_hour - data from the past hour. last_day - data from the past 24 hours. last_week - data from the past week. last_month - data from the past month. last_year - data from the past year. Using time_period_min or time_period_max parameters, you can specify a custom time period. Note, that the time_period_min and time_period_max parameters could be used separately as well.',
         routing: {
           request: {
             qs: {
@@ -974,7 +854,7 @@ const properties: INodeProperties[] = [
         name: 'time_period_max',
         type: 'string',
         default: '',
-        description: 'Specifies the end of the custom time period. Can be used with time_period_min. Format: MM/DD/YYYY.',
+        description: 'Specifies the end of the time period. It could be used in combination with the time_period_min parameter. The value should be in the format MM/DD/YYYY.',
         routing: {
           request: {
             qs: {
@@ -988,29 +868,11 @@ const properties: INodeProperties[] = [
         name: 'time_period_min',
         type: 'string',
         default: '',
-        description: 'Specifies the start of the custom time period. Can be used with time_period_max. Format: MM/DD/YYYY.',
+        description: 'Specifies the start of the time period. It could be used in combination with the time_period_max parameter. The value should be in the format MM/DD/YYYY.',
         routing: {
           request: {
             qs: {
               time_period_min: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Verbatim (verbatim)',
-        name: 'verbatim',
-        type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'True', value: 'true' },
-        ],
-        default: '',
-        description: 'Forces Google to use your exact keywords, bypassing automatic spelling corrections, synonyms, and stemmed variations. Can be combined with time_period filters. Note: Verbatim mode is stricter than nfpr=1 — it disables all query modifications, not just spelling corrections.',
-        routing: {
-          request: {
-            qs: {
-              verbatim: '={{$value}}',
             },
           },
         },
@@ -1026,25 +888,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Phased out by Google on September 2025. It is now constant 10.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Page Number (page)',
+        displayName: 'Page (page)',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -1052,39 +896,11 @@ const properties: INodeProperties[] = [
           numberPrecision: 0,
         },
         default: 1,
-        description: 'Indicates which page of results to return. Defaults to 1.',
+        description: 'Indicates which page of results to return. By default, it is set to 1.',
         routing: {
           request: {
             qs: {
               page: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  },
-  {
-    displayName: 'Optimization',
-    name: 'optimization',
-    type: 'collection',
-    placeholder: 'Add Optimization',
-    default: {},
-    options: [
-      {
-        displayName: 'Optimization Strategy (optimization_strategy)',
-        name: 'optimization_strategy',
-        type: 'options',
-        options: [
-          { name: 'Ad Scraping Rate', value: 'ads' },
-          { name: 'Performance', value: 'performance' },
-        ],
-        default: 'performance',
-        description: 'Controls how the search request is optimized. The ads option prioritizes ad collection success rate at the cost of longer processing times.',
-        routing: {
-          request: {
-            qs: {
-              optimization_strategy: '={{$value}}',
             },
           },
         },
@@ -1118,8 +934,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google = {
+export const google_news = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google',
+  docsUrl: 'https://www.searchapi.io/docs/google-news',
 };
