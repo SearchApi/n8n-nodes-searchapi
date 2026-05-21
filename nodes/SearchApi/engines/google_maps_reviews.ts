@@ -62,7 +62,7 @@ const properties: INodeProperties[] = [
           { name: 'Newest', value: 'newest' },
         ],
         default: 'most_relevant',
-        description: 'Sorts results by relevance, recency, or rating.',
+        description: 'Sorts results by relevance, recency, or rating',
         routing: {
           request: {
             qs: {
@@ -346,7 +346,7 @@ const properties: INodeProperties[] = [
           { name: 'Zimbabwe', value: 'zw' },
         ],
         default: '',
-        description: 'Country of the search.',
+        description: 'Country of the search',
         routing: {
           request: {
             qs: {
@@ -516,7 +516,7 @@ const properties: INodeProperties[] = [
           { name: 'Zulu', value: 'zu' },
         ],
         default: 'en',
-        description: 'Interface language of the search.',
+        description: 'Interface language of the search',
         routing: {
           request: {
             qs: {

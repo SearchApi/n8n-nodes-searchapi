@@ -240,7 +240,7 @@ const properties: INodeProperties[] = [
           { name: 'Round trip', value: 'round_trip' },
         ],
         default: '',
-        description: 'Defines the type of the flights.',
+        description: 'Defines the type of the flights',
         routing: {
           request: {
             qs: {
@@ -410,7 +410,7 @@ const properties: INodeProperties[] = [
           { name: 'Two stops or fewer', value: 'two_stops_or_fewer' },
         ],
         default: 'any',
-        description: 'Defines the number of stops during the flight.',
+        description: 'Defines the number of stops during the flight',
         routing: {
           request: {
             qs: {
@@ -431,7 +431,7 @@ const properties: INodeProperties[] = [
           { name: 'Premium economy', value: 'premium_economy' },
         ],
         default: '',
-        description: 'Defines the travel class.',
+        description: 'Defines the travel class',
         routing: {
           request: {
             qs: {

@@ -170,7 +170,7 @@ const properties: INodeProperties[] = [
         type: 'string',
         typeOptions: { password: true },
         default: '',
-        description: 'A token for fetching the next set of results. You can obtain this token from the next_page_token field in the previous response',
+        description: 'A token for fetching the next set of results. You can obtain this token from the next_page_token field in the previous response.',
         routing: {
           request: {
             qs: {

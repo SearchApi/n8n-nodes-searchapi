@@ -140,7 +140,7 @@ const properties: INodeProperties[] = [
           { name: 'Departure', value: 'departure' },
         ],
         default: 'departure',
-        description: 'Defines which flight box to autocomplete.',
+        description: 'Defines which flight box to autocomplete',
         routing: {
           request: {
             qs: {
