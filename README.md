@@ -16,7 +16,22 @@ SearchApi is a fast, reliable SERP and data extraction API that focuses on perfo
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+### Option 1 — Install from the nodes panel (recommended)
+
+SearchApi is a verified community node. On recent n8n versions (1.94+, self-hosted or Cloud):
+
+1. Open the **Nodes panel** and search for **SearchApi**.
+2. Select the node and click **Install**.
+
+### Option 2 — Install by npm package name (self-hosted only)
+
+1. Go to **Settings → Community Nodes → Install**.
+2. Enter the full scoped package name: `@searchapi/n8n-nodes-searchapi`
+3. Agree to the risks and click **Install**.
+
+> **Note:** the package name is scoped (it starts with `@searchapi/`). Older n8n versions had issues installing scoped community packages — see [Troubleshooting](#troubleshooting) if the install fails with a `tar` error.
+
+For more details, follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
 ## Operations
 
@@ -61,6 +76,25 @@ The node supports one main operation: `Search`. You can use it to search from al
 | ---------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
 | **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                           |
 | **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
+| **Error loading package … `tar … Cannot open: No such file or directory`** | Older n8n versions fail to prepare the target directory for **scoped** packages (`@searchapi/…`) before extracting | See [Installation fails with a `tar` error](#installation-fails-with-a-tar-error) below. |
+
+### Installation fails with a `tar` error
+
+On some older n8n versions, installing this node via **Settings → Community Nodes** fails with:
+
+```
+Error loading package "@searchapi/n8n-nodes-searchapi": Command failed: tar -xzf searchapi-n8n-nodes-searchapi-<version>.tgz -C <...>
+tar: <...>/node_modules/@searchapi/n8n-nodes-searchapi: Cannot open: No such file or directory
+```
+
+This is not specific to SearchApi: those n8n versions don't create the nested target directory that **scoped** package names (`@scope/name`) require before running `tar`, so the extraction fails. Unscoped packages are unaffected, which is why the error can look SearchApi-specific.
+
+**Fixes (any one of these):**
+
+1. **Update n8n** to a recent version — current versions create the package directory correctly.
+2. **Install from the Nodes panel instead** (see [Installation](#installation), Option 1): search for "SearchApi" and click Install. This verified-node path is the recommended installation method.
+
+If the error persists on a current n8n version, please [open an issue](https://github.com/SearchApi/n8n-nodes-searchapi/issues) and include your n8n version and hosting setup (self-hosted or Cloud).
 
 ## Version history
 
