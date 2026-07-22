@@ -17,7 +17,6 @@ const properties: INodeProperties[] = [
     displayName: 'Place ID (place_id)',
     name: 'place_id',
     type: 'string',
-    required: true,
     default: '',
     description: 'Unique identifier for locations on Google Maps, including businesses, landmarks, and more. For example, a place_id looks like ChIJhRwB-yFawokR5Phil-QQ3zM. Not required if data_id is being used.',
     displayOptions,
@@ -33,7 +32,6 @@ const properties: INodeProperties[] = [
     displayName: 'Data ID (data_id)',
     name: 'data_id',
     type: 'string',
-    required: true,
     default: '',
     description: 'Unique identifier for locations on Google Maps, including businesses, landmarks, and more. For example, a data_id looks like 0x89c25a21fb011c85:0x33df10e49762f8e4. Not required if place_id is being used.',
     displayOptions,
@@ -187,7 +185,7 @@ const properties: INodeProperties[] = [
           maxValue: 20,
           numberPrecision: 0,
         },
-        default: 1,
+        default: 10,
         description: 'Number of reviews to return. The default value is 10 and the maximum value is 20.',
         routing: {
           request: {

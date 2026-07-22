@@ -66,20 +66,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Encoded Location (uule)',
         name: 'uule',
         type: 'string',
@@ -89,6 +75,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               uule: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
             },
           },
         },
@@ -103,36 +103,6 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Localization',
     default: {},
     options: [
-      {
-        displayName: 'Country Restrict (cr)',
-        name: 'cr',
-        type: 'options',
-        options: countryOptions([
-          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', '', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs',
-          'bh', 'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg',
-          'bf', 'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cd', 'cg',
-          'ck', 'cr', 'ci', 'hr', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'tl', 'ec', 'eg', 'sv', 'gq', 'er', 'ee',
-          'et', 'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl',
-          'gd', 'gp', 'gu', 'gt', 'gn', 'gw', 'gy', 'ht', 'hm', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'iq', 'ie',
-          'il', 'it', 'jm', 'jp', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb', 'ls', 'lr', 'ly', 'li',
-          'lt', 'lu', 'mo', 'mk', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu', 'yt', 'mx', 'fm',
-          'md', 'mc', 'mn', 'ms', 'ma', 'mz', 'na', 'nr', 'np', 'nl', 'nc', 'nz', 'ni', 'ne', 'ng', 'nu', 'nf',
-          'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe', 'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're',
-          'ro', 'ru', 'rw', 'kn', 'lc', 'vc', 'ws', 'sm', 'st', 'sa', 'sn', 'cs', 'sc', 'sl', 'sg', 'sk', 'si',
-          'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sh', 'pm', 'sr', 'sj', 'sz', 'se', 'ch', 'tw', 'tj', 'tz',
-          'th', 'tg', 'tk', 'to', 'tt', 'tn', 'tr', 'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um',
-          'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
-        ]),
-        default: '',
-        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location.',
-        routing: {
-          request: {
-            qs: {
-              cr: '={{$value}}',
-            },
-          },
-        },
-      },
       {
         displayName: 'Country (gl)',
         name: 'gl',
@@ -160,6 +130,36 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               gl: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Country Restrict (cr)',
+        name: 'cr',
+        type: 'options',
+        options: countryOptions([
+          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', '', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs',
+          'bh', 'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg',
+          'bf', 'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cd', 'cg',
+          'ck', 'cr', 'ci', 'hr', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'tl', 'ec', 'eg', 'sv', 'gq', 'er', 'ee',
+          'et', 'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl',
+          'gd', 'gp', 'gu', 'gt', 'gn', 'gw', 'gy', 'ht', 'hm', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'iq', 'ie',
+          'il', 'it', 'jm', 'jp', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb', 'ls', 'lr', 'ly', 'li',
+          'lt', 'lu', 'mo', 'mk', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu', 'yt', 'mx', 'fm',
+          'md', 'mc', 'mn', 'ms', 'ma', 'mz', 'na', 'nr', 'np', 'nl', 'nc', 'nz', 'ni', 'ne', 'ng', 'nu', 'nf',
+          'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe', 'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're',
+          'ro', 'ru', 'rw', 'kn', 'lc', 'vc', 'ws', 'sm', 'st', 'sa', 'sn', 'cs', 'sc', 'sl', 'sg', 'sk', 'si',
+          'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sh', 'pm', 'sr', 'sj', 'sz', 'se', 'ch', 'tw', 'tj', 'tz',
+          'th', 'tg', 'tk', 'to', 'tt', 'tn', 'tr', 'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um',
+          'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
+        ]),
+        default: '',
+        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location.',
+        routing: {
+          request: {
+            qs: {
+              cr: '={{$value}}',
             },
           },
         },
@@ -236,6 +236,20 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
+        displayName: 'Advanced Search Filter (tbs)',
+        name: 'tbs',
+        type: 'string',
+        default: '',
+        description: 'Restricts results to URLs based on encoded values. Normally constructed using size, color, image_type, time_period, usage_rights values. For instance, isz:l would return only results that has large image size.',
+        routing: {
+          request: {
+            qs: {
+              tbs: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Aspect Ratio (aspect_ratio)',
         name: 'aspect_ratio',
         type: 'options',
@@ -252,6 +266,24 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               aspect_ratio: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Auto-Correction Filter (nfpr)',
+        name: 'nfpr',
+        type: 'options',
+        options: [
+          { name: 'Exclude auto-corrected results', value: '1' },
+          { name: 'Include auto-corrected results', value: '0' },
+        ],
+        default: '0',
+        description: 'Controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
+        routing: {
+          request: {
+            qs: {
+              nfpr: '={{$value}}',
             },
           },
         },
@@ -329,24 +361,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Auto-Correction Filter (nfpr)',
-        name: 'nfpr',
-        type: 'options',
-        options: [
-          { name: 'Exclude auto-corrected results', value: '1' },
-          { name: 'Include auto-corrected results', value: '0' },
-        ],
-        default: '0',
-        description: 'Controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
-        routing: {
-          request: {
-            qs: {
-              nfpr: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Safe Search (safe)',
         name: 'safe',
         type: 'options',
@@ -394,20 +408,6 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               size: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Advanced Search Filter (tbs)',
-        name: 'tbs',
-        type: 'string',
-        default: '',
-        description: 'Restricts results to URLs based on encoded values. Normally constructed using size, color, image_type, time_period, usage_rights values. For instance, isz:l would return only results that has large image size.',
-        routing: {
-          request: {
-            qs: {
-              tbs: '={{$value}}',
             },
           },
         },

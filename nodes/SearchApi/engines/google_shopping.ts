@@ -108,20 +108,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Encoded Location (uule)',
         name: 'uule',
         type: 'string',
@@ -131,6 +117,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               uule: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
             },
           },
         },

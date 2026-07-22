@@ -17,9 +17,8 @@ const properties: INodeProperties[] = [
     displayName: 'Departure Airport (departure_id)',
     name: 'departure_id',
     type: 'string',
-    required: true,
     default: '',
-    description: 'Code for the departure airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286).',
+    description: 'Code for the departure airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286). Note: Not required if flight_type is set to multi_city, where the itinerary comes from multi_city_json.',
     displayOptions,
     routing: {
       request: {
@@ -33,9 +32,8 @@ const properties: INodeProperties[] = [
     displayName: 'Arrival Airport (arrival_id)',
     name: 'arrival_id',
     type: 'string',
-    required: true,
     default: '',
-    description: 'Code for the arrival airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286).',
+    description: 'Code for the arrival airport or a location identifier. Airport Code: A 3-letter uppercase code (e.g., MAD for Madrid-Barajas Airport or JFK for John F. Kennedy International Airport). Location Identifier (kgmid): A string beginning with /m/ (e.g., /m/02_286 for New York, United States). Multiple airports or locations can be separated with commas (e.g., SEA, MIA, /m/02_286). Note: Not required if flight_type is set to multi_city, where the itinerary comes from multi_city_json.',
     displayOptions,
     routing: {
       request: {
@@ -49,7 +47,6 @@ const properties: INodeProperties[] = [
     displayName: 'Outbound Date (outbound_date)',
     name: 'outbound_date',
     type: 'string',
-    required: true,
     default: '',
     description: 'Defines the outbound date. The date format is YYYY-MM-DD. Note: Not required if flight_type set to multi_city.',
     displayOptions,
@@ -65,7 +62,6 @@ const properties: INodeProperties[] = [
     displayName: 'Return Date (return_date)',
     name: 'return_date',
     type: 'string',
-    required: true,
     default: '',
     description: 'Defines the return date. The date format is YYYY-MM-DD. Note: Not required if flight_type set to one_way or multi_city.',
     displayOptions,
@@ -109,28 +105,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Currency (currency)',
-        name: 'currency',
-        type: 'options',
-        options: currencyOptions([
-          'ALL', 'DZD', 'ARS', 'AMD', 'AWG', 'AUD', 'AZN', 'BSD', 'BHD', 'BYN', 'BMD', 'BAM', 'BRL', 'GBP',
-          'BGN', 'CAD', 'XPF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK', 'DKK', 'DOP', 'EGP', 'EUR', 'GEL',
-          'HKD', 'HUF', 'ISK', 'INR', 'IDR', 'IRR', 'ILS', 'JMD', 'JPY', 'JOD', 'KZT', 'KWD', 'LBP', 'MKD',
-          'MYR', 'MXN', 'MDL', 'MAD', 'TWD', 'NZD', 'NOK', 'OMR', 'PKR', 'PAB', 'PEN', 'PHP', 'PLN', 'QAR',
-          'RON', 'RUB', 'SAR', 'RSD', 'SGD', 'ZAR', 'KRW', 'SEK', 'CHF', 'THB', 'TRY', 'UAH', 'AED', 'USD',
-          'VND',
-        ]),
-        default: 'USD',
-        description: 'Defines the currency of the returned prices. Default is USD.',
-        routing: {
-          request: {
-            qs: {
-              currency: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Country (gl)',
         name: 'gl',
         type: 'options',
@@ -157,6 +131,28 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               gl: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Currency (currency)',
+        name: 'currency',
+        type: 'options',
+        options: currencyOptions([
+          'ALL', 'DZD', 'ARS', 'AMD', 'AWG', 'AUD', 'AZN', 'BSD', 'BHD', 'BYN', 'BMD', 'BAM', 'BRL', 'GBP',
+          'BGN', 'CAD', 'XPF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK', 'DKK', 'DOP', 'EGP', 'EUR', 'GEL',
+          'HKD', 'HUF', 'ISK', 'INR', 'IDR', 'IRR', 'ILS', 'JMD', 'JPY', 'JOD', 'KZT', 'KWD', 'LBP', 'MKD',
+          'MYR', 'MXN', 'MDL', 'MAD', 'TWD', 'NZD', 'NOK', 'OMR', 'PKR', 'PAB', 'PEN', 'PHP', 'PLN', 'QAR',
+          'RON', 'RUB', 'SAR', 'RSD', 'SGD', 'ZAR', 'KRW', 'SEK', 'CHF', 'THB', 'TRY', 'UAH', 'AED', 'USD',
+          'VND',
+        ]),
+        default: 'USD',
+        description: 'Defines the currency of the returned prices. Default is USD.',
+        routing: {
+          request: {
+            qs: {
+              currency: '={{$value}}',
             },
           },
         },

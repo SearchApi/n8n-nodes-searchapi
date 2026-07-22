@@ -265,20 +265,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'string',
-        default: '10',
-        description: 'Number of results per page — maximum 50. Use with page to paginate.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Page Number (page)',
         name: 'page',
         type: 'string',
@@ -288,6 +274,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               page: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Results Per Page (num)',
+        name: 'num',
+        type: 'string',
+        default: '10',
+        description: 'Number of results per page — maximum 50. Use with page to paginate.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
             },
           },
         },

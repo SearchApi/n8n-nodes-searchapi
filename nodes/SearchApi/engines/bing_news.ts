@@ -17,7 +17,6 @@ const properties: INodeProperties[] = [
     displayName: 'Search Query (q)',
     name: 'q',
     type: 'string',
-    required: true,
     default: '',
     description: 'Search terms for Bing News. Queries can include operators and advanced filters like "climate change", site:, inurl:, or intitle:. Optional when category is used — if both are provided, category takes priority.',
     displayOptions,
@@ -276,24 +275,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 10,
-        description: 'Number of results to return per page. Maximum is 50. Use with page to paginate results.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Page Number (page)',
         name: 'page',
         type: 'number',
@@ -307,6 +288,24 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               page: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Results Per Page (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          numberPrecision: 0,
+        },
+        default: 10,
+        description: 'Number of results to return per page. Maximum is 50. Use with page to paginate results.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
             },
           },
         },

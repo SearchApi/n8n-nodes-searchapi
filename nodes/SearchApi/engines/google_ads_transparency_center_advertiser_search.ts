@@ -43,7 +43,7 @@ const properties: INodeProperties[] = [
         typeOptions: {
           maxValue: 100,
         },
-        default: 0,
+        default: 10,
         description: 'Specifies the number of advertisers to return. The default is 10. The maximum is 100.',
         routing: {
           request: {
@@ -60,7 +60,7 @@ const properties: INodeProperties[] = [
         typeOptions: {
           maxValue: 100,
         },
-        default: 0,
+        default: 10,
         description: 'Specifies the number of domains to return. The default is 10. The maximum is 100.',
         routing: {
           request: {

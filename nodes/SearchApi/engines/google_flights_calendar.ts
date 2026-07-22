@@ -65,7 +65,6 @@ const properties: INodeProperties[] = [
     displayName: 'Return Date (return_date)',
     name: 'return_date',
     type: 'string',
-    required: true,
     default: '',
     description: 'Defines the return date. The date format is YYYY-MM-DD.',
     displayOptions,
@@ -534,28 +533,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Currency (currency)',
-        name: 'currency',
-        type: 'options',
-        options: currencyOptions([
-          'ALL', 'DZD', 'ARS', 'AMD', 'AWG', 'AUD', 'AZN', 'BSD', 'BHD', 'BYN', 'BMD', 'BAM', 'BRL', 'GBP',
-          'BGN', 'CAD', 'XPF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK', 'DKK', 'DOP', 'EGP', 'EUR', 'GEL',
-          'HKD', 'HUF', 'ISK', 'INR', 'IDR', 'IRR', 'ILS', 'JMD', 'JPY', 'JOD', 'KZT', 'KWD', 'LBP', 'MKD',
-          'MYR', 'MXN', 'MDL', 'MAD', 'TWD', 'NZD', 'NOK', 'OMR', 'PKR', 'PAB', 'PEN', 'PHP', 'PLN', 'QAR',
-          'RON', 'RUB', 'SAR', 'RSD', 'SGD', 'ZAR', 'KRW', 'SEK', 'CHF', 'THB', 'TRY', 'UAH', 'AED', 'USD',
-          'VND',
-        ]),
-        default: 'USD',
-        description: 'Defines the currency of the returned prices. Default is USD. Check the full list of supported Google Travel currency values.',
-        routing: {
-          request: {
-            qs: {
-              currency: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Country (gl)',
         name: 'gl',
         type: 'options',
@@ -582,6 +559,28 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               gl: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Currency (currency)',
+        name: 'currency',
+        type: 'options',
+        options: currencyOptions([
+          'ALL', 'DZD', 'ARS', 'AMD', 'AWG', 'AUD', 'AZN', 'BSD', 'BHD', 'BYN', 'BMD', 'BAM', 'BRL', 'GBP',
+          'BGN', 'CAD', 'XPF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK', 'DKK', 'DOP', 'EGP', 'EUR', 'GEL',
+          'HKD', 'HUF', 'ISK', 'INR', 'IDR', 'IRR', 'ILS', 'JMD', 'JPY', 'JOD', 'KZT', 'KWD', 'LBP', 'MKD',
+          'MYR', 'MXN', 'MDL', 'MAD', 'TWD', 'NZD', 'NOK', 'OMR', 'PKR', 'PAB', 'PEN', 'PHP', 'PLN', 'QAR',
+          'RON', 'RUB', 'SAR', 'RSD', 'SGD', 'ZAR', 'KRW', 'SEK', 'CHF', 'THB', 'TRY', 'UAH', 'AED', 'USD',
+          'VND',
+        ]),
+        default: 'USD',
+        description: 'Defines the currency of the returned prices. Default is USD. Check the full list of supported Google Travel currency values.',
+        routing: {
+          request: {
+            qs: {
+              currency: '={{$value}}',
             },
           },
         },

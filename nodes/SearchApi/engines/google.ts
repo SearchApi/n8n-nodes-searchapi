@@ -17,9 +17,8 @@ const properties: INodeProperties[] = [
     displayName: 'Search Query (q)',
     name: 'q',
     type: 'string',
-    required: true,
     default: '',
-    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR.',
+    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR. Note: Not required if the kgmid parameter is being used — either q or kgmid must be provided.',
     displayOptions,
     routing: {
       request: {
@@ -90,20 +89,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Encoded Location (uule)',
         name: 'uule',
         type: 'string',
@@ -113,6 +98,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               uule: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
             },
           },
         },
@@ -127,36 +126,6 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Localization',
     default: {},
     options: [
-      {
-        displayName: 'Country Restrict (cr)',
-        name: 'cr',
-        type: 'options',
-        options: countryOptions([
-          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', '', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs',
-          'bh', 'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg',
-          'bf', 'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cd', 'cg',
-          'ck', 'cr', 'ci', 'hr', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'tl', 'ec', 'eg', 'sv', 'gq', 'er', 'ee',
-          'et', 'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl',
-          'gd', 'gp', 'gu', 'gt', 'gn', 'gw', 'gy', 'ht', 'hm', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'iq', 'ie',
-          'il', 'it', 'jm', 'jp', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb', 'ls', 'lr', 'ly', 'li',
-          'lt', 'lu', 'mo', 'mk', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu', 'yt', 'mx', 'fm',
-          'md', 'mc', 'mn', 'ms', 'ma', 'mz', 'na', 'nr', 'np', 'nl', 'nc', 'nz', 'ni', 'ne', 'ng', 'nu', 'nf',
-          'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe', 'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're',
-          'ro', 'ru', 'rw', 'kn', 'lc', 'vc', 'ws', 'sm', 'st', 'sa', 'sn', 'cs', 'sc', 'sl', 'sg', 'sk', 'si',
-          'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sh', 'pm', 'sr', 'sj', 'sz', 'se', 'ch', 'tw', 'tj', 'tz',
-          'th', 'tg', 'tk', 'to', 'tt', 'tn', 'tr', 'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um',
-          'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
-        ]),
-        default: '',
-        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by the web server\'s IP address geographic location.',
-        routing: {
-          request: {
-            qs: {
-              cr: '={{$value}}',
-            },
-          },
-        },
-      },
       {
         displayName: 'Country (gl)',
         name: 'gl',
@@ -184,6 +153,36 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               gl: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Country Restrict (cr)',
+        name: 'cr',
+        type: 'options',
+        options: countryOptions([
+          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', '', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs',
+          'bh', 'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg',
+          'bf', 'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cd', 'cg',
+          'ck', 'cr', 'ci', 'hr', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'tl', 'ec', 'eg', 'sv', 'gq', 'er', 'ee',
+          'et', 'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl',
+          'gd', 'gp', 'gu', 'gt', 'gn', 'gw', 'gy', 'ht', 'hm', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'iq', 'ie',
+          'il', 'it', 'jm', 'jp', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb', 'ls', 'lr', 'ly', 'li',
+          'lt', 'lu', 'mo', 'mk', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu', 'yt', 'mx', 'fm',
+          'md', 'mc', 'mn', 'ms', 'ma', 'mz', 'na', 'nr', 'np', 'nl', 'nc', 'nz', 'ni', 'ne', 'ng', 'nu', 'nf',
+          'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe', 'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're',
+          'ro', 'ru', 'rw', 'kn', 'lc', 'vc', 'ws', 'sm', 'st', 'sa', 'sn', 'cs', 'sc', 'sl', 'sg', 'sk', 'si',
+          'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sh', 'pm', 'sr', 'sj', 'sz', 'se', 'ch', 'tw', 'tj', 'tz',
+          'th', 'tg', 'tk', 'to', 'tt', 'tn', 'tr', 'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um',
+          'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
+        ]),
+        default: '',
+        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by the web server\'s IP address geographic location.',
+        routing: {
+          request: {
+            qs: {
+              cr: '={{$value}}',
             },
           },
         },
@@ -397,24 +396,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Phased out by Google on September 2025. It is now constant 10.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Page Number (page)',
         name: 'page',
         type: 'number',
@@ -428,6 +409,24 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               page: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Results Per Page (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          numberPrecision: 0,
+        },
+        default: 1,
+        description: 'Phased out by Google on September 2025. It is now constant 10.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
             },
           },
         },

@@ -66,20 +66,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Specifies the canonical location of the search (e.g., New York). If multiple locations match your input, the most popular one will be selected.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Encoded Location (uule)',
         name: 'uule',
         type: 'string',
@@ -89,6 +75,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               uule: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location (location)',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Specifies the canonical location of the search (e.g., New York). If multiple locations match your input, the most popular one will be selected.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
             },
           },
         },
@@ -206,25 +206,6 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Results Count (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          maxValue: 100,
-          numberPrecision: 0,
-        },
-        default: 100,
-        description: 'Number of results to return. Can be customized from 1 to 100.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Page (page)',
         name: 'page',
         type: 'number',
@@ -239,6 +220,25 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               page: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Results Count (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          maxValue: 100,
+          numberPrecision: 0,
+        },
+        default: 100,
+        description: 'Number of results to return. Can be customized from 1 to 100.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
             },
           },
         },
