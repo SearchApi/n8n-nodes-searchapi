@@ -301,32 +301,23 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page Number (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Indicates which page of results to return',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Page Number (page)',
+    name: 'page',
+    type: 'number',
+    typeOptions: {
+      minValue: 1,
+      numberPrecision: 0,
+    },
+    default: 1,
+    description: 'Indicates which page of results to return',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Zero Data Retention',

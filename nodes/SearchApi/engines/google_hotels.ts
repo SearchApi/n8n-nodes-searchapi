@@ -235,7 +235,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              price_max: '={{$value}}',
+              price_max: '={{$value || ""}}',
             },
           },
         },

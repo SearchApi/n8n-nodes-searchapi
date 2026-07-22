@@ -30,28 +30,19 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Geographic Location',
-    name: 'geographic_location',
-    type: 'collection',
-    placeholder: 'Add Geographic Location',
-    default: {},
-    options: [
-      {
-        displayName: 'Location Coordinates (ll)',
-        name: 'll',
-        type: 'string',
-        default: '',
-        description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
-        routing: {
-          request: {
-            qs: {
-              ll: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Location Coordinates (ll)',
+    name: 'll',
+    type: 'string',
+    default: '',
+    description: 'GPS coordinates for the location where the query should be applied. Formatted as @latitude,longitude,zoom (e.g. @40.7009973,-73.994778,12z) or @latitude,longitude,meters (e.g. @40.7009973,-73.994778,500m). The last value ends with z (zoom, 3z–21z) or m (meters radius, 62m–18636559m).',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          ll: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Localization',
@@ -121,32 +112,23 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Defaults to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Page (page)',
+    name: 'page',
+    type: 'number',
+    typeOptions: {
+      minValue: 1,
+      numberPrecision: 0,
+    },
+    default: 1,
+    description: 'Page of results to return. Defaults to 1.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Zero Data Retention',

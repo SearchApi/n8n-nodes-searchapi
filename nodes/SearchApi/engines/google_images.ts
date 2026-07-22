@@ -30,33 +30,24 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Device',
+    displayName: 'Device (device)',
     name: 'device',
-    type: 'collection',
-    placeholder: 'Add Device',
-    default: {},
+    type: 'options',
     options: [
-      {
-        displayName: 'Device (device)',
-        name: 'device',
-        type: 'options',
-        options: [
-          { name: 'Desktop', value: 'desktop' },
-          { name: 'Mobile', value: 'mobile' },
-          { name: 'Tablet', value: 'tablet' },
-        ],
-        default: 'desktop',
-        description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
-        routing: {
-          request: {
-            qs: {
-              device: '={{$value}}',
-            },
-          },
-        },
-      }
+      { name: 'Desktop', value: 'desktop' },
+      { name: 'Mobile', value: 'mobile' },
+      { name: 'Tablet', value: 'tablet' },
     ],
+    default: 'desktop',
+    description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          device: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Geographic Location',
@@ -461,32 +452,23 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Pagination',
-    name: 'pagination',
-    type: 'collection',
-    placeholder: 'Add Pagination',
-    default: {},
-    options: [
-      {
-        displayName: 'Page Number (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Indicates which page of results to return. By default, it is set to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Page Number (page)',
+    name: 'page',
+    type: 'number',
+    typeOptions: {
+      minValue: 1,
+      numberPrecision: 0,
+    },
+    default: 1,
+    description: 'Indicates which page of results to return. By default, it is set to 1.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          page: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Zero Data Retention',

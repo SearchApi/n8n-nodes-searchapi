@@ -29,57 +29,39 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Search Query',
-    name: 'search_query',
-    type: 'collection',
-    placeholder: 'Add Search Query',
-    default: {},
-    options: [
-      {
-        displayName: 'Kgmid (kgmid)',
-        name: 'kgmid',
-        type: 'string',
-        default: '',
-        description: 'Defines a Knowledge Graph identifier (kgmid), representing entities in Google\'s Knowledge Graph. Format: Location Identifier (/m/): Typically followed by 2 to 7 characters. Used primarily to represent specific locations. Find the identifier by searching for the "Freebase ID" on Wikidata. Example: kgmid=/m/02_286 refers to New York. Google Knowledge Graph Identifier (/g/): Typically followed by a longer alphanumeric string. Represents general entities in Google\'s Knowledge Graph. Find details on Wikidata. Example: kgmid=/g/11f555cn8l refers to TikTok.',
-        routing: {
-          request: {
-            qs: {
-              kgmid: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
+    displayName: 'Kgmid (kgmid)',
+    name: 'kgmid',
+    type: 'string',
+    default: '',
+    description: 'Defines a Knowledge Graph identifier (kgmid), representing entities in Google\'s Knowledge Graph. Format: Location Identifier (/m/): Typically followed by 2 to 7 characters. Used primarily to represent specific locations. Find the identifier by searching for the "Freebase ID" on Wikidata. Example: kgmid=/m/02_286 refers to New York. Google Knowledge Graph Identifier (/g/): Typically followed by a longer alphanumeric string. Represents general entities in Google\'s Knowledge Graph. Find details on Wikidata. Example: kgmid=/g/11f555cn8l refers to TikTok.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          kgmid: '={{$value}}',
+        },
+      },
+    },
   },
   {
-    displayName: 'Device',
+    displayName: 'Device (device)',
     name: 'device',
-    type: 'collection',
-    placeholder: 'Add Device',
-    default: {},
+    type: 'options',
     options: [
-      {
-        displayName: 'Device (device)',
-        name: 'device',
-        type: 'options',
-        options: [
-          { name: 'Desktop', value: 'desktop' },
-          { name: 'Mobile', value: 'mobile' },
-          { name: 'Tablet', value: 'tablet' },
-        ],
-        default: 'desktop',
-        description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
-        routing: {
-          request: {
-            qs: {
-              device: '={{$value}}',
-            },
-          },
-        },
-      }
+      { name: 'Desktop', value: 'desktop' },
+      { name: 'Mobile', value: 'mobile' },
+      { name: 'Tablet', value: 'tablet' },
     ],
+    default: 'desktop',
+    description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          device: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Geographic Location',
@@ -421,7 +403,7 @@ const properties: INodeProperties[] = [
           minValue: 1,
           numberPrecision: 0,
         },
-        default: 1,
+        default: 10,
         description: 'Phased out by Google on September 2025. It is now constant 10.',
         routing: {
           request: {
@@ -435,32 +417,23 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Optimization',
-    name: 'optimization',
-    type: 'collection',
-    placeholder: 'Add Optimization',
-    default: {},
+    displayName: 'Optimization Strategy (optimization_strategy)',
+    name: 'optimization_strategy',
+    type: 'options',
     options: [
-      {
-        displayName: 'Optimization Strategy (optimization_strategy)',
-        name: 'optimization_strategy',
-        type: 'options',
-        options: [
-          { name: 'Ad Scraping Rate', value: 'ads' },
-          { name: 'Performance', value: 'performance' },
-        ],
-        default: 'performance',
-        description: 'Controls how the search request is optimized. The ads option prioritizes ad collection success rate at the cost of longer processing times.',
-        routing: {
-          request: {
-            qs: {
-              optimization_strategy: '={{$value}}',
-            },
-          },
-        },
-      }
+      { name: 'Ad Scraping Rate', value: 'ads' },
+      { name: 'Performance', value: 'performance' },
     ],
+    default: 'performance',
+    description: 'Controls how the search request is optimized. The ads option prioritizes ad collection success rate at the cost of longer processing times.',
     displayOptions,
+    routing: {
+      request: {
+        qs: {
+          optimization_strategy: '={{$value}}',
+        },
+      },
+    },
   },
   {
     displayName: 'Zero Data Retention',

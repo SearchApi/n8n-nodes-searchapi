@@ -291,7 +291,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              layover_duration_max: '={{$value}}',
+              layover_duration_max: '={{$value || ""}}',
             },
           },
         },
@@ -309,7 +309,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              layover_duration_min: '={{$value}}',
+              layover_duration_min: '={{$value || ""}}',
             },
           },
         },
@@ -328,7 +328,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              max_flight_duration: '={{$value}}',
+              max_flight_duration: '={{$value || ""}}',
             },
           },
         },
@@ -347,7 +347,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              max_price: '={{$value}}',
+              max_price: '={{$value || ""}}',
             },
           },
         },
