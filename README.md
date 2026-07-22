@@ -103,10 +103,17 @@ kept as-is. Regenerate with `npm run generate:labels`, overriding the sources if
 RAILS_DUCKDUCKGO_CONSTANTS=../searchapi.io/app/lib/constants/duckduckgo.rb npm run generate:labels
 ```
 
-`npm run check:enums` fails the build when a code has no canonical label, when an `options`
-default is not one of its own values, or — if a `searchapi.io` checkout is present — when an
-engine's values disagree with the matching `public/openapi/<engine>.yaml` enum. Point it at a
-checkout with `OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums`.
+`npm run check:enums` fails the build when a code has no canonical label or when an `options`
+default is not one of its own values.
+
+If a `searchapi.io` checkout is present it also compares each engine's values against the
+matching `public/openapi/<engine>.yaml` enum, case-insensitively. Those divergences are
+reported as **warnings** — the specs and the engine files do not agree yet, and neither side is
+authoritative for every parameter. Pass `--strict` to fail on them once they are reconciled:
+
+```sh
+OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums -- --strict
+```
 
 You will be able to see the the node in the local n8n http://localhost:5678.
 
