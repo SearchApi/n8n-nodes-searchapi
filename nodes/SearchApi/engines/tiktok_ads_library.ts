@@ -1,4 +1,5 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { countryOptions } from '../shared/options';
 
 const displayOptions = {
   show: {
@@ -61,42 +62,11 @@ const properties: INodeProperties[] = [
         displayName: 'Country (country)',
         name: 'country',
         type: 'options',
-        options: [
-          { name: 'All', value: 'all' },
-          { name: 'AT', value: 'AT' },
-          { name: 'BE', value: 'BE' },
-          { name: 'BG', value: 'BG' },
-          { name: 'CH', value: 'CH' },
-          { name: 'CY', value: 'CY' },
-          { name: 'CZ', value: 'CZ' },
-          { name: 'DE', value: 'DE' },
-          { name: 'DK', value: 'DK' },
-          { name: 'EE', value: 'EE' },
-          { name: 'ES', value: 'ES' },
-          { name: 'FI', value: 'FI' },
-          { name: 'FR', value: 'FR' },
-          { name: 'GB', value: 'GB' },
-          { name: 'GR', value: 'GR' },
-          { name: 'HR', value: 'HR' },
-          { name: 'HU', value: 'HU' },
-          { name: 'IE', value: 'IE' },
-          { name: 'IS', value: 'IS' },
-          { name: 'IT', value: 'IT' },
-          { name: 'LI', value: 'LI' },
-          { name: 'LT', value: 'LT' },
-          { name: 'LU', value: 'LU' },
-          { name: 'LV', value: 'LV' },
-          { name: 'MT', value: 'MT' },
-          { name: 'NL', value: 'NL' },
-          { name: 'NO', value: 'NO' },
-          { name: 'PL', value: 'PL' },
-          { name: 'PT', value: 'PT' },
-          { name: 'RO', value: 'RO' },
-          { name: 'SE', value: 'SE' },
-          { name: 'SI', value: 'SI' },
-          { name: 'SK', value: 'SK' },
-          { name: 'TR', value: 'TR' },
-        ],
+        options: countryOptions([
+          'all', 'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR',
+          'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK',
+          'TR',
+        ]),
         default: 'all',
         description: 'Specifies the country for your search. The default value is ALL. Check the full list of supported TikTok Ads Library countries.',
         routing: {

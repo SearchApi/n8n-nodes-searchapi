@@ -78,7 +78,35 @@ Other useful commands:
 - `npm run build` — compile TypeScript for production
 - `npm run lint` — run ESLint code quality checks
 - `npm run lint:fix` — auto-fix linting issues
+- `npm run check:enums` — validate shared enumerations (runs in CI)
+- `npm run generate:labels` — regenerate `nodes/SearchApi/shared/labels.ts`
 - `npm run release` — bump version, update changelog, and publish to npm
+
+### Shared enumerations
+
+Country, language, currency and locale dropdowns are shared rather than duplicated per engine.
+An engine lists only the codes its API accepts and the label comes from one canonical table:
+
+```ts
+import { countryOptions } from '../shared/options';
+
+{ name: 'gl', type: 'options', options: countryOptions(['us', 'gb', 'de']) }
+```
+
+`nodes/SearchApi/shared/labels.ts` is **generated** — do not hand-edit it. Country, language and
+currency labels come from Node's ICU data (`Intl.DisplayNames`), with vendor-specific codes that
+ICU cannot resolve listed explicitly in `scripts/overrides.mjs`. Locale labels come from
+`searchapi.io`'s `Constants::Duckduckgo::LOCALES`; without that checkout the existing table is
+kept as-is. Regenerate with `npm run generate:labels`, overriding the sources if needed:
+
+```sh
+RAILS_DUCKDUCKGO_CONSTANTS=../searchapi.io/app/lib/constants/duckduckgo.rb npm run generate:labels
+```
+
+`npm run check:enums` fails the build when a code has no canonical label, when an `options`
+default is not one of its own values, or — if a `searchapi.io` checkout is present — when an
+engine's values disagree with the matching `public/openapi/<engine>.yaml` enum. Point it at a
+checkout with `OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums`.
 
 You will be able to see the the node in the local n8n http://localhost:5678.
 

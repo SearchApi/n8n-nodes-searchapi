@@ -1,4 +1,5 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { languageOptions } from '../shared/options';
 
 const displayOptions = {
   show: {
@@ -39,27 +40,10 @@ const properties: INodeProperties[] = [
         displayName: 'Language (lang)',
         name: 'lang',
         type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'Armenian', value: 'hy' },
-          { name: 'Azerbaijani', value: 'az' },
-          { name: 'Belarusian', value: 'be' },
-          { name: 'English', value: 'en' },
-          { name: 'Estonian', value: 'et' },
-          { name: 'French', value: 'fr' },
-          { name: 'German', value: 'de' },
-          { name: 'Indonesian', value: 'id' },
-          { name: 'Kazakh', value: 'kk' },
-          { name: 'Latvian', value: 'lv' },
-          { name: 'Lithuanian', value: 'lt' },
-          { name: 'Romanian', value: 'ro' },
-          { name: 'Russian', value: 'ru' },
-          { name: 'Tatar', value: 'tt' },
-          { name: 'Turkish', value: 'tr' },
-          { name: 'Turkmen', value: 'tk' },
-          { name: 'Ukrainian', value: 'uk' },
-          { name: 'Uzbek', value: 'uz' },
-        ],
+        options: languageOptions([
+          '', 'hy', 'az', 'be', 'en', 'et', 'fr', 'de', 'id', 'kk', 'lv', 'lt', 'ro', 'ru', 'tt', 'tr', 'tk',
+          'uk', 'uz',
+        ]),
         default: '',
         description: 'Interface language of the search',
         routing: {
