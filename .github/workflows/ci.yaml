@@ -34,6 +34,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Check shared enumerations
+        run: npm run check:enums
+
       - name: Build
         run: npm run build
 
