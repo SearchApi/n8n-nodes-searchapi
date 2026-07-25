@@ -1,0 +1,89 @@
+{
+  "name": "SearchApi AI Agent - Google Search",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "chat-trigger",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0],
+      "webhookId": "searchapi-ai-agent-demo"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a research assistant with access to live web search through SearchApi. When the user asks for current information, call the SearchApi tool, then summarize the top results with titles and links."
+        }
+      },
+      "id": "ai-agent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [280, 0]
+    },
+    {
+      "parameters": {
+        "resource": "google",
+        "operation": "search",
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('q', 'Search query for Google organic results', 'string') }}"
+      },
+      "id": "searchapi-tool",
+      "name": "SearchApi",
+      "type": "n8n-nodes-searchapi.searchApi",
+      "typeVersion": 1,
+      "position": [280, 240],
+      "credentials": {
+        "searchApi": {
+          "id": "REPLACE_WITH_SEARCHAPI_CREDENTIAL_ID",
+          "name": "SearchApi account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SearchApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "searchapi-ai-agent-google-search-example"
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "SearchApi"
+    },
+    {
+      "name": "AI Agent"
+    }
+  ]
+}
