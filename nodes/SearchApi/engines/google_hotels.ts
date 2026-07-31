@@ -214,7 +214,7 @@ const properties: INodeProperties[] = [
           { name: 'Wheelchair accessible', value: '53' },
         ],
         default: '',
-        description: 'Defines a list of amenities that allows multiple categories that are separated by a comma. For example: 1,2. Check the full list of supported Google Hotels amenities values.',
+        description: 'Comma-separated amenity IDs, for example 1,2. Accepted IDs depend on property_type: hotel and vacation_rental each allow a different subset, and mixing them is rejected.',
         routing: {
           request: {
             qs: {

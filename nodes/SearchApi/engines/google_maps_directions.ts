@@ -55,19 +55,18 @@ const properties: INodeProperties[] = [
       {
         displayName: 'Avoid (avoid)',
         name: 'avoid',
-        type: 'options',
+        type: 'multiOptions',
         options: [
-          { name: 'Any', value: '' },
           { name: 'Ferries', value: 'ferries' },
           { name: 'Highways', value: 'highways' },
           { name: 'Tolls', value: 'tolls' },
         ],
-        default: '',
-        description: 'What to avoid when calculating routes. Options: tolls (driving/best only), highways (driving/best only), ferries (walking/cycling only). Example: ["tolls", "highways"].',
+        default: [],
+        description: 'What to avoid when calculating routes. Tolls and highways apply to driving and best only, ferries to walking and cycling only.',
         routing: {
           request: {
             qs: {
-              avoid: '={{$value}}',
+              avoid: '={{ $value.length ? JSON.stringify($value) : \'\' }}',
             },
           },
         },
@@ -94,20 +93,19 @@ const properties: INodeProperties[] = [
       {
         displayName: 'Prefer (prefer)',
         name: 'prefer',
-        type: 'options',
+        type: 'multiOptions',
         options: [
-          { name: 'Any', value: '' },
           { name: 'Bus', value: 'bus' },
           { name: 'Subway', value: 'subway' },
           { name: 'Train', value: 'train' },
           { name: 'Tram and light rail', value: 'tram_and_light_rail' },
         ],
-        default: '',
-        description: 'Preferred transit types for transit directions. Options: bus, subway, train, tram_and_light_rail. Example: ["bus", "subway"]. Only supported when travel_mode is transit.',
+        default: [],
+        description: 'Preferred transit types. Only supported when travel_mode is transit.',
         routing: {
           request: {
             qs: {
-              prefer: '={{$value}}',
+              prefer: '={{ $value.length ? JSON.stringify($value) : \'\' }}',
             },
           },
         },
@@ -173,7 +171,7 @@ const properties: INodeProperties[] = [
         name: 'waypoints',
         type: 'string',
         default: '',
-        description: 'Waypoints of the route. Should be an array of strings (plain address, data ID, or coordinates). Maximum 8 elements. Not supported when travel_mode is transit. Cannot be used together with the time parameter.',
+        description: 'Waypoints of the route, as a JSON array of strings — plain addresses, data IDs or coordinates, for example ["Buckingham Palace, London"]. Maximum 8 elements. Not supported when travel_mode is transit. Cannot be used together with the time parameter.',
         routing: {
           request: {
             qs: {

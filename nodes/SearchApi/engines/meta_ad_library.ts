@@ -35,6 +35,40 @@ const properties: INodeProperties[] = [
         },
       },
       {
+        displayName: 'Location Name (location_name)',
+        name: 'location_name',
+        type: 'string',
+        default: '',
+        description: 'Name of the targeted location. Required whenever location_id is provided.',
+        routing: {
+          request: {
+            qs: {
+              location_name: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location Type (location_type)',
+        name: 'location_type',
+        type: 'options',
+        options: [
+          { name: '', value: '' },
+          { name: 'City', value: 'CITY' },
+          { name: 'Country', value: 'COUNTRY' },
+          { name: 'Region', value: 'REGION' },
+        ],
+        default: '',
+        description: 'Granularity of the targeted location. Required whenever location_id is provided.',
+        routing: {
+          request: {
+            qs: {
+              location_type: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Page ID (page_id)',
         name: 'page_id',
         type: 'string',
@@ -61,7 +95,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },

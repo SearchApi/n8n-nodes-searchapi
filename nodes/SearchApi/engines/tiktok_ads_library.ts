@@ -35,6 +35,21 @@ const properties: INodeProperties[] = [
         },
       },
       {
+        displayName: 'Advertiser Token (advertiser_token)',
+        name: 'advertiser_token',
+        type: 'string',
+        default: '',
+        description: 'Token bundling the advertiser ID and name together. Obtain it from the TikTok Ads Library Advertiser Search API.',
+        typeOptions: { password: true },
+        routing: {
+          request: {
+            qs: {
+              advertiser_token: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Search Query (q)',
         name: 'q',
         type: 'string',
@@ -47,7 +62,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },

@@ -165,20 +165,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead. Learn more in Google\'s official announcement. See the full list of supported Google domains.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
@@ -348,6 +334,25 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
+        displayName: 'Number of Results (num)',
+        name: 'num',
+        type: 'number',
+        typeOptions: {
+          minValue: 1,
+          maxValue: 10,
+          numberPrecision: 0,
+        },
+        default: 10,
+        description: 'Number of results to return. Values above 10 are capped at 10.',
+        routing: {
+          request: {
+            qs: {
+              num: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Page (page)',
         name: 'page',
         type: 'number',
@@ -364,7 +369,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },

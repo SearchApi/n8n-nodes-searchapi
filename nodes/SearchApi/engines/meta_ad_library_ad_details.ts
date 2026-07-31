@@ -1,4 +1,5 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { countryOptions } from '../shared/options';
 
 const displayOptions = {
   show: {
@@ -47,7 +48,71 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
+      {
+        displayName: 'Country (country)',
+        name: 'country',
+        type: 'options',
+        options: countryOptions([
+            'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'ALL', 'AM', 'AN', '', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW',
+            'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR',
+            'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN',
+            'CO', 'CR', 'CV', 'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH',
+            'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI',
+            'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU',
+            'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI',
+            'KM', 'KN', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY',
+            'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT',
+            'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU',
+            'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA',
+            'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN',
+            'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN',
+            'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI',
+            'VN', 'VU', 'WF', 'WS', 'XK', 'YE', 'YT', 'ZA', 'ZM', 'ZW',
+          ]),
+        default: '',
+        description: 'Country the ad was shown in. Improves the accuracy of the lookup.',
+        routing: {
+          request: {
+            qs: {
+              country: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Is Political (is_political)',
+        name: 'is_political',
+        type: 'options',
+        options: [
+          { name: '', value: '' },
+          { name: 'True', value: 'true' },
+          { name: 'False', value: 'false' },
+        ],
+        default: '',
+        description: 'Whether the ad should be looked up as a political or issue ad',
+        routing: {
+          request: {
+            qs: {
+              is_political: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Page ID (page_id)',
+        name: 'page_id',
+        type: 'string',
+        default: '',
+        description: 'Unique ID of the page the ad belongs to. Improves the accuracy of the lookup.',
+        routing: {
+          request: {
+            qs: {
+              page_id: '={{$value}}',
+            },
+          },
+        },
+      },
     ],
     displayOptions,
   },

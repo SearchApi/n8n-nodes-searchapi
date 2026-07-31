@@ -21,7 +21,13 @@
     "dev": "n8n-node dev",
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
+    "test": "npm run build && node --test test/routing.test.mjs",
     "check:enums": "node scripts/check-enums.mjs",
+    "check:engines": "node scripts/check-engines.mjs",
+    "smoke": "npm run build && npm run smoke:generate && npm run smoke:import && npm run smoke:run",
+    "smoke:generate": "node scripts/generate-smoke-workflow.mjs",
+    "smoke:import": "N8N_USER_FOLDER=${N8N_USER_FOLDER:-$HOME/.n8n-node-cli} npx --yes n8n import:workflow --input=.n8n-e2e/searchapi-smoke.workflow.json",
+    "smoke:run": "N8N_USER_FOLDER=${N8N_USER_FOLDER:-$HOME/.n8n-node-cli} N8N_RUNNERS_ENABLED=true npx --yes n8n execute --id=searchapi-smoke --rawOutput | node scripts/check-smoke-output.mjs",
     "generate:labels": "node scripts/generate-labels.mjs",
     "release": "n8n-node release",
     "prepublishOnly": "n8n-node prerelease"

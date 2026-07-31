@@ -156,20 +156,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
@@ -280,6 +266,20 @@ const properties: INodeProperties[] = [
         },
       },
       {
+        displayName: 'Chips (chips)',
+        name: 'chips',
+        type: 'string',
+        default: '',
+        description: 'Includes additional query conditions taken from the filter chips shown above the results. Values come from a previous response.',
+        routing: {
+          request: {
+            qs: {
+              chips: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Color (color)',
         name: 'color',
         type: 'options',
@@ -347,6 +347,21 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               image_type: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Next Page Token (next_page_token)',
+        name: 'next_page_token',
+        type: 'string',
+								typeOptions: { password: true },
+        default: '',
+        description: 'Token for retrieving the next page of results. Returned in the response when more results are available.',
+        routing: {
+          request: {
+            qs: {
+              next_page_token: '={{$value}}',
             },
           },
         },
@@ -447,7 +462,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },

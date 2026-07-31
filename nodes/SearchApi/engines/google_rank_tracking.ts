@@ -135,20 +135,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',

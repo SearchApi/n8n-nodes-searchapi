@@ -37,6 +37,20 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
+        displayName: 'Chips (chips)',
+        name: 'chips',
+        type: 'string',
+        default: '',
+        description: 'Includes additional query conditions taken from the filter chips shown above the results — for example city:Owg_06VPwoli_nfhBo8LyA== filters to one city. Combine several with commas.',
+        routing: {
+          request: {
+            qs: {
+              chips: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Google-Encoded Location (uule)',
         name: 'uule',
         type: 'string',
@@ -63,7 +77,21 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
+      {
+        displayName: 'Location Type (ltype)',
+        name: 'ltype',
+        type: 'string',
+        default: '',
+        description: 'Filters results by listing type. Set to 1 to return only work-from-home jobs.',
+        routing: {
+          request: {
+            qs: {
+              ltype: '={{$value}}',
+            },
+          },
+        },
+      },
     ],
     displayOptions,
   },
@@ -100,20 +128,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead. Learn more in Google\'s official announcement. See the full list of supported Google domains.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Interface Language (hl)',
         name: 'hl',
         type: 'options',
@@ -138,7 +152,21 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
+      {
+        displayName: 'Search Radius (lrad)',
+        name: 'lrad',
+        type: 'number',
+        default: 0,
+        description: 'Search radius in kilometres around the given location',
+        routing: {
+          request: {
+            qs: {
+              lrad: '={{$value}}',
+            },
+          },
+        },
+      },
     ],
     displayOptions,
   },
@@ -163,7 +191,22 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
+      {
+        displayName: 'Page (page)',
+        name: 'page',
+        type: 'number',
+        typeOptions: { minValue: 1 },
+        default: 1,
+        description: 'Indicates which page of results to return. Each page holds 10 results.',
+        routing: {
+          request: {
+            qs: {
+              page: '={{$value}}',
+            },
+          },
+        },
+      },
     ],
     displayOptions,
   },

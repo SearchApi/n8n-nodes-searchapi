@@ -70,7 +70,7 @@ const properties: INodeProperties[] = [
         name: 'lat',
         type: 'string',
         default: '',
-        description: 'Latitude of the location to use for the search',
+        description: 'Latitude of the location to use for the search, between -90 and 90. Must be used together with lon.',
         routing: {
           request: {
             qs: {
@@ -98,7 +98,7 @@ const properties: INodeProperties[] = [
         name: 'lon',
         type: 'string',
         default: '',
-        description: 'Longitude of the location to use for the search',
+        description: 'Longitude of the location to use for the search, between -180 and 180. Must be used together with lat.',
         routing: {
           request: {
             qs: {
@@ -197,7 +197,7 @@ const properties: INodeProperties[] = [
         type: 'options',
         options: languageOptions([
           '', 'ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'en', 'en-gb', 'es', 'et', 'eu', 'fi', 'fr', 'gl',
-          'gu', 'he', 'hi', 'hr', 'hu', 'is', 'it', 'jp', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'ms', 'nb', 'nl',
+          'gu', 'he', 'hi', 'hr', 'hu', 'is', 'it', 'ja', 'jp', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'ms', 'nb', 'nl',
           'pa', 'pl', 'pt-br', 'pt-pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'ta', 'te', 'th', 'tr', 'uk', 'vi',
           'zh-hans', 'zh-hant',
         ]),
@@ -269,7 +269,7 @@ const properties: INodeProperties[] = [
         name: 'page',
         type: 'string',
         default: '1',
-        description: 'Page of results to return — defaults to 1. Use with num to paginate.',
+        description: 'Page of results to return — defaults to 1',
         routing: {
           request: {
             qs: {
@@ -278,20 +278,7 @@ const properties: INodeProperties[] = [
           },
         },
       },
-      {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'string',
-        default: '10',
-        description: 'Number of results per page — maximum 50. Use with page to paginate.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      }
+
     ],
     displayOptions,
   },

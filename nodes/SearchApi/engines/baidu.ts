@@ -112,6 +112,7 @@ const properties: INodeProperties[] = [
         type: 'number',
         typeOptions: {
           minValue: 1,
+          maxValue: 50,
           numberPrecision: 0,
         },
         default: 10,

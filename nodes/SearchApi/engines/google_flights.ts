@@ -274,6 +274,25 @@ const properties: INodeProperties[] = [
         },
       },
       {
+        displayName: 'Expanded Search (expanded_search)',
+        name: 'expanded_search',
+        type: 'options',
+        options: [
+          { name: '', value: '' },
+          { name: 'True', value: 'true' },
+          { name: 'False', value: 'false' },
+        ],
+        default: '',
+        description: 'Whether to retrieve more results. Only has an effect together with show_hidden_flights or show_cheapest_flights, and makes the request slower.',
+        routing: {
+          request: {
+            qs: {
+              expanded_search: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
         displayName: 'Flight Type (flight_type)',
         name: 'flight_type',
         type: 'options',
@@ -542,7 +561,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },

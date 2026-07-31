@@ -176,7 +176,7 @@ const properties: INodeProperties[] = [
         type: 'options',
         options: languageOptions([
           '', 'ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'en', 'en-gb', 'es', 'et', 'eu', 'fi', 'fr', 'gl',
-          'gu', 'he', 'hi', 'hr', 'hu', 'is', 'it', 'jp', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'ms', 'nb', 'nl',
+          'gu', 'he', 'hi', 'hr', 'hu', 'is', 'it', 'ja', 'jp', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'ms', 'nb', 'nl',
           'pa', 'pl', 'pt-br', 'pt-pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'ta', 'te', 'th', 'tr', 'uk', 'vi',
           'zh-hans', 'zh-hant',
         ]),

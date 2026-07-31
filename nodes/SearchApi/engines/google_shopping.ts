@@ -58,20 +58,6 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use gl (country) or hl (language) instead.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
@@ -284,8 +270,7 @@ const properties: INodeProperties[] = [
           { name: 'Any', value: '' },
           { name: 'Price high to low', value: 'price_high_to_low' },
           { name: 'Price low to high', value: 'price_low_to_high' },
-          { name: 'Relevance', value: 'relevance' },
-          { name: 'Review score', value: 'review_score' },
+          { name: 'Rating high to low', value: 'rating_high_to_low' },
         ],
         default: '',
         description: 'Sorts the shopping results by the specified criteria. If shoprs is also provided, it takes priority and this parameter is ignored.',

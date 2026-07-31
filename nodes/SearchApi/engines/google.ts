@@ -130,7 +130,7 @@ const properties: INodeProperties[] = [
           'wf', 'eh', 'ye', 'zm', 'zw',
         ]),
         default: 'us',
-        description: 'Defines the country of the search. Defaults to us.',
+        description: 'Defines the country of the search. Defaults to us. Note: with optimization_strategy=ads a narrower country list applies and some values are rejected.',
         routing: {
           request: {
             qs: {
@@ -165,20 +165,6 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               cr: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Google Domain (google_domain)',
-        name: 'google_domain',
-        type: 'string',
-        default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
-        routing: {
-          request: {
-            qs: {
-              google_domain: '={{$value}}',
             },
           },
         },
@@ -254,6 +240,25 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               filter: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Include Redirect Link (include_redirect_link)',
+        name: 'include_redirect_link',
+        type: 'options',
+        options: [
+          { name: '', value: '' },
+          { name: 'True', value: 'true' },
+          { name: 'False', value: 'false' },
+        ],
+        default: '',
+        description: 'Whether to include the Google redirect link for each organic result',
+        routing: {
+          request: {
+            qs: {
+              include_redirect_link: '={{$value}}',
             },
           },
         },
@@ -366,7 +371,7 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      }
+      },
     ],
     displayOptions,
   },
@@ -401,10 +406,11 @@ const properties: INodeProperties[] = [
         type: 'number',
         typeOptions: {
           minValue: 1,
+          maxValue: 10,
           numberPrecision: 0,
         },
         default: 10,
-        description: 'Phased out by Google on September 2025. It is now constant 10.',
+        description: 'Number of results to return. Google phased out larger pages in September 2025, so values above 10 are capped at 10.',
         routing: {
           request: {
             qs: {

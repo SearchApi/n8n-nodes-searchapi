@@ -78,8 +78,11 @@ Other useful commands:
 - `npm run build` — compile TypeScript for production
 - `npm run lint` — run ESLint code quality checks
 - `npm run lint:fix` — auto-fix linting issues
+- `npm test` — build and verify every parameter's query-string routing (runs in CI)
 - `npm run check:enums` — validate shared enumerations (runs in CI)
+- `npm run check:engines` — compare every engine against the searchapi.io models
 - `npm run generate:labels` — regenerate `nodes/SearchApi/shared/labels.ts`
+- `npm run smoke` — run one live request for every engine in the local n8n
 - `npm run release` — bump version, update changelog, and publish to npm
 
 ### Shared enumerations
@@ -117,4 +120,43 @@ OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums -- --strict
 
 You will be able to see the the node in the local n8n http://localhost:5678.
 
-Obs: You might need to run `rm -rf ~/.n8n-node-cli`, to clear the cache of old n8n instances you might have installed, it might make the cli to timeout.
+### Tests
+
+`npm test` checks the compiled node description without making API calls. It verifies that every
+engine parameter has exactly one `routing.request.qs` entry, that the query-string key matches the
+parameter name, and that the route forwards the parameter value. This exhaustive offline check
+runs in CI.
+
+The local smoke test makes live requests for every engine through the n8n instance created by
+`npm run dev`. Each engine has a `base` case with the fewest parameters needed for a valid
+response, a `full` case sending every parameter it accepts at once, and further cases for
+parameters that cannot be combined — where the API rejects the pair or one supersedes the other.
+Token-based engines read the identifier they need from an earlier response, and date-based engines
+use future dates. Requests run sequentially and retry failures up to three times.
+
+Find the id and name of your local SearchApi credential, then run the smoke:
+
+```sh
+sqlite3 $HOME/.n8n-node-cli/.n8n/database.sqlite \
+  "select id, name from credentials_entity where type = 'searchApi'"
+
+SEARCHAPI_CREDENTIAL_ID=<local-id> \
+SEARCHAPI_CREDENTIAL_NAME='SearchApi account' \
+npm run smoke
+```
+
+The command prints one line per combination and a final total. A combination passes when the API
+echoes its parameters back in `search_parameters` with the values that were sent; a request the API
+rejects answers with an error and nothing else. It is report-only: individual engine
+failures are visible but do not make the command exit non-zero. Generation, import, execution, or
+output-parsing failures still return a non-zero status. Expect roughly three API requests per
+engine, plus retries for failed requests.
+
+`npm run check:engines` needs a `searchapi.io` checkout and compares every engine against its Rails
+model there: the `permitted_params` allowlist (anything outside it is dropped before the search is
+built), the values each `validates … inclusion:` accepts, and whether a parameter is required. It
+skips when the checkout is missing, so it never blocks a build that cannot run it.
+
+```sh
+SEARCHAPI_DIR=../searchapi.io npm run check:engines
+```
