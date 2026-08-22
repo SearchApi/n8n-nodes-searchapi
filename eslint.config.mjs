@@ -18,4 +18,21 @@ export default [
 			'n8n-nodes-base/node-param-default-wrong-for-options': 'off',
 		},
 	},
+	{
+		files: ['nodes/**/*.ts', 'credentials/**/*.ts'],
+		rules: {
+			'no-useless-escape': 'error',
+			'no-irregular-whitespace': ['error', { skipStrings: false, skipTemplates: false }],
+			'no-restricted-syntax': [
+				'error',
+				{
+					// Strings here become n8n UI text; a surviving backslash, HTML
+					// entity, or raw newline means an escaping mistake in the source.
+					selector: 'Literal[value=/\\\\|&#\\d+;|&apos;|&quot;|[\\n\\t]/]',
+					message:
+						'String contains a literal backslash, HTML entity, or control character — fix the escaping.',
+				},
+			],
+		},
+	},
 ];
