@@ -6,6 +6,9 @@
     "n8n-community-node-package"
   ],
   "license": "MIT",
+  "engines": {
+    "node": ">=22.22"
+  },
   "homepage": "https://www.searchapi.io",
   "author": {
     "name": "SearchApi",
@@ -47,7 +50,7 @@
   "devDependencies": {
     "@n8n/node-cli": "*",
     "eslint": "9.39.4",
-    "prettier": "3.8.1",
+    "prettier": "^3.9.6",
     "release-it": "19.2.4",
     "typescript": "5.9.3"
   },

@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions, IHttpRequestOptions, IExecuteSingleFunctions } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, INodeProperties, INodePropertyOptions, IHttpRequestOptions, IExecuteSingleFunctions, NodeConnectionTypes } from 'n8n-workflow';
 import { google, google_images, google_maps, google_shopping, baidu, bing_news, google_rank_tracking, bing, google_maps_place, google_maps_reviews, google_maps_photos, google_maps_directions, google_ads_transparency_center, google_ads_transparency_center_advertiser_search, google_ads_transparency_center_ad_details, google_ads_advertiser_info, meta_ad_library, meta_ad_library_ad_details, meta_ad_library_page_info, meta_ad_library_page_search, youtube, youtube_video, youtube_channel, youtube_channel_videos, youtube_comments, youtube_transcripts, google_shopping_autocomplete, google_shopping_filters, google_flights, google_flights_calendar, google_flights_location_search, google_hotels, google_hotels_property, google_hotels_autocomplete, google_news, google_jobs, tiktok_profile, instagram_profile, linkedin_ad_library, tiktok_ads_library, tiktok_ads_library_advertiser_search, tiktok_ads_library_ad_details, yandex, yandex_reverse_image, duckduckgo, duckduckgo_light, duckduckgo_images, duckduckgo_videos } from './engines';
 
 interface Engine {
@@ -24,15 +24,15 @@ export class SearchApi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'SearchApi',
 		name: 'searchApi',
-		icon: 'file:searchApi.svg',
+		icon: { light: 'file:searchApi.svg', dark: 'file:searchApi.dark.svg' },
 		group: ['output'],
 		version: 1,
 		description:
 			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
 		subtitle: '={{ $parameter["engine"] }}',
 		defaults: { name: 'SearchApi' },
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [{ name: 'searchApi', required: true }],
 		usableAsTool: true,
 		requestDefaults: {
@@ -43,7 +43,7 @@ export class SearchApi implements INodeType {
 		},
 		hints: [
 			{
-				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
+				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈",
 				type: 'info',
 				whenToDisplay: 'beforeExecution',
 				location: 'inputPane',
@@ -57,8 +57,7 @@ export class SearchApi implements INodeType {
 				description: 'The search engine to use',
 				noDataExpression: true,
 				options: engines.map((engine) => engine.resource),
-				// eslint-disable-next-line n8n-nodes-base/node-param-default-wrong-for-options
-				default: 'google', // We default to Google, but esling is not being able to detect that it is in the options.
+				default: 'google',
 			},
 			{
 				displayName: 'Operation Name',
