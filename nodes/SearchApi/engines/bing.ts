@@ -253,6 +253,55 @@ const properties: INodeProperties[] = [
             },
           },
         },
+      },
+      {
+        displayName: 'Time Period (time_period)',
+        name: 'time_period',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Last day', value: 'last_day' },
+          { name: 'Last month', value: 'last_month' },
+          { name: 'Last week', value: 'last_week' },
+          { name: 'Last year', value: 'last_year' },
+        ],
+        default: '',
+        description: 'Restricts results to a relative time period. Cannot be combined with filters.',
+        routing: {
+          request: {
+            qs: {
+              time_period: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Time Period Max (time_period_max)',
+        name: 'time_period_max',
+        type: 'string',
+        default: '',
+        description: 'End of a custom time period, in MM/DD/YYYY or YYYY-MM-DD format. Cannot be combined with filters.',
+        routing: {
+          request: {
+            qs: {
+              time_period_max: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Time Period Min (time_period_min)',
+        name: 'time_period_min',
+        type: 'string',
+        default: '',
+        description: 'Start of a custom time period, in MM/DD/YYYY or YYYY-MM-DD format. Cannot be combined with filters.',
+        routing: {
+          request: {
+            qs: {
+              time_period_min: '={{$value}}',
+            },
+          },
+        },
       }
     ],
     displayOptions,

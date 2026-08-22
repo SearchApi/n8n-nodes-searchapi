@@ -96,6 +96,25 @@ const properties: INodeProperties[] = [
           },
         },
       },
+      {
+        displayName: 'Search Type (search_type)',
+        name: 'search_type',
+        type: 'options',
+        options: [
+          { name: 'Any', value: '' },
+          { name: 'Keyword exact phrase', value: 'keyword_exact_phrase' },
+          { name: 'Keyword unordered', value: 'keyword_unordered' },
+        ],
+        default: '',
+        description: 'How the keyword is matched — keyword_unordered matches all words in any order, keyword_exact_phrase matches the exact phrase. Overrides the automatic choice based on the query.',
+        routing: {
+          request: {
+            qs: {
+              search_type: '={{$value}}',
+            },
+          },
+        },
+      },
     ],
     displayOptions,
   },
