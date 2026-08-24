@@ -26,7 +26,6 @@
     "lint:fix": "n8n-node lint --fix",
     "test": "npm run build && node --test test/routing.test.mjs",
     "check:enums": "node scripts/check-enums.mjs",
-    "check:engines": "node scripts/check-engines.mjs",
     "smoke": "npm run build && npm run smoke:generate && npm run smoke:import && npm run smoke:run",
     "smoke:generate": "node scripts/generate-smoke-workflow.mjs",
     "smoke:import": "N8N_USER_FOLDER=${N8N_USER_FOLDER:-$HOME/.n8n-node-cli} npx --yes n8n import:workflow --input=.n8n-e2e/searchapi-smoke.workflow.json",

@@ -80,7 +80,6 @@ Other useful commands:
 - `npm run lint:fix` — auto-fix linting issues
 - `npm test` — build and verify every parameter's query-string routing (runs in CI)
 - `npm run check:enums` — validate shared enumerations (runs in CI)
-- `npm run check:engines` — compare every engine against the searchapi.io models
 - `npm run generate:labels` — regenerate `nodes/SearchApi/shared/labels.ts`
 - `npm run smoke` — run one live request for every engine in the local n8n
 - `npm run release` — bump version, update changelog, and publish to npm
@@ -151,12 +150,3 @@ rejects answers with an error and nothing else. It is report-only: individual en
 failures are visible but do not make the command exit non-zero. Generation, import, execution, or
 output-parsing failures still return a non-zero status. Expect roughly three API requests per
 engine, plus retries for failed requests.
-
-`npm run check:engines` needs a `searchapi.io` checkout and compares every engine against its Rails
-model there: the `permitted_params` allowlist (anything outside it is dropped before the search is
-built), the values each `validates … inclusion:` accepts, and whether a parameter is required. It
-skips when the checkout is missing, so it never blocks a build that cannot run it.
-
-```sh
-SEARCHAPI_DIR=../searchapi.io npm run check:engines
-```
