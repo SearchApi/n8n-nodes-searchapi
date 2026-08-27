@@ -43,7 +43,7 @@ for (const engine of Object.keys(cases)) {
 		if (!echoed) {
 			const reason =
 				json?.error ?? run?.error?.message ?? 'node did not return search_parameters';
-			console.log(`FAIL  ${label} — ${formatReason(reason)}`);
+			console.log(`FAIL  ${label}: ${formatReason(reason)}`);
 			failed++;
 			continue;
 		}
@@ -61,11 +61,11 @@ for (const engine of Object.keys(cases)) {
 		}
 
 		if (problems.length) {
-			console.log(`FAIL  ${label} — ${problems.map(formatReason).join('; ')}`);
+			console.log(`FAIL  ${label}: ${problems.map(formatReason).join('; ')}`);
 			failed++;
 		} else {
 			const note = json.error ? ` (${formatReason(json.error).slice(0, 60)})` : '';
-			console.log(`ok    ${label} — ${Object.keys(params ?? {}).length} params${note}`);
+			console.log(`ok    ${label}: ${Object.keys(params ?? {}).length} params${note}`);
 			passed++;
 		}
 	}

@@ -19,7 +19,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Specifies the search query. Filters embedded in the query act as hints rather than strict filters — if there are too few matching items, results outside the filters may appear.',
+    description: 'Specifies the search query. Filters embedded in the query act as hints rather than strict filters. If there are too few matching items, results outside the filters may appear.',
     displayOptions,
     routing: {
       request: {

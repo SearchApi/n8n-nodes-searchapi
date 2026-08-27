@@ -1,6 +1,5 @@
 ![SearchApi Banner](searchapi-banner.png)
 
-
 # n8n-nodes-searchapi
 
 SearchApi is a fast, reliable SERP and data extraction API that focuses on performance, parsing quality, and competitive pricing. We offer realtime structured data from many different sources like Google, Bing, Amazon and others...
@@ -29,31 +28,22 @@ The node supports one main operation: `Search`. You can use it to search from al
 3. Paste the key and save.\
    The new credential will now appear in the node’s **Credential** dropdown.
 
-## Usage
-
-### Credentials
-
-1. Go to **Credentials → + New Credential → SearchApi**.
-2. Paste the **API Key**.
-3. Click **Save**.
-
 ![Credentials](images/credentials.png)
 
-### Search
+## Usage
 
-1. Create a SearchApi credential in n8n.
-2. Go to the **SearchApi** node and select your **Credential**.
-3. Select the **Engine** you want to use.
-4. Enter the parameters for the engine. After selection, you will see the parameters for the engine. There are also optional parameters that you can use to further refine your search.
-5. Click **Execute** to receive the response as JSON.
+1. Go to the **SearchApi** node and select your **Credential**.
+2. Select the **Engine** you want to use.
+3. Enter the parameters for the engine. After selection, you will see the parameters for the engine. There are also optional parameters that you can use to further refine your search.
+4. Click **Execute** to receive the response as JSON.
 
 ![Usage](images/steps.png)
 
 ## Resources
 
-- **SearchApi.io documentation** – [https://www.searchapi.io/](https://www.searchapi.io/docs/google)
-- **n8n Community Nodes Documentation** – [https://docs.n8n.io/integrations/#community-nodes](https://docs.n8n.io/integrations/#community-nodes)
-- **n8n Community Forum** – [https://community.n8n.io](https://community.n8n.io)
+- **SearchApi.io documentation**: [https://www.searchapi.io/docs/google](https://www.searchapi.io/docs/google)
+- **n8n Community Nodes Documentation**: [https://docs.n8n.io/integrations/#community-nodes](https://docs.n8n.io/integrations/#community-nodes)
+- **n8n Community Forum**: [https://community.n8n.io](https://community.n8n.io)
 
 ## Troubleshooting
 
@@ -71,18 +61,18 @@ You can see the version history [here](https://github.com/SearchApi/n8n-nodes-se
 1. Run `npm install` to install the dependencies
 2. Run `npm run dev` to start n8n with the node in development mode
 3. Open http://localhost:5678 to access n8n with the node loaded
-4. Make changes to the source files — the node rebuilds automatically on file changes
+4. Make changes to the source files and the node rebuilds automatically
 
 Other useful commands:
 
-- `npm run build` — compile TypeScript for production
-- `npm run lint` — run ESLint code quality checks
-- `npm run lint:fix` — auto-fix linting issues
-- `npm test` — build and verify every parameter's query-string routing (runs in CI)
-- `npm run check:enums` — validate shared enumerations (runs in CI)
-- `npm run generate:labels` — regenerate `nodes/SearchApi/shared/labels.ts`
-- `npm run smoke` — run one live request for every engine in the local n8n
-- `npm run release` — bump version, update changelog, and publish to npm
+- `npm run build`: compile TypeScript for production
+- `npm run lint`: run ESLint code quality checks
+- `npm run lint:fix`: auto-fix linting issues
+- `npm test`: build and verify every parameter's query-string routing (runs in CI)
+- `npm run check:enums`: validate shared enumerations (runs in CI)
+- `npm run generate:labels`: regenerate `nodes/SearchApi/shared/labels.ts`
+- `npm run smoke`: run one live request for every engine in the local n8n
+- `npm run release`: bump version, update changelog, tag and push; the tag triggers the publish workflow on GitHub Actions
 
 ### Shared enumerations
 
@@ -95,7 +85,7 @@ import { countryOptions } from '../shared/options';
 { name: 'gl', type: 'options', options: countryOptions(['us', 'gb', 'de']) }
 ```
 
-`nodes/SearchApi/shared/labels.ts` is **generated** — do not hand-edit it. Country, language and
+`nodes/SearchApi/shared/labels.ts` is **generated**, do not hand-edit it. Country, language and
 currency labels come from Node's ICU data (`Intl.DisplayNames`), with vendor-specific codes that
 ICU cannot resolve listed explicitly in `scripts/overrides.mjs`. Locale labels come from
 `searchapi.io`'s `Constants::Duckduckgo::LOCALES`; without that checkout the existing table is
@@ -110,14 +100,12 @@ default is not one of its own values.
 
 If a `searchapi.io` checkout is present it also compares each engine's values against the
 matching `public/openapi/<engine>.yaml` enum, case-insensitively. Those divergences are
-reported as **warnings** — the specs and the engine files do not agree yet, and neither side is
+reported as **warnings**: the specs and the engine files do not agree yet, and neither side is
 authoritative for every parameter. Pass `--strict` to fail on them once they are reconciled:
 
 ```sh
 OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums -- --strict
 ```
-
-You will be able to see the the node in the local n8n http://localhost:5678.
 
 ### Tests
 
@@ -129,7 +117,7 @@ runs in CI.
 The local smoke test makes live requests for every engine through the n8n instance created by
 `npm run dev`. Each engine has a `base` case with the fewest parameters needed for a valid
 response, a `full` case sending every parameter it accepts at once, and further cases for
-parameters that cannot be combined — where the API rejects the pair or one supersedes the other.
+parameters that cannot be combined, where the API rejects the pair or one supersedes the other.
 Token-based engines read the identifier they need from an earlier response, and date-based engines
 use future dates. Requests run sequentially and retry failures up to three times.
 

@@ -41,7 +41,7 @@ const properties: INodeProperties[] = [
         name: 'chips',
         type: 'string',
         default: '',
-        description: 'Includes additional query conditions taken from the filter chips shown above the results — for example city:Owg_06VPwoli_nfhBo8LyA== filters to one city. Combine several with commas.',
+        description: 'Includes additional query conditions taken from the filter chips shown above the results, for example city:Owg_06VPwoli_nfhBo8LyA== filters to one city. Combine several with commas.',
         routing: {
           request: {
             qs: {

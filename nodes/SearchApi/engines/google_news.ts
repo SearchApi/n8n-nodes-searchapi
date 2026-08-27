@@ -286,7 +286,7 @@ const properties: INodeProperties[] = [
           { name: 'Last year', value: 'last_year' },
         ],
         default: '',
-        description: 'Restricts results to URLs based on date. Supported values are: last_hour - data from the past hour. last_day - data from the past 24 hours. last_week - data from the past week. last_month - data from the past month. last_year - data from the past year. Using time_period_min or time_period_max parameters, you can specify a custom time period. Note, that the time_period_min and time_period_max parameters could be used separately as well.',
+        description: 'Restricts results to URLs based on date. Supported values are: last_hour for data from the past hour, last_day for the past 24 hours, last_week for the past week, last_month for the past month, and last_year for the past year. Using time_period_min or time_period_max parameters, you can specify a custom time period. Note, that the time_period_min and time_period_max parameters could be used separately as well.',
         routing: {
           request: {
             qs: {

@@ -19,7 +19,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Search terms to query on Bing — supports operators and advanced filters like "machine learning models", site:, feed:, AND, or OR',
+    description: 'Search terms to query on Bing. Supports operators and advanced filters like "machine learning models", site:, feed:, AND, or OR.',
     displayOptions,
     routing: {
       request: {
@@ -84,7 +84,7 @@ const properties: INodeProperties[] = [
         name: 'location',
         type: 'string',
         default: '',
-        description: 'Canonical location for the search — if multiple locations match, the most popular one is selected. Example: "New York" selects New York, United States.',
+        description: 'Canonical location for the search. If multiple locations match, the most popular one is selected. Example: "New York" selects New York, United States.',
         routing: {
           request: {
             qs: {
@@ -153,7 +153,7 @@ const properties: INodeProperties[] = [
           { name: 'zh-tw', value: 'zh-tw' },
         ],
         default: '',
-        description: 'Country for search results — format is language-country, like en-US. Cannot be used together with country_code.',
+        description: 'Country for search results. Format is language-country, like en-US. Cannot be used together with country_code.',
         routing: {
           request: {
             qs: {
@@ -182,7 +182,7 @@ const properties: INodeProperties[] = [
           'TW', 'US', 'ZA',
         ]),
         default: '',
-        description: 'Country for search results when market_code is not set — defaults to US. Cannot be used together with market_code.',
+        description: 'Country for search results when market_code is not set. Defaults to US. Cannot be used together with market_code.',
         routing: {
           request: {
             qs: {
@@ -202,7 +202,7 @@ const properties: INodeProperties[] = [
           'zh-hans', 'zh-hant',
         ]),
         default: '',
-        description: 'Language for UI text — accepts 2-letter (ISO 639-1) or 4-letter codes. Defaults to en (English) if unspecified or unsupported.',
+        description: 'Language for UI text. Accepts 2-letter (ISO 639-1) or 4-letter codes. Defaults to en (English) if unspecified or unsupported.',
         routing: {
           request: {
             qs: {
@@ -226,7 +226,7 @@ const properties: INodeProperties[] = [
         name: 'filters',
         type: 'string',
         default: '',
-        description: 'Restricts search results using filter values — supports date-based filters (ex1%3a"ez1" for past 24h, ex1%3a"ez2" for past week, ex1%3a"ez3" for past month). Construct complex filter values by searching on Bing and copying the filters parameter.',
+        description: 'Restricts search results using filter values. Supports date-based filters (ex1%3a"ez1" for past 24h, ex1%3a"ez2" for past week, ex1%3a"ez3" for past month). Construct complex filter values by searching on Bing and copying the filters parameter.',
         routing: {
           request: {
             qs: {
@@ -245,7 +245,7 @@ const properties: INodeProperties[] = [
           { name: 'Strict', value: 'strict' },
         ],
         default: 'moderate',
-        description: 'Filters adult content from results — in some market_code values, strict is enforced regardless of this setting',
+        description: 'Filters adult content from results. In some market_code values, strict is enforced regardless of this setting.',
         routing: {
           request: {
             qs: {
@@ -318,7 +318,7 @@ const properties: INodeProperties[] = [
         name: 'page',
         type: 'string',
         default: '1',
-        description: 'Page of results to return — defaults to 1',
+        description: 'Page of results to return. Defaults to 1.',
         routing: {
           request: {
             qs: {

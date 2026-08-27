@@ -171,7 +171,7 @@ const properties: INodeProperties[] = [
         name: 'waypoints',
         type: 'string',
         default: '',
-        description: 'Waypoints of the route, as a JSON array of strings — plain addresses, data IDs or coordinates, for example ["Buckingham Palace, London"]. Maximum 8 elements. Not supported when travel_mode is transit. Cannot be used together with the time parameter.',
+        description: 'Waypoints of the route, as a JSON array of strings: plain addresses, data IDs or coordinates, for example ["Buckingham Palace, London"]. Maximum 8 elements. Not supported when travel_mode is transit. Cannot be used together with the time parameter.',
         routing: {
           request: {
             qs: {

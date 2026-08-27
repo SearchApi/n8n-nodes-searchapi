@@ -50,7 +50,7 @@ const properties: INodeProperties[] = [
           'xa-en', 'xl-es', 'za-en',
         ]),
         default: '',
-        description: 'Country and language for your search — defaults to us-en',
+        description: 'Country and language for your search. Defaults to us-en.',
         routing: {
           request: {
             qs: {

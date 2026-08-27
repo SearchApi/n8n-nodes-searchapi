@@ -106,7 +106,7 @@ const properties: INodeProperties[] = [
           { name: 'Keyword unordered', value: 'keyword_unordered' },
         ],
         default: '',
-        description: 'How the keyword is matched — keyword_unordered matches all words in any order, keyword_exact_phrase matches the exact phrase. Overrides the automatic choice based on the query.',
+        description: 'How the keyword is matched: keyword_unordered matches all words in any order, keyword_exact_phrase matches the exact phrase. Overrides the automatic choice based on the query.',
         routing: {
           request: {
             qs: {

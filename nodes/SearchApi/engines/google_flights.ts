@@ -420,7 +420,7 @@ const properties: INodeProperties[] = [
         name: 'outbound_times',
         type: 'string',
         default: '',
-        description: 'Defines the outbound departure and arrival times range. This parameter accepts a string containing up to 4 comma-separated numbers, where the first two numbers specify the departure time range and the last two numbers specify the arrival time range. Each number represents the beginning of an hour (e.g., 4,18,2,18 for a 4:00 AM - 7:00 PM departure and a 2:00 AM - 7:00 PM arrival). Default values are: 0,23,0,23.',
+        description: 'Defines the outbound departure and arrival times range. This parameter accepts a string containing up to 4 comma-separated numbers, where the first two numbers specify the departure time range and the last two numbers specify the arrival time range. Each number represents the beginning of an hour (e.g., 4,18,2,18 for a 4:00 AM to 7:00 PM departure and a 2:00 AM to 7:00 PM arrival). Default values are: 0,23,0,23.',
         routing: {
           request: {
             qs: {
@@ -434,7 +434,7 @@ const properties: INodeProperties[] = [
         name: 'return_times',
         type: 'string',
         default: '',
-        description: 'Defines the return departure and arrival times range. This parameter also accepts up to 4 comma-separated numbers, where the first two specify the departure time range and the last two specify the arrival time range, following the same format as outbound_times (e.g., 4,18,2,18 for a 4:00 AM - 7:00 PM departure and a 2:00 AM - 7:00 PM arrival). Default values are: 0,23,0,23. Note: available only if flight_type set to round_trip.',
+        description: 'Defines the return departure and arrival times range. This parameter also accepts up to 4 comma-separated numbers, where the first two specify the departure time range and the last two specify the arrival time range, following the same format as outbound_times (e.g., 4,18,2,18 for a 4:00 AM to 7:00 PM departure and a 2:00 AM to 7:00 PM arrival). Default values are: 0,23,0,23. Note: available only if flight_type set to round_trip.',
         routing: {
           request: {
             qs: {

@@ -2,8 +2,8 @@
 // the first entry is the `base` case (the fewest parameters needed for a valid response, and the
 // one other engines chain tokens off), followed by combinations that exercise the rest.
 //
-// `full` sends every parameter an engine accepts at once. Where parameters cannot be combined —
-// the API rejects the pair, or one supersedes the other — an extra case covers them and says why.
+// `full` sends every parameter an engine accepts at once. Where parameters cannot be combined,
+// because the API rejects the pair or one supersedes the other, an extra case covers them and says why.
 //
 // zero_retention is deliberately absent: it needs an account with zero data retention enabled and
 // otherwise answers 403 on every engine that carries it.

@@ -30,7 +30,7 @@ export default [
 					// entity, or raw newline means an escaping mistake in the source.
 					selector: 'Literal[value=/\\\\|&#\\d+;|&apos;|&quot;|[\\n\\t]/]',
 					message:
-						'String contains a literal backslash, HTML entity, or control character — fix the escaping.',
+						'String contains a literal backslash, HTML entity, or control character. Fix the escaping.',
 				},
 			],
 		},

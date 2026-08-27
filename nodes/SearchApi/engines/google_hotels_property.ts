@@ -212,7 +212,7 @@ const properties: INodeProperties[] = [
         name: 'children_ages',
         type: 'string',
         default: '',
-        description: 'Defines the ages of children as a comma-separated list, e.g., 2,5 for two children aged 2 and 5. Available age range is 1–17. Note: This parameter is only applicable for hotels and will be ignored for other property types.',
+        description: 'Defines the ages of children as a comma-separated list, e.g., 2,5 for two children aged 2 and 5. Available age range is 1-17. Note: This parameter is only applicable for hotels and will be ignored for other property types.',
         routing: {
           request: {
             qs: {

@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     type: 'string',
     required: true,
     default: '',
-    description: 'Search terms to query on Baidu — supports operators and advanced filters like "machine learning models", site:, intitle:, or filetype:',
+    description: 'Search terms to query on Baidu. Supports operators and advanced filters like "machine learning models", site:, intitle:, or filetype:.',
     displayOptions,
     routing: {
       request: {
@@ -69,7 +69,7 @@ const properties: INodeProperties[] = [
         name: 'gpc',
         type: 'string',
         default: '',
-        description: 'Filters results to a specific time period using Unix Timestamps — format: stf=START_TIME,END_TIME|stftype=1. Example: stf=1683108267,1714730667|stftype=1.',
+        description: 'Filters results to a specific time period using Unix Timestamps in the format stf=START_TIME,END_TIME|stftype=1. Example: stf=1683108267,1714730667|stftype=1.',
         routing: {
           request: {
             qs: {
@@ -116,7 +116,7 @@ const properties: INodeProperties[] = [
           numberPrecision: 0,
         },
         default: 10,
-        description: 'Number of results to display per page — maximum 50. Use with the page parameter to paginate.',
+        description: 'Number of results to display per page, maximum 50. Use with the page parameter to paginate.',
         routing: {
           request: {
             qs: {

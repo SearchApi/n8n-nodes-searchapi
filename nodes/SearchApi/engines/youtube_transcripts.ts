@@ -109,7 +109,7 @@ const properties: INodeProperties[] = [
           { name: 'Manual', value: 'manual' },
         ],
         default: '',
-        description: 'The transcript preference when both auto-generated and manually uploaded transcripts are available. auto - Prioritizes YouTube\'s auto-generated transcript. It can be translated into any lang language, but retrieval may be slower compared to manual transcripts. manual - Prioritizes manually uploaded transcripts.',
+        description: 'The transcript preference when both auto-generated and manually uploaded transcripts are available. auto prioritizes YouTube\'s auto-generated transcript. It can be translated into any lang language, but retrieval may be slower compared to manual transcripts. manual prioritizes manually uploaded transcripts.',
         routing: {
           request: {
             qs: {

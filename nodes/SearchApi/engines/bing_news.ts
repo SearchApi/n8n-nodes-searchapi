@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     name: 'q',
     type: 'string',
     default: '',
-    description: 'Search terms for Bing News. Queries can include operators and advanced filters like "climate change", site:, inurl:, or intitle:. Optional when category is used — if both are provided, category takes priority.',
+    description: 'Search terms for Bing News. Queries can include operators and advanced filters like "climate change", site:, inurl:, or intitle:. Optional when category is used; if both are provided, category takes priority.',
     displayOptions,
     routing: {
       request: {
@@ -40,7 +40,7 @@ const properties: INodeProperties[] = [
         name: 'category',
         type: 'string',
         default: '',
-        description: 'Category to search in Bing News — found in the Bing News URL as the nvaug parameter value. Example: nvaug=%5bNewsVertical+Category%3d"rt_CATEGORY"%5d. To retrieve Top Stories, set to MaxClass.',
+        description: 'Category to search in Bing News, found in the Bing News URL as the nvaug parameter value. Example: nvaug=%5bNewsVertical+Category%3d"rt_CATEGORY"%5d. To retrieve Top Stories, set to MaxClass.',
         routing: {
           request: {
             qs: {
@@ -132,7 +132,7 @@ const properties: INodeProperties[] = [
           { name: 'zh-tw', value: 'zh-tw' },
         ],
         default: 'en-us',
-        description: 'Defines the country for search results. Format is language-country — Example: en-US. Cannot be used together with country_code.',
+        description: 'Defines the country for search results. Format is language-country. Example: en-US. Cannot be used together with country_code.',
         routing: {
           request: {
             qs: {

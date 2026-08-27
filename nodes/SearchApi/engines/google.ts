@@ -18,7 +18,7 @@ const properties: INodeProperties[] = [
     name: 'q',
     type: 'string',
     default: '',
-    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR. Note: Not required if the kgmid parameter is being used — either q or kgmid must be provided.',
+    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR. Note: Not required if the kgmid parameter is being used. Either q or kgmid must be provided.',
     displayOptions,
     routing: {
       request: {
@@ -207,7 +207,7 @@ const properties: INodeProperties[] = [
           'lang_sl', 'lang_es', 'lang_sv', 'lang_th', 'lang_tr', 'lang_uk', 'lang_vi',
         ]),
         default: '',
-        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter language code} — for example, lang_jp for Japanese. To restrict to multiple languages, combine with a pipe: lang_it|lang_de. Google identifies the document language from the URL\'s top-level domain, language meta tags, or the body text.',
+        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter language code}, for example lang_jp for Japanese. To restrict to multiple languages, combine with a pipe: lang_it|lang_de. Google identifies the document language from the URL\'s top-level domain, language meta tags, or the body text.',
         routing: {
           request: {
             qs: {
@@ -363,7 +363,7 @@ const properties: INodeProperties[] = [
           { name: 'True', value: 'true' },
         ],
         default: '',
-        description: 'Forces Google to use your exact keywords, bypassing automatic spelling corrections, synonyms, and stemmed variations. Can be combined with time_period filters. Note: Verbatim mode is stricter than nfpr=1 — it disables all query modifications, not just spelling corrections.',
+        description: 'Forces Google to use your exact keywords, bypassing automatic spelling corrections, synonyms, and stemmed variations. Can be combined with time_period filters. Note: Verbatim mode is stricter than nfpr=1: it disables all query modifications, not just spelling corrections.',
         routing: {
           request: {
             qs: {
