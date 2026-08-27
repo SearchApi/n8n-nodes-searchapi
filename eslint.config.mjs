@@ -8,8 +8,6 @@ export default [
 			'n8n-nodes-base/node-param-display-name-miscased-id': 'off',
 			'n8n-nodes-base/node-param-description-miscased-id': 'off',
 			'n8n-nodes-base/node-param-display-name-miscased': 'off',
-			// Overrides here pin vulnerable transitive devDependencies; nothing ships to runtime.
-			'@n8n/community-nodes/no-overrides-field': 'off',
 		},
 	},
 	{
