@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { GOOGLE_LANGUAGES } from '../shared/lists';
 import { countryOptions, languageOptions } from '../shared/options';
+import { nextPageToken, pageParam, uule, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -50,20 +52,7 @@ const properties: INodeProperties[] = [
           },
         },
       },
-      {
-        displayName: 'Google-Encoded Location (uule)',
-        name: 'uule',
-        type: 'string',
-        default: '',
-        description: 'This parameter sets the exact Google-encoded location for the search, and uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
-        routing: {
-          request: {
-            qs: {
-              uule: '={{$value}}',
-            },
-          },
-        },
-      },
+      uule('This parameter sets the exact Google-encoded location for the search, and uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.'),
       {
         displayName: 'Location (location)',
         name: 'location',
@@ -131,18 +120,7 @@ const properties: INodeProperties[] = [
         displayName: 'Interface Language (hl)',
         name: 'hl',
         type: 'options',
-        options: languageOptions([
-          'af', 'ak', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bem', 'bn', 'bh', 'xx-bork', 'bs', 'br', 'bg',
-          'my', 'km', 'ca', 'chr', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl', 'xx-elmer', 'en',
-          'eo', 'et', 'ee', 'fo', 'tl', 'fi', 'fr', 'fy', 'gaa', 'gl', 'ka', 'de', 'el', 'kl', 'gn', 'gu',
-          'xx-hacker', 'ht', 'ha', 'haw', 'iw', 'hi', 'hu', 'is', 'ig', 'id', 'ia', 'ga', 'it', 'ja', 'jw',
-          'kn', 'kk', 'rw', 'rn', 'xx-klingon', 'kg', 'ko', 'kri', 'ku', 'ckb', 'ky', 'lo', 'la', 'lv', 'ln',
-          'lt', 'loz', 'lg', 'ach', 'mk', 'mg', 'ms', 'ml', 'mv', 'mt', 'mi', 'mr', 'mfe', 'mo', 'mn', 'sr-me',
-          'ne', 'pcm', 'nso', 'no', 'nn', 'oc', 'or', 'om', 'ps', 'fa', 'xx-pirate', 'pl', 'pt', 'pt-br',
-          'pt-pt', 'pa', 'qu', 'ro', 'rm', 'nyn', 'ru', 'gd', 'sr', 'sh', 'st', 'tn', 'crs', 'sn', 'sd', 'si',
-          'sk', 'sl', 'so', 'es', 'es-419', 'su', 'sw', 'sv', 'tg', 'ta', 'tt', 'te', 'th', 'ti', 'to', 'lua',
-          'tum', 'tr', 'tk', 'tw', 'ug', 'uk', 'ur', 'uz', 'vu', 'vi', 'cy', 'wo', 'xh', 'yi', 'yo', 'zu',
-        ]),
+        options: languageOptions(GOOGLE_LANGUAGES),
         default: 'en',
         description: 'Interface language of the search. Check the full list of supported Google hl languages.',
         routing: {
@@ -162,7 +140,7 @@ const properties: INodeProperties[] = [
         routing: {
           request: {
             qs: {
-              lrad: '={{$value}}',
+              lrad: '={{$value || ""}}',
             },
           },
         },
@@ -177,63 +155,12 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Next Page Token (next_page_token)',
-        name: 'next_page_token',
-        type: 'string',
-        typeOptions: { password: true },
-        default: '',
-        description: 'This parameter is used to retrieve the next page of results. It is returned in the response when there are more results to display. The next_page_token is a unique identifier for the next page of results. It is used to retrieve the next page of results.',
-        routing: {
-          request: {
-            qs: {
-              next_page_token: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Page (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: { minValue: 1 },
-        default: 1,
-        description: 'Indicates which page of results to return. Each page holds 10 results.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      },
+      nextPageToken('This parameter is used to retrieve the next page of results. It is returned in the response when there are more results to display. The next_page_token is a unique identifier for the next page of results. It is used to retrieve the next page of results.'),
+      pageParam('Indicates which page of results to return. Each page holds 10 results.'),
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const google_jobs = {

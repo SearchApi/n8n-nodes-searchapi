@@ -1,5 +1,6 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 import { countryOptions } from '../shared/options';
+import { nextPageToken, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -103,48 +104,11 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Next Page Token (next_page_token)',
-        name: 'next_page_token',
-        type: 'string',
-        typeOptions: { password: true },
-        default: '',
-        description: 'A token for fetching the next set of results. Obtained from the next_page_token field in the previous response.',
-        routing: {
-          request: {
-            qs: {
-              next_page_token: '={{$value}}',
-            },
-          },
-        },
-      }
+      nextPageToken('A token for fetching the next set of results. Obtained from the next_page_token field in the previous response.')
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const linkedin_ad_library = {

@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { DEVICE_OPTIONS, GOOGLE_COUNTRIES, GOOGLE_CR_COUNTRIES, GOOGLE_LANGUAGES, GOOGLE_LR_LANGUAGES, GOOGLE_SAFE_OPTIONS } from '../shared/lists';
 import { countryOptions, languageOptions } from '../shared/options';
+import { nextPageToken, pageParam, uule, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -33,11 +35,7 @@ const properties: INodeProperties[] = [
     displayName: 'Device (device)',
     name: 'device',
     type: 'options',
-    options: [
-      { name: 'Desktop', value: 'desktop' },
-      { name: 'Mobile', value: 'mobile' },
-      { name: 'Tablet', value: 'tablet' },
-    ],
+    options: DEVICE_OPTIONS,
     default: 'desktop',
     description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
     displayOptions,
@@ -56,20 +54,7 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Geographic Location',
     default: {},
     options: [
-      {
-        displayName: 'Encoded Location (uule)',
-        name: 'uule',
-        type: 'string',
-        default: '',
-        description: 'Exact Google-encoded location for the search; uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
-        routing: {
-          request: {
-            qs: {
-              uule: '={{$value}}',
-            },
-          },
-        },
-      },
+      uule('Exact Google-encoded location for the search; uule and location cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.'),
       {
         displayName: 'Location (location)',
         name: 'location',
@@ -98,23 +83,7 @@ const properties: INodeProperties[] = [
         displayName: 'Country (gl)',
         name: 'gl',
         type: 'options',
-        options: countryOptions([
-          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs', 'bh',
-          'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg', 'bf',
-          'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cg', 'cd', 'ck',
-          'cr', 'ci', 'hr', 'cu', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'ec', 'eg', 'sv', 'gq', 'er', 'ee', 'et',
-          'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl', 'gd',
-          'gp', 'gu', 'gt', 'gg', 'gn', 'gw', 'gy', 'ht', 'hm', 'va', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'ir',
-          'iq', 'ie', 'im', 'il', 'it', 'jm', 'jp', 'je', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb',
-          'ls', 'lr', 'ly', 'li', 'lt', 'lu', 'mo', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu',
-          'yt', 'mx', 'fm', 'md', 'mc', 'mn', 'me', 'ms', 'ma', 'mz', 'mm', 'na', 'nr', 'np', 'nl', 'nc', 'nz',
-          'ni', 'ne', 'ng', 'nu', 'nf', 'kp', 'mk', 'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe',
-          'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're', 'ro', 'ru', 'rw', 'sh', 'kn', 'lc', 'pm', 'vc', 'ws', 'sm',
-          'st', 'sa', 'sn', 'rs', 'sc', 'sl', 'sg', 'sk', 'si', 'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sd',
-          'sr', 'sj', 'sz', 'se', 'ch', 'sy', 'tw', 'tj', 'tz', 'th', 'tl', 'tg', 'tk', 'to', 'tt', 'tn', 'tr',
-          'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um', 'uy', 'uz', 'vu', 've', 'vn', 'vg', 'vi',
-          'wf', 'eh', 'ye', 'zm', 'zw',
-        ]),
+        options: countryOptions(GOOGLE_COUNTRIES),
         default: 'us',
         description: 'The default parameter us defines the country of the search',
         routing: {
@@ -129,22 +98,7 @@ const properties: INodeProperties[] = [
         displayName: 'Country Restrict (cr)',
         name: 'cr',
         type: 'options',
-        options: countryOptions([
-          'af', 'al', 'dz', 'as', 'ad', 'ao', 'ai', 'aq', 'ag', '', 'ar', 'am', 'aw', 'au', 'at', 'az', 'bs',
-          'bh', 'bd', 'bb', 'by', 'be', 'bz', 'bj', 'bm', 'bt', 'bo', 'ba', 'bw', 'bv', 'br', 'io', 'bn', 'bg',
-          'bf', 'bi', 'kh', 'cm', 'ca', 'cv', 'ky', 'cf', 'td', 'cl', 'cn', 'cx', 'cc', 'co', 'km', 'cd', 'cg',
-          'ck', 'cr', 'ci', 'hr', 'cy', 'cz', 'dk', 'dj', 'dm', 'do', 'tl', 'ec', 'eg', 'sv', 'gq', 'er', 'ee',
-          'et', 'fk', 'fo', 'fj', 'fi', 'fr', 'gf', 'pf', 'tf', 'ga', 'gm', 'ge', 'de', 'gh', 'gi', 'gr', 'gl',
-          'gd', 'gp', 'gu', 'gt', 'gn', 'gw', 'gy', 'ht', 'hm', 'hn', 'hk', 'hu', 'is', 'in', 'id', 'iq', 'ie',
-          'il', 'it', 'jm', 'jp', 'jo', 'kz', 'ke', 'ki', 'kw', 'kg', 'la', 'lv', 'lb', 'ls', 'lr', 'ly', 'li',
-          'lt', 'lu', 'mo', 'mk', 'mg', 'mw', 'my', 'mv', 'ml', 'mt', 'mh', 'mq', 'mr', 'mu', 'yt', 'mx', 'fm',
-          'md', 'mc', 'mn', 'ms', 'ma', 'mz', 'na', 'nr', 'np', 'nl', 'nc', 'nz', 'ni', 'ne', 'ng', 'nu', 'nf',
-          'mp', 'no', 'om', 'pk', 'pw', 'ps', 'pa', 'pg', 'py', 'pe', 'ph', 'pn', 'pl', 'pt', 'pr', 'qa', 're',
-          'ro', 'ru', 'rw', 'kn', 'lc', 'vc', 'ws', 'sm', 'st', 'sa', 'sn', 'cs', 'sc', 'sl', 'sg', 'sk', 'si',
-          'sb', 'so', 'za', 'gs', 'kr', 'es', 'lk', 'sh', 'pm', 'sr', 'sj', 'sz', 'se', 'ch', 'tw', 'tj', 'tz',
-          'th', 'tg', 'tk', 'to', 'tt', 'tn', 'tr', 'tm', 'tc', 'tv', 'ug', 'ua', 'ae', 'gb', 'uk', 'us', 'um',
-          'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
-        ]),
+        options: countryOptions(GOOGLE_CR_COUNTRIES),
         default: '',
         description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location.',
         routing: {
@@ -159,18 +113,7 @@ const properties: INodeProperties[] = [
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
-        options: languageOptions([
-          'af', 'ak', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bem', 'bn', 'bh', 'xx-bork', 'bs', 'br', 'bg',
-          'my', 'km', 'ca', 'chr', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl', 'xx-elmer', 'en',
-          'eo', 'et', 'ee', 'fo', 'tl', 'fi', 'fr', 'fy', 'gaa', 'gl', 'ka', 'de', 'el', 'kl', 'gn', 'gu',
-          'xx-hacker', 'ht', 'ha', 'haw', 'iw', 'hi', 'hu', 'is', 'ig', 'id', 'ia', 'ga', 'it', 'ja', 'jw',
-          'kn', 'kk', 'rw', 'rn', 'xx-klingon', 'kg', 'ko', 'kri', 'ku', 'ckb', 'ky', 'lo', 'la', 'lv', 'ln',
-          'lt', 'loz', 'lg', 'ach', 'mk', 'mg', 'ms', 'ml', 'mv', 'mt', 'mi', 'mr', 'mfe', 'mo', 'mn', 'sr-me',
-          'ne', 'pcm', 'nso', 'no', 'nn', 'oc', 'or', 'om', 'ps', 'fa', 'xx-pirate', 'pl', 'pt', 'pt-br',
-          'pt-pt', 'pa', 'qu', 'ro', 'rm', 'nyn', 'ru', 'gd', 'sr', 'sh', 'st', 'tn', 'crs', 'sn', 'sd', 'si',
-          'sk', 'sl', 'so', 'es', 'es-419', 'su', 'sw', 'sv', 'tg', 'ta', 'tt', 'te', 'th', 'ti', 'to', 'lua',
-          'tum', 'tr', 'tk', 'tw', 'ug', 'uk', 'ur', 'uz', 'vu', 'vi', 'cy', 'wo', 'xh', 'yi', 'yo', 'zu',
-        ]),
+        options: languageOptions(GOOGLE_LANGUAGES),
         default: 'en',
         description: 'The default parameter en defines the interface language of the search',
         routing: {
@@ -185,13 +128,7 @@ const properties: INodeProperties[] = [
         displayName: 'Language Restrict (lr)',
         name: 'lr',
         type: 'options',
-        options: languageOptions([
-          '', 'lang_ar', 'lang_hy', 'lang_bg', 'lang_ca', 'lang_zh-CN', 'lang_zh-TW', 'lang_hr', 'lang_cs',
-          'lang_da', 'lang_nl', 'lang_en', 'lang_et', 'lang_tl', 'lang_fi', 'lang_fr', 'lang_de', 'lang_el',
-          'lang_iw', 'lang_hi', 'lang_hu', 'lang_is', 'lang_id', 'lang_it', 'lang_ja', 'lang_ko', 'lang_lv',
-          'lang_lt', 'lang_no', 'lang_fa', 'lang_pl', 'lang_pt', 'lang_ro', 'lang_ru', 'lang_sr', 'lang_sk',
-          'lang_sl', 'lang_es', 'lang_sv', 'lang_th', 'lang_tr', 'lang_uk', 'lang_vi',
-        ]),
+        options: languageOptions(GOOGLE_LR_LANGUAGES),
         default: '',
         description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format for this parameter is lang_{2-letter country code}. For instance, to filter documents written in Japanese, the value should be set to lang_jp. To incorporate multiple languages, a value like lang_it|lang_de restricts the search to documents written in either Italian or German. Google identifies the document language based on the top-level domain (TLD) of the document\'s URL, any language meta tags present, or the language utilized within the document\'s body text.',
         routing: {
@@ -351,30 +288,12 @@ const properties: INodeProperties[] = [
           },
         },
       },
-      {
-        displayName: 'Next Page Token (next_page_token)',
-        name: 'next_page_token',
-        type: 'string',
-								typeOptions: { password: true },
-        default: '',
-        description: 'Token for retrieving the next page of results. Returned in the response when more results are available.',
-        routing: {
-          request: {
-            qs: {
-              next_page_token: '={{$value}}',
-            },
-          },
-        },
-      },
+      nextPageToken('Token for retrieving the next page of results. Returned in the response when more results are available.'),
       {
         displayName: 'Safe Search (safe)',
         name: 'safe',
         type: 'options',
-        options: [
-          { name: 'Blur explicit images', value: 'blur' },
-          { name: 'Disable SafeSearch', value: 'off' },
-          { name: 'Enable strict SafeSearch', value: 'active' },
-        ],
+        options: GOOGLE_SAFE_OPTIONS,
         default: 'blur',
         description: 'Toggles the SafeSearch feature for the results. SafeSearch operates by filtering out adult content from your search results. Google\'s filters use proprietary technology to check keywords, phrases and URLs. While no filters are 100 percent accurate, SafeSearch will remove the overwhelming majority of adult content from your search results.',
         routing: {
@@ -466,49 +385,8 @@ const properties: INodeProperties[] = [
     ],
     displayOptions,
   },
-  {
-    displayName: 'Page Number (page)',
-    name: 'page',
-    type: 'number',
-    typeOptions: {
-      minValue: 1,
-      numberPrecision: 0,
-    },
-    default: 1,
-    description: 'Indicates which page of results to return. By default, it is set to 1.',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
-        },
-      },
-    },
-  },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  pageParam('Indicates which page of results to return. By default, it is set to 1.', { displayOptions }),
+  zeroDataRetention(displayOptions)
 ];
 
 export const google_images = {

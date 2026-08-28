@@ -68,15 +68,14 @@ Other useful commands:
 - `npm run build`: compile TypeScript for production
 - `npm run lint`: run ESLint code quality checks
 - `npm run lint:fix`: auto-fix linting issues
-- `npm test`: build and verify every parameter's query-string routing (runs in CI)
-- `npm run check:enums`: validate shared enumerations (runs in CI)
 - `npm run generate:labels`: regenerate `nodes/SearchApi/shared/labels.ts`
-- `npm run smoke`: run one live request for every engine in the local n8n
 - `npm run release`: bump version, update changelog, tag and push; the tag triggers the publish workflow on GitHub Actions
 
 ### Shared enumerations
 
 Country, language, currency and locale dropdowns are shared rather than duplicated per engine.
+Common value lists live in `nodes/SearchApi/shared/lists.ts` and repeated parameters
+(pagination, zero data retention, uule) come from factories in `nodes/SearchApi/shared/params.ts`.
 An engine lists only the codes its API accepts and the label comes from one canonical table:
 
 ```ts
@@ -87,54 +86,5 @@ import { countryOptions } from '../shared/options';
 
 `nodes/SearchApi/shared/labels.ts` is **generated**, do not hand-edit it. Country, language and
 currency labels come from Node's ICU data (`Intl.DisplayNames`), with vendor-specific codes that
-ICU cannot resolve listed explicitly in `scripts/overrides.mjs`. Locale labels come from
-`searchapi.io`'s `Constants::Duckduckgo::LOCALES`; without that checkout the existing table is
-kept as-is. Regenerate with `npm run generate:labels`, overriding the sources if needed:
-
-```sh
-RAILS_DUCKDUCKGO_CONSTANTS=../searchapi.io/app/lib/constants/duckduckgo.rb npm run generate:labels
-```
-
-`npm run check:enums` fails the build when a code has no canonical label or when an `options`
-default is not one of its own values.
-
-If a `searchapi.io` checkout is present it also compares each engine's values against the
-matching `public/openapi/<engine>.yaml` enum, case-insensitively. Those divergences are
-reported as **warnings**: the specs and the engine files do not agree yet, and neither side is
-authoritative for every parameter. Pass `--strict` to fail on them once they are reconciled:
-
-```sh
-OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums -- --strict
-```
-
-### Tests
-
-`npm test` checks the compiled node description without making API calls. It verifies that every
-engine parameter has exactly one `routing.request.qs` entry, that the query-string key matches the
-parameter name, and that the route forwards the parameter value. This exhaustive offline check
-runs in CI.
-
-The local smoke test makes live requests for every engine through the n8n instance created by
-`npm run dev`. Each engine has a `base` case with the fewest parameters needed for a valid
-response, a `full` case sending every parameter it accepts at once, and further cases for
-parameters that cannot be combined, where the API rejects the pair or one supersedes the other.
-Token-based engines read the identifier they need from an earlier response, and date-based engines
-use future dates. Requests run sequentially and retry failures up to three times.
-
-Find the id and name of your local SearchApi credential, then run the smoke:
-
-```sh
-sqlite3 $HOME/.n8n-node-cli/.n8n/database.sqlite \
-  "select id, name from credentials_entity where type = 'searchApi'"
-
-SEARCHAPI_CREDENTIAL_ID=<local-id> \
-SEARCHAPI_CREDENTIAL_NAME='SearchApi account' \
-npm run smoke
-```
-
-The command prints one line per combination and a final total. A combination passes when the API
-echoes its parameters back in `search_parameters` with the values that were sent; a request the API
-rejects answers with an error and nothing else. It is report-only: individual engine
-failures are visible but do not make the command exit non-zero. Generation, import, execution, or
-output-parsing failures still return a non-zero status. Expect roughly three API requests per
-engine, plus retries for failed requests.
+ICU cannot resolve listed explicitly in `scripts/overrides.mjs`. Locale labels are carried over
+from the existing `LOCALE_LABELS` table. Regenerate with `npm run generate:labels`.

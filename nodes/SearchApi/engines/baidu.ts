@@ -1,4 +1,5 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { numParam, pageParam, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -88,70 +89,12 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Page Number (page)',
-        name: 'page',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 1,
-        description: 'Page of results to return. Use with the num parameter to paginate.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          maxValue: 50,
-          numberPrecision: 0,
-        },
-        default: 10,
-        description: 'Number of results to display per page, maximum 50. Use with the page parameter to paginate.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      }
+      pageParam('Page of results to return. Use with the num parameter to paginate.'),
+      numParam('Number of results to display per page, maximum 50. Use with the page parameter to paginate.', { maxValue: 50 })
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const baidu = {

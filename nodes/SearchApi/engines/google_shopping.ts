@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { GOOGLE_LANGUAGES } from '../shared/lists';
 import { countryOptions, languageOptions } from '../shared/options';
+import { pageParam, uule, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -61,18 +63,7 @@ const properties: INodeProperties[] = [
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
-        options: languageOptions([
-          'af', 'ak', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bem', 'bn', 'bh', 'xx-bork', 'bs', 'br', 'bg',
-          'my', 'km', 'ca', 'chr', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl', 'xx-elmer', 'en',
-          'eo', 'et', 'ee', 'fo', 'tl', 'fi', 'fr', 'fy', 'gaa', 'gl', 'ka', 'de', 'el', 'kl', 'gn', 'gu',
-          'xx-hacker', 'ht', 'ha', 'haw', 'iw', 'hi', 'hu', 'is', 'ig', 'id', 'ia', 'ga', 'it', 'ja', 'jw',
-          'kn', 'kk', 'rw', 'rn', 'xx-klingon', 'kg', 'ko', 'kri', 'ku', 'ckb', 'ky', 'lo', 'la', 'lv', 'ln',
-          'lt', 'loz', 'lg', 'ach', 'mk', 'mg', 'ms', 'ml', 'mv', 'mt', 'mi', 'mr', 'mfe', 'mo', 'mn', 'sr-me',
-          'ne', 'pcm', 'nso', 'no', 'nn', 'oc', 'or', 'om', 'ps', 'fa', 'xx-pirate', 'pl', 'pt', 'pt-br',
-          'pt-pt', 'pa', 'qu', 'ro', 'rm', 'nyn', 'ru', 'gd', 'sr', 'sh', 'st', 'tn', 'crs', 'sn', 'sd', 'si',
-          'sk', 'sl', 'so', 'es', 'es-419', 'su', 'sw', 'sv', 'tg', 'ta', 'tt', 'te', 'th', 'ti', 'to', 'lua',
-          'tum', 'tr', 'tk', 'tw', 'ug', 'uk', 'ur', 'uz', 'vu', 'vi', 'cy', 'wo', 'xh', 'yi', 'yo', 'zu',
-        ]),
+        options: languageOptions(GOOGLE_LANGUAGES),
         default: 'en',
         description: 'Defines the interface language of the search',
         routing: {
@@ -93,20 +84,7 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Geographic Location',
     default: {},
     options: [
-      {
-        displayName: 'Encoded Location (uule)',
-        name: 'uule',
-        type: 'string',
-        default: '',
-        description: 'Sets the exact Google-encoded location for the search. Cannot be used together with location. SearchApi builds it automatically when you use location, but you can provide your own for precise control.',
-        routing: {
-          request: {
-            qs: {
-              uule: '={{$value}}',
-            },
-          },
-        },
-      },
+      uule('Sets the exact Google-encoded location for the search. Cannot be used together with location. SearchApi builds it automatically when you use location, but you can provide your own for precise control.'),
       {
         displayName: 'Location (location)',
         name: 'location',
@@ -285,49 +263,8 @@ const properties: INodeProperties[] = [
     ],
     displayOptions,
   },
-  {
-    displayName: 'Page Number (page)',
-    name: 'page',
-    type: 'number',
-    typeOptions: {
-      minValue: 1,
-      numberPrecision: 0,
-    },
-    default: 1,
-    description: 'Indicates which page of results to return',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          page: '={{$value}}',
-        },
-      },
-    },
-  },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  pageParam('Indicates which page of results to return', { displayOptions }),
+  zeroDataRetention(displayOptions)
 ];
 
 export const google_shopping = {

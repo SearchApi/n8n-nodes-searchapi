@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { DUCKDUCKGO_LOCALES } from '../shared/lists';
 import { localeOptions } from '../shared/options';
+import { nextPageToken, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -40,15 +42,7 @@ const properties: INodeProperties[] = [
         displayName: 'Locale (locale)',
         name: 'locale',
         type: 'options',
-        options: localeOptions([
-          'ar-es', 'at-de', 'au-en', 'be-fr', 'be-nl', 'bg-bg', 'br-pt', 'ca-en', 'ca-fr', 'ch-de', 'ch-fr',
-          'ch-it', 'cl-es', 'cn-zh', 'co-es', 'ct-ca', 'cz-cs', 'de-de', 'dk-da', 'ee-et', 'es-es', 'fi-fi',
-          'fr-fr', 'gr-el', 'hk-tzh', 'hr-hr', 'hu-hu', 'id-en', 'id-id', 'ie-en', 'il-he', 'in-en', 'it-it',
-          'jp-jp', 'kr-kr', 'lt-lt', 'lv-lv', 'mx-es', 'my-en', 'my-ms', 'nl-nl', 'no-no', 'nz-en', 'pe-es',
-          'ph-en', 'ph-tl', 'pl-pl', 'pt-pt', 'ro-ro', 'ru-ru', 'se-sv', 'sg-en', 'sk-sk', 'sl-sl', 'th-th',
-          'tr-tr', 'tw-tzh', 'ua-uk', 'ue-es', 'uk-en', 'us-en', 've-es', 'vn-vi', 'wt-wt', 'xa-ar', 'xa-en',
-          'xl-es', 'za-en',
-        ]),
+        options: localeOptions(DUCKDUCKGO_LOCALES),
         default: 'us-en',
         description: 'Specifies the country and language for your search. Check the full list of supported DuckDuckGo locales.',
         routing: {
@@ -100,48 +94,11 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Next Page Token (next_page_token)',
-        name: 'next_page_token',
-        type: 'string',
-        typeOptions: { password: true },
-        default: '',
-        description: 'Token for retrieving the next page of results. Located inside pagination.next_page_token in the response.',
-        routing: {
-          request: {
-            qs: {
-              next_page_token: '={{$value}}',
-            },
-          },
-        },
-      }
+      nextPageToken('Token for retrieving the next page of results. Located inside pagination.next_page_token in the response.')
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const duckduckgo_light = {

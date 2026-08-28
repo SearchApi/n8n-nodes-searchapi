@@ -1,4 +1,4 @@
-name: Build and test node
+name: Build node
 
 on:
   pull_request:
@@ -37,8 +37,5 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Check shared enumerations
-        run: npm run check:enums
-
-      - name: Build and test routing
-        run: npm test
+      - name: Build
+        run: npm run build

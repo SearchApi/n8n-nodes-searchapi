@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { BING_COUNTRIES, BING_LANGUAGES, BING_MARKET_CODES, DEVICE_OPTIONS } from '../shared/lists';
 import { countryOptions, languageOptions } from '../shared/options';
+import { pageParam, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -40,11 +42,7 @@ const properties: INodeProperties[] = [
         displayName: 'Device (device)',
         name: 'device',
         type: 'options',
-        options: [
-          { name: 'Desktop', value: 'desktop' },
-          { name: 'Mobile', value: 'mobile' },
-          { name: 'Tablet', value: 'tablet' },
-        ],
+        options: DEVICE_OPTIONS,
         default: 'desktop',
         description: 'Device type used to perform the search',
         routing: {
@@ -111,47 +109,7 @@ const properties: INodeProperties[] = [
         displayName: 'Market Code (market_code)',
         name: 'market_code',
         type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'da-dk', value: 'da-dk' },
-          { name: 'de-at', value: 'de-at' },
-          { name: 'de-ch', value: 'de-ch' },
-          { name: 'de-de', value: 'de-de' },
-          { name: 'en-au', value: 'en-au' },
-          { name: 'en-ca', value: 'en-ca' },
-          { name: 'en-gb', value: 'en-gb' },
-          { name: 'en-id', value: 'en-id' },
-          { name: 'en-in', value: 'en-in' },
-          { name: 'en-my', value: 'en-my' },
-          { name: 'en-nz', value: 'en-nz' },
-          { name: 'en-ph', value: 'en-ph' },
-          { name: 'en-us', value: 'en-us' },
-          { name: 'en-za', value: 'en-za' },
-          { name: 'es-ar', value: 'es-ar' },
-          { name: 'es-cl', value: 'es-cl' },
-          { name: 'es-es', value: 'es-es' },
-          { name: 'es-mx', value: 'es-mx' },
-          { name: 'es-us', value: 'es-us' },
-          { name: 'fi-fi', value: 'fi-fi' },
-          { name: 'fr-be', value: 'fr-be' },
-          { name: 'fr-ca', value: 'fr-ca' },
-          { name: 'fr-ch', value: 'fr-ch' },
-          { name: 'fr-fr', value: 'fr-fr' },
-          { name: 'it-it', value: 'it-it' },
-          { name: 'ja-jp', value: 'ja-jp' },
-          { name: 'ko-kr', value: 'ko-kr' },
-          { name: 'nl-be', value: 'nl-be' },
-          { name: 'nl-nl', value: 'nl-nl' },
-          { name: 'no-no', value: 'no-no' },
-          { name: 'pl-pl', value: 'pl-pl' },
-          { name: 'pt-br', value: 'pt-br' },
-          { name: 'ru-ru', value: 'ru-ru' },
-          { name: 'sv-se', value: 'sv-se' },
-          { name: 'tr-tr', value: 'tr-tr' },
-          { name: 'zh-cn', value: 'zh-cn' },
-          { name: 'zh-hk', value: 'zh-hk' },
-          { name: 'zh-tw', value: 'zh-tw' },
-        ],
+        options: BING_MARKET_CODES,
         default: '',
         description: 'Country for search results. Format is language-country, like en-US. Cannot be used together with country_code.',
         routing: {
@@ -176,11 +134,7 @@ const properties: INodeProperties[] = [
         displayName: 'Country Code (country_code)',
         name: 'country_code',
         type: 'options',
-        options: countryOptions([
-          '', 'AR', 'AT', 'AU', 'BE', 'BR', 'CA', 'CH', 'CL', 'CN', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'HK',
-          'ID', 'IN', 'IT', 'JP', 'KR', 'MX', 'MY', 'NL', 'NO', 'NZ', 'PH', 'PL', 'PT', 'RU', 'SA', 'SE', 'TR',
-          'TW', 'US', 'ZA',
-        ]),
+        options: countryOptions(BING_COUNTRIES),
         default: '',
         description: 'Country for search results when market_code is not set. Defaults to US. Cannot be used together with market_code.',
         routing: {
@@ -195,12 +149,7 @@ const properties: INodeProperties[] = [
         displayName: 'Language (language)',
         name: 'language',
         type: 'options',
-        options: languageOptions([
-          '', 'ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'en', 'en-gb', 'es', 'et', 'eu', 'fi', 'fr', 'gl',
-          'gu', 'he', 'hi', 'hr', 'hu', 'is', 'it', 'ja', 'jp', 'kn', 'ko', 'lt', 'lv', 'ml', 'mr', 'ms', 'nb', 'nl',
-          'pa', 'pl', 'pt-br', 'pt-pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'ta', 'te', 'th', 'tr', 'uk', 'vi',
-          'zh-hans', 'zh-hant',
-        ]),
+        options: languageOptions(BING_LANGUAGES),
         default: '',
         description: 'Language for UI text. Accepts 2-letter (ISO 639-1) or 4-letter codes. Defaults to en (English) if unspecified or unsupported.',
         routing: {
@@ -313,48 +262,12 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Page Number (page)',
-        name: 'page',
-        type: 'string',
-        default: '1',
-        description: 'Page of results to return. Defaults to 1.',
-        routing: {
-          request: {
-            qs: {
-              page: '={{$value}}',
-            },
-          },
-        },
-      },
+      pageParam('Page of results to return. Defaults to 1.'),
 
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const bing = {

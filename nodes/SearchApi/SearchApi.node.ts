@@ -9,15 +9,13 @@ interface Engine {
 
 const engines: Engine[] = [google, google_images, google_maps, google_shopping, baidu, bing_news, google_rank_tracking, bing, google_maps_place, google_maps_reviews, google_maps_photos, google_maps_directions, google_ads_transparency_center, google_ads_transparency_center_advertiser_search, google_ads_transparency_center_ad_details, google_ads_advertiser_info, meta_ad_library, meta_ad_library_ad_details, meta_ad_library_page_info, meta_ad_library_page_search, youtube, youtube_video, youtube_channel, youtube_channel_videos, youtube_comments, youtube_transcripts, google_shopping_autocomplete, google_shopping_filters, google_flights, google_flights_calendar, google_flights_location_search, google_hotels, google_hotels_property, google_hotels_autocomplete, google_news, google_jobs, tiktok_profile, instagram_profile, linkedin_ad_library, tiktok_ads_library, tiktok_ads_library_advertiser_search, tiktok_ads_library_ad_details, yandex, yandex_reverse_image, duckduckgo, duckduckgo_light, duckduckgo_images, duckduckgo_videos];
 
-async function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
+function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
 	if (requestOptions.qs) {
-		for (const key of Object.keys(requestOptions.qs)) {
-			if (requestOptions.qs[key] === '' || requestOptions.qs[key] === undefined) {
-				delete requestOptions.qs[key];
-			}
-		}
+		requestOptions.qs = Object.fromEntries(
+			Object.entries(requestOptions.qs).filter(([, value]) => value !== '' && value !== undefined),
+		);
 	}
-	return requestOptions;
+	return Promise.resolve(requestOptions);
 }
 
 export class SearchApi implements INodeType {
@@ -86,10 +84,10 @@ export class SearchApi implements INodeType {
 			},
 			...engines.map((engine): INodeProperties => ({
 				displayName: `For all available parameters and detailed usage, see the <a href="${engine.docsUrl}" target="_blank">${engine.resource.name} API documentation</a>.`,
-				name: `${engine.resource.value}_docs_notice`,
+				name: `${String(engine.resource.value)}_docs_notice`,
 				type: 'notice',
 				default: '',
-				displayOptions: { show: { resource: [engine.resource.value as string] } },
+				displayOptions: { show: { resource: [String(engine.resource.value)] } },
 			})),
 			...engines.flatMap((engine) => engine.properties),
 		],

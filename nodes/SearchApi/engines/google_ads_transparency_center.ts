@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { ADS_TRANSPARENCY_COUNTRIES } from '../shared/lists';
 import { countryOptions } from '../shared/options';
+import { nextPageToken, numParam, zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -298,23 +300,7 @@ const properties: INodeProperties[] = [
         displayName: 'Region (region)',
         name: 'region',
         type: 'options',
-        options: countryOptions([
-          'AD', 'AE', 'AG', 'AI', 'AL', 'AM', '', 'ANYWHERE', 'AO', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AW', 'AZ',
-          'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV',
-          'BW', 'BY', 'BZ', 'CA', 'CC', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CV',
-          'CW', 'CX', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET',
-          'FI', 'FJ', 'FK', 'FM', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN',
-          'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HM', 'HN', 'HR', 'HT', 'HU', 'IC', 'ID', 'IE',
-          'IL', 'IM', 'IN', 'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN',
-          'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC',
-          'MD', 'ME', 'MF', 'MG', 'MH', 'MK', 'ML', 'MM', 'MN', 'MO', 'MP', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV',
-          'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NF', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM',
-          'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PW', 'PY', 'QA', 'RE', 'RO',
-          'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'ST', 'SV',
-          'SX', 'SZ', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW',
-          'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS', 'YE',
-          'YT', 'ZA', 'ZM', 'ZW',
-        ]),
+        options: countryOptions(ADS_TRANSPARENCY_COUNTRIES),
         default: '',
         description: 'Specifies the region for your search. The default parameter is anywhere.',
         routing: {
@@ -356,67 +342,12 @@ const properties: INodeProperties[] = [
     placeholder: 'Add Pagination',
     default: {},
     options: [
-      {
-        displayName: 'Next Page Token (next_page_token)',
-        name: 'next_page_token',
-        type: 'string',
-        typeOptions: { password: true },
-        default: '',
-        description: 'A token for fetching the next set of results. You can obtain this token from the next_page_token field in the previous response.',
-        routing: {
-          request: {
-            qs: {
-              next_page_token: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          maxValue: 100,
-          numberPrecision: 0,
-        },
-        default: 40,
-        description: 'Specifies the number of results to return. Default is 40. The maximum is 100.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
-      }
+      nextPageToken('A token for fetching the next set of results. You can obtain this token from the next_page_token field in the previous response.'),
+      numParam('Specifies the number of results to return. Default is 40. The maximum is 100.', { maxValue: 100, defaultValue: 40 })
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const google_ads_transparency_center = {

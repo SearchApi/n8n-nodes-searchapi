@@ -1,5 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { CURRENCIES, TRAVEL_LANGUAGES } from '../shared/lists';
 import { countryOptions, currencyOptions, languageOptions } from '../shared/options';
+import { zeroDataRetention } from '../shared/params';
 
 const displayOptions = {
   show: {
@@ -101,14 +103,7 @@ const properties: INodeProperties[] = [
         displayName: 'Currency (currency)',
         name: 'currency',
         type: 'options',
-        options: currencyOptions([
-          'ALL', 'DZD', 'ARS', 'AMD', 'AWG', 'AUD', 'AZN', 'BSD', 'BHD', 'BYN', 'BMD', 'BAM', 'BRL', 'GBP',
-          'BGN', 'CAD', 'XPF', 'CLP', 'CNY', 'COP', 'CRC', 'CUP', 'CZK', 'DKK', 'DOP', 'EGP', 'EUR', 'GEL',
-          'HKD', 'HUF', 'ISK', 'INR', 'IDR', 'IRR', 'ILS', 'JMD', 'JPY', 'JOD', 'KZT', 'KWD', 'LBP', 'MKD',
-          'MYR', 'MXN', 'MDL', 'MAD', 'TWD', 'NZD', 'NOK', 'OMR', 'PKR', 'PAB', 'PEN', 'PHP', 'PLN', 'QAR',
-          'RON', 'RUB', 'SAR', 'RSD', 'SGD', 'ZAR', 'KRW', 'SEK', 'CHF', 'THB', 'TRY', 'UAH', 'AED', 'USD',
-          'VND',
-        ]),
+        options: currencyOptions(CURRENCIES),
         default: 'USD',
         description: 'Defines the currency of the returned prices. Default is USD. Check the full list of supported Google Travel currency values.',
         routing: {
@@ -123,13 +118,7 @@ const properties: INodeProperties[] = [
         displayName: 'Language (hl)',
         name: 'hl',
         type: 'options',
-        options: languageOptions([
-          'af', 'am', '', 'ar', 'bg', 'bn', 'bs', 'ca', 'cs', 'da', 'de', 'et', 'el', 'en-GB', 'en-US', 'es',
-          'es-419', 'eu', 'fa', 'fil', 'fr', 'gl', 'gu', 'hi', 'hr', 'id', 'is', 'it', 'iw', 'ja', 'ka', 'sw',
-          'km', 'kn', 'ko', 'lv', 'lt', 'lo', 'hu', 'ms', 'mk', 'ml', 'mn', 'mr', 'ne', 'nl', 'no', 'pa', 'pl',
-          'pt-BR', 'pt-PT', 'ro', 'ru', 'sq', 'si', 'sk', 'sl', 'sr', 'sr-Latn', 'fi', 'sv', 'ta', 'te', 'th',
-          'vi', 'tr', 'uk', 'ur', 'zh-CN', 'zh-TW',
-        ]),
+        options: languageOptions(TRAVEL_LANGUAGES),
         default: '',
         description: 'Defines the interface language of the search. Check the full list of supported Google Travel hl languages.',
         routing: {
@@ -224,30 +213,7 @@ const properties: INodeProperties[] = [
     ],
     displayOptions,
   },
-  {
-    displayName: 'Zero Data Retention',
-    name: 'zero_data_retention',
-    type: 'collection',
-    placeholder: 'Add Zero Data Retention',
-    default: {},
-    options: [
-      {
-        displayName: 'Zero Retention (zero_retention)',
-        name: 'zero_retention',
-        type: 'boolean',
-        default: false,
-        description: 'Whether to disable all logging and persistent storage. No request parameters, HTML, or JSON responses are stored or logged. Suitable for high-compliance use cases. Debugging and support may be limited while enabled.',
-        routing: {
-          request: {
-            qs: {
-              zero_retention: '={{$value}}',
-            },
-          },
-        },
-      }
-    ],
-    displayOptions,
-  }
+  zeroDataRetention(displayOptions)
 ];
 
 export const google_hotels_property = {
