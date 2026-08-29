@@ -12,7 +12,8 @@ const engines: Engine[] = [google, google_images, google_maps, google_shopping, 
 async function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
 	if (requestOptions.qs) {
 		for (const key of Object.keys(requestOptions.qs)) {
-			if (requestOptions.qs[key] === '' || requestOptions.qs[key] === undefined) {
+			const value = requestOptions.qs[key];
+			if (value === '' || value == null || value === 'undefined' || value === 'null') {
 				delete requestOptions.qs[key];
 			}
 		}
@@ -29,7 +30,7 @@ export class SearchApi implements INodeType {
 		version: 1,
 		description:
 			'Access real-time search results from Google, Google Images, Google Maps, Google Shopping and more. Use this when you need current, up-to-date information, product searches, location data, or visual content that may not be available in your training data.',
-		subtitle: '={{ $parameter["engine"] }}',
+		subtitle: '={{ $parameter["resource"] }}',
 		defaults: { name: 'SearchApi' },
 		inputs: ['main'],
 		outputs: ['main'],
@@ -43,7 +44,7 @@ export class SearchApi implements INodeType {
 		},
 		hints: [
 			{
-				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈'",
+				message: "Hit SearchAPI's free 100-request quota? Check the Pricing page 📈",
 				type: 'info',
 				whenToDisplay: 'beforeExecution',
 				location: 'inputPane',

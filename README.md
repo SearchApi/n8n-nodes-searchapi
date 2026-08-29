@@ -16,7 +16,11 @@ SearchApi is a fast, reliable SERP and data extraction API that focuses on perfo
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+1. Open the **nodes panel** (`+` or press `N`).
+2. Search for **SearchApi** — it's a verified node, so it shows up with an **Install** button.
+3. Click **Install**, then **Add to workflow**.
+
+Need a specific version, or installing on a restricted/headless instance? Go to **Settings → Community nodes**, enter package name `@searchapi/n8n-nodes-searchapi` (or pin a version with `@searchapi/n8n-nodes-searchapi@2.0.4`). See the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) for details.
 
 ## Operations
 
@@ -61,6 +65,8 @@ The node supports one main operation: `Search`. You can use it to search from al
 | ---------------------------- | ---------------------------- | --------------------------------------------------------------------------- |
 | **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                           |
 | **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
+| **Error loading package / tar ... No such file or directory** | Install failed for the scoped npm package | Prefer installing via the nodes panel (search "SearchApi"). If installing manually, use the full package name `@searchapi/n8n-nodes-searchapi` and retry after clearing the n8n community-node cache. |
+| **Node not available as AI tool** | Community tool usage disabled | On self-hosted n8n, ensure community nodes can be used as tools (see n8n docs for community package tool usage). Re-install/reload the node after enabling. |
 
 ## Version history
 
@@ -115,6 +121,6 @@ authoritative for every parameter. Pass `--strict` to fail on them once they are
 OPENAPI_DIR=../searchapi.io/public/openapi npm run check:enums -- --strict
 ```
 
-You will be able to see the the node in the local n8n http://localhost:5678.
+You will be able to see the node in the local n8n http://localhost:5678.
 
 Obs: You might need to run `rm -rf ~/.n8n-node-cli`, to clear the cache of old n8n instances you might have installed, it might make the cli to timeout.
