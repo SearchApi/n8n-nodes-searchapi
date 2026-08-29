@@ -3,13 +3,13 @@ import { countryOptions, languageOptions } from '../shared/options';
 
 const displayOptions = {
   show: {
-    resource: ['google'],
+    resource: ['google_news'],
   },
 };
 
 const resource: INodePropertyOptions = {
-  name: 'Google',
-  value: 'google'
+  name: 'Google News',
+  value: 'google_news'
 };
 
 const properties: INodeProperties[] = [
@@ -17,8 +17,9 @@ const properties: INodeProperties[] = [
     displayName: 'Search Query (q)',
     name: 'q',
     type: 'string',
+    required: true,
     default: '',
-    description: 'Search terms for Google. Queries can include operators and advanced filters like "machine learning models", site:, inurl:, intitle:, AND, or OR. Note: Not required if the kgmid parameter is being used — either q or kgmid must be provided.',
+    description: 'Terms to search on Google News. Queries can include operators and advanced filters like "climate change", site:, inurl:, intitle:, as_dt, or as_eq.',
     displayOptions,
     routing: {
       request: {
@@ -29,39 +30,33 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Kgmid (kgmid)',
-    name: 'kgmid',
-    type: 'string',
-    default: '',
-    description: 'Defines a Knowledge Graph identifier (kgmid), representing entities in Google\'s Knowledge Graph. Format: Location Identifier (/m/): Typically followed by 2 to 7 characters. Used primarily to represent specific locations. Find the identifier by searching for the "Freebase ID" on Wikidata. Example: kgmid=/m/02_286 refers to New York. Google Knowledge Graph Identifier (/g/): Typically followed by a longer alphanumeric string. Represents general entities in Google\'s Knowledge Graph. Find details on Wikidata. Example: kgmid=/g/11f555cn8l refers to TikTok.',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          kgmid: '={{$value}}',
-        },
-      },
-    },
-  },
-  {
-    displayName: 'Device (device)',
+    displayName: 'Device',
     name: 'device',
-    type: 'options',
+    type: 'collection',
+    placeholder: 'Add Device',
+    default: {},
     options: [
-      { name: 'Desktop', value: 'desktop' },
-      { name: 'Mobile', value: 'mobile' },
-      { name: 'Tablet', value: 'tablet' },
-    ],
-    default: 'desktop',
-    description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          device: '={{$value}}',
+      {
+        displayName: 'Device (device)',
+        name: 'device',
+        type: 'options',
+        options: [
+          { name: 'Desktop', value: 'desktop' },
+          { name: 'Mobile', value: 'mobile' },
+          { name: 'Tablet', value: 'tablet' },
+        ],
+        default: 'desktop',
+        description: 'The default parameter desktop defines the search on a desktop device. The mobile parameter defines the search on a mobile device. The tablet parameter defines the search on a tablet device.',
+        routing: {
+          request: {
+            qs: {
+              device: '={{$value}}',
+            },
+          },
         },
-      },
-    },
+      }
+    ],
+    displayOptions,
   },
   {
     displayName: 'Geographic Location',
@@ -71,29 +66,29 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Encoded Location (uule)',
-        name: 'uule',
+        displayName: 'Location (location)',
+        name: 'location',
         type: 'string',
         default: '',
-        description: 'Sets the exact Google-encoded location for the search. Cannot be used together with the location parameter. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
+        description: 'Specifies the canonical location of the search. For exact targeting or to see all available options, check out the Locations API. If multiple locations match your input, the most popular one will be selected.',
         routing: {
           request: {
             qs: {
-              uule: '={{$value}}',
+              location: '={{$value}}',
             },
           },
         },
       },
       {
-        displayName: 'Location (location)',
-        name: 'location',
+        displayName: 'UULE (uule)',
+        name: 'uule',
         type: 'string',
         default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
+        description: 'Sets the exact Google-encoded location for the search. The uule and location parameters cannot be used at the same time. SearchApi builds it for you when you use the location parameter, but you can provide your own if you want precise control.',
         routing: {
           request: {
             qs: {
-              location: '={{$value}}',
+              uule: '={{$value}}',
             },
           },
         },
@@ -130,7 +125,7 @@ const properties: INodeProperties[] = [
           'wf', 'eh', 'ye', 'zm', 'zw',
         ]),
         default: 'us',
-        description: 'Defines the country of the search. Defaults to us.',
+        description: 'The default parameter us defines the country of the search. Check the full list of supported Google gl countries.',
         routing: {
           request: {
             qs: {
@@ -140,7 +135,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Country Restrict (cr)',
+        displayName: 'CR (cr)',
         name: 'cr',
         type: 'options',
         options: countryOptions([
@@ -160,7 +155,7 @@ const properties: INodeProperties[] = [
           'uy', 'uz', 'vu', 'va', 've', 'vn', 'vg', 'vi', 'wf', 'eh', 'ye', 'zm', 'zw',
         ]),
         default: '',
-        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by the web server\'s IP address geographic location.',
+        description: 'Restricts search results to documents originating in a particular country. Google determines the country of a document by the top-level domain (TLD) of the document\'s URL or by Web server\'s IP address geographic location. Check the full list of supported Google cr countries.',
         routing: {
           request: {
             qs: {
@@ -174,7 +169,7 @@ const properties: INodeProperties[] = [
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
-        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead.',
+        description: 'As of Apr 15, 2025, Google began phasing out country code top-level domains (ccTLDs). Users using the search bar or visiting local domains like google.de or google.co.uk are now automatically redirected to google.com. For localized searches, use the gl (country), hl (language) or other localization parameters instead. Learn more in Google\'s official announcement. See the full list of supported Google domains.',
         routing: {
           request: {
             qs: {
@@ -188,19 +183,13 @@ const properties: INodeProperties[] = [
         name: 'hl',
         type: 'options',
         options: languageOptions([
-          'af', 'ak', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bem', 'bn', 'bh', 'xx-bork', 'bs', 'br', 'bg',
-          'my', 'km', 'ca', 'chr', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl', 'xx-elmer', 'en',
-          'eo', 'et', 'ee', 'fo', 'tl', 'fi', 'fr', 'fy', 'gaa', 'gl', 'ka', 'de', 'el', 'kl', 'gn', 'gu',
-          'xx-hacker', 'ht', 'ha', 'haw', 'iw', 'hi', 'hu', 'is', 'ig', 'id', 'ia', 'ga', 'it', 'ja', 'jw',
-          'kn', 'kk', 'rw', 'rn', 'xx-klingon', 'kg', 'ko', 'kri', 'ku', 'ckb', 'ky', 'lo', 'la', 'lv', 'ln',
-          'lt', 'loz', 'lg', 'ach', 'mk', 'mg', 'ms', 'ml', 'mv', 'mt', 'mi', 'mr', 'mfe', 'mo', 'mn', 'sr-me',
-          'ne', 'pcm', 'nso', 'no', 'nn', 'oc', 'or', 'om', 'ps', 'fa', 'xx-pirate', 'pl', 'pt', 'pt-br',
-          'pt-pt', 'pa', 'qu', 'ro', 'rm', 'nyn', 'ru', 'gd', 'sr', 'sh', 'st', 'tn', 'crs', 'sn', 'sd', 'si',
-          'sk', 'sl', 'so', 'es', 'es-419', 'su', 'sw', 'sv', 'tg', 'ta', 'tt', 'te', 'th', 'ti', 'to', 'lua',
-          'tum', 'tr', 'tk', 'tw', 'ug', 'uk', 'ur', 'uz', 'vu', 'vi', 'cy', 'wo', 'xh', 'yi', 'yo', 'zu',
+          'ar', 'be', 'bn', 'bh', 'bg', 'ca', 'zh-cn', 'zh-tw', 'cs', 'da', 'nl', 'en', 'fr', 'gl', 'de', 'el',
+          'kl', 'gu', 'ha', 'iw', 'hi', 'hu', 'id', 'it', 'ja', 'jw', 'kn', 'ko', 'lv', 'lt', 'ms', 'ml', 'mv',
+          'mr', 'mo', 'sr-me', 'no', 'fa', 'pl', 'pt', 'pt-br', 'pt-pt', 'pa', 'ro', 'ru', 'sr', 'sh', 'sk',
+          'sl', 'es', 'es-419', 'sv', 'ta', 'te', 'th', 'tr', 'uk', 'vu', 'vi',
         ]),
         default: 'en',
-        description: 'Defines the interface language of the search. Defaults to en.',
+        description: 'The default parameter en defines the interface language of the search. Check the full list of supported Google News hl languages.',
         routing: {
           request: {
             qs: {
@@ -210,7 +199,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language Restrict (lr)',
+        displayName: 'LR (lr)',
         name: 'lr',
         type: 'options',
         options: languageOptions([
@@ -221,7 +210,7 @@ const properties: INodeProperties[] = [
           'lang_sl', 'lang_es', 'lang_sv', 'lang_th', 'lang_tr', 'lang_uk', 'lang_vi',
         ]),
         default: '',
-        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter language code} — for example, lang_jp for Japanese. To restrict to multiple languages, combine with a pipe: lang_it|lang_de. Google identifies the document language from the URL\'s top-level domain, language meta tags, or the body text.',
+        description: 'Restricts search results to documents written in a particular language or a set of languages. The accepted format is lang_{2-letter country code}. For instance, to filter documents written in Japanese, the value should be set to lang_jp. To incorporate multiple languages, a value like lang_it|lang_de restricts the search to documents written in either Italian or German. Google identifies the document language based on the top-level domain (TLD) of the document\'s URL, any language meta tags present, or the language utilized within the document\'s body text. Check the full list of supported Google lr languages.',
         routing: {
           request: {
             qs: {
@@ -249,7 +238,7 @@ const properties: INodeProperties[] = [
           { name: 'Enable "Duplicate Content" and "Host Crowding" filters', value: '1' },
         ],
         default: '1',
-        description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Defaults to 1 (enabled).',
+        description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
         routing: {
           request: {
             qs: {
@@ -259,7 +248,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Nfpr (nfpr)',
+        displayName: 'NFPR (nfpr)',
         name: 'nfpr',
         type: 'options',
         options: [
@@ -267,7 +256,7 @@ const properties: INodeProperties[] = [
           { name: 'Include auto-corrected results', value: '0' },
         ],
         default: '0',
-        description: 'Controls whether results from auto-corrected spelling queries are included. Set to 1 to exclude auto-corrected results. Defaults to 0 (auto-corrected results included).',
+        description: 'Controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
         routing: {
           request: {
             qs: {
@@ -277,20 +266,19 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Safe (safe)',
-        name: 'safe',
+        displayName: 'Sort By (sort_by)',
+        name: 'sort_by',
         type: 'options',
         options: [
-          { name: 'Blur explicit images', value: 'blur' },
-          { name: 'Disable SafeSearch', value: 'off' },
-          { name: 'Enable strict SafeSearch', value: 'active' },
+          { name: 'Any', value: '' },
+          { name: 'Most recent', value: 'most_recent' },
         ],
-        default: 'blur',
-        description: 'Toggles the SafeSearch feature, which filters adult content from search results using Google\'s proprietary keyword, phrase, and URL analysis. Defaults to blur.',
+        default: '',
+        description: 'By default, news results are sorted by relevance. To get the most recent articles, set it to most_recent.',
         routing: {
           request: {
             qs: {
-              safe: '={{$value}}',
+              sort_by: '={{$value}}',
             },
           },
         },
@@ -312,7 +300,7 @@ const properties: INodeProperties[] = [
           { name: 'Last year', value: 'last_year' },
         ],
         default: '',
-        description: 'Restricts results to URLs based on date. Use time_period_min or time_period_max for a custom date range.',
+        description: 'Restricts results to URLs based on date. Supported values are: last_hour - data from the past hour. last_day - data from the past 24 hours. last_week - data from the past week. last_month - data from the past month. last_year - data from the past year. Using time_period_min or time_period_max parameters, you can specify a custom time period. Note, that the time_period_min and time_period_max parameters could be used separately as well.',
         routing: {
           request: {
             qs: {
@@ -326,7 +314,7 @@ const properties: INodeProperties[] = [
         name: 'time_period_max',
         type: 'string',
         default: '',
-        description: 'Specifies the end of the custom time period. Can be used with time_period_min. Format: MM/DD/YYYY.',
+        description: 'Specifies the end of the time period. It could be used in combination with the time_period_min parameter. The value should be in the format MM/DD/YYYY.',
         routing: {
           request: {
             qs: {
@@ -340,29 +328,11 @@ const properties: INodeProperties[] = [
         name: 'time_period_min',
         type: 'string',
         default: '',
-        description: 'Specifies the start of the custom time period. Can be used with time_period_max. Format: MM/DD/YYYY.',
+        description: 'Specifies the start of the time period. It could be used in combination with the time_period_max parameter. The value should be in the format MM/DD/YYYY.',
         routing: {
           request: {
             qs: {
               time_period_min: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Verbatim (verbatim)',
-        name: 'verbatim',
-        type: 'options',
-        options: [
-          { name: 'Any', value: '' },
-          { name: 'True', value: 'true' },
-        ],
-        default: '',
-        description: 'Forces Google to use your exact keywords, bypassing automatic spelling corrections, synonyms, and stemmed variations. Can be combined with time_period filters. Note: Verbatim mode is stricter than nfpr=1 — it disables all query modifications, not just spelling corrections.',
-        routing: {
-          request: {
-            qs: {
-              verbatim: '={{$value}}',
             },
           },
         },
@@ -378,7 +348,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
+        displayName: 'Page (page)',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -386,7 +356,7 @@ const properties: INodeProperties[] = [
           numberPrecision: 0,
         },
         default: 1,
-        description: 'Indicates which page of results to return. Defaults to 1.',
+        description: 'Indicates which page of results to return. By default, it is set to 1.',
         routing: {
           request: {
             qs: {
@@ -394,46 +364,9 @@ const properties: INodeProperties[] = [
             },
           },
         },
-      },
-      {
-        displayName: 'Results Per Page (num)',
-        name: 'num',
-        type: 'number',
-        typeOptions: {
-          minValue: 1,
-          numberPrecision: 0,
-        },
-        default: 10,
-        description: 'Phased out by Google on September 2025. It is now constant 10.',
-        routing: {
-          request: {
-            qs: {
-              num: '={{$value}}',
-            },
-          },
-        },
       }
     ],
     displayOptions,
-  },
-  {
-    displayName: 'Optimization Strategy (optimization_strategy)',
-    name: 'optimization_strategy',
-    type: 'options',
-    options: [
-      { name: 'Ad Scraping Rate', value: 'ads' },
-      { name: 'Performance', value: 'performance' },
-    ],
-    default: 'performance',
-    description: 'Controls how the search request is optimized. The ads option prioritizes ad collection success rate at the cost of longer processing times.',
-    displayOptions,
-    routing: {
-      request: {
-        qs: {
-          optimization_strategy: '={{$value}}',
-        },
-      },
-    },
   },
   {
     displayName: 'Zero Data Retention',
@@ -461,8 +394,8 @@ const properties: INodeProperties[] = [
   }
 ];
 
-export const google = {
+export const google_news = {
   resource,
   properties,
-  docsUrl: 'https://www.searchapi.io/docs/google',
+  docsUrl: 'https://www.searchapi.io/docs/google-news',
 };

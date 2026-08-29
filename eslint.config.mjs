@@ -10,4 +10,12 @@ export default [
 			'n8n-nodes-base/node-param-display-name-miscased': 'off',
 		},
 	},
+	{
+		files: ['nodes/SearchApi/engines/*.ts'],
+		rules: {
+			// Shared enumerations are built by helpers, which this rule cannot resolve
+			// statically. `npm run check:enums` validates the same defaults instead.
+			'n8n-nodes-base/node-param-default-wrong-for-options': 'off',
+		},
+	},
 ];
