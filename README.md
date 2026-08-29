@@ -60,8 +60,10 @@ You can see the version history [here](https://github.com/SearchApi/n8n-nodes-se
 
 1. Run `npm install` to install the dependencies
 2. Run `npm run dev` to start n8n with the node in development mode
-3. Open http://localhost:5678 to access n8n with the node loaded
+3. Open http://localhost:5678 and log in with the development account: `dev@searchapi.io` / `DevPassword1!`
 4. Make changes to the source files and the node rebuilds automatically
+
+The development account is provisioned automatically on startup through the `N8N_INSTANCE_OWNER_*` environment variables set in `scripts/dev.mjs`, so no manual sign-up is needed.
 
 Other useful commands:
 

@@ -21,7 +21,7 @@
   "scripts": {
     "build": "n8n-node build",
     "build:watch": "tsc --watch",
-    "dev": "n8n-node dev",
+    "dev": "node scripts/dev.mjs",
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
     "generate:labels": "node scripts/generate-labels.mjs",
