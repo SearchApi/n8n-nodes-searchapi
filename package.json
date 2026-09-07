@@ -29,6 +29,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=24"
+  },
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
