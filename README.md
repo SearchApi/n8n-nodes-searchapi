@@ -66,7 +66,7 @@ The node supports one main operation: `Search`. You can use it to search from al
 | **401 Unauthorized**         | Invalid or missing API key   | Double‑check the credentials.                                           |
 | **429 Too Many Requests**    | Rate limit exceeded          | Slow down the workflow or [upgrade plan](https://www.searchapi.io/pricing). |
 | **Error loading package / tar ... No such file or directory** | Install failed for the scoped npm package | Prefer installing via the nodes panel (search "SearchApi"). If installing manually, use the full package name `@searchapi/n8n-nodes-searchapi` and retry after clearing the n8n community-node cache. |
-| **Node not available as AI tool** | Community tool usage disabled | On self-hosted n8n, ensure community nodes can be used as tools (see n8n docs for community package tool usage). Re-install/reload the node after enabling. |
+| **Node not available as AI tool** | Community tool usage disabled | On self-hosted n8n, set `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true` ([n8n docs](https://docs.n8n.io/hosting/configuration/environment-variables/nodes/)) and restart n8n. Re-install/reload the node after enabling. |
 
 ## Version history
 
