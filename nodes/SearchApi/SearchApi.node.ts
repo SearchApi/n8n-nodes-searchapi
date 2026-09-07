@@ -14,9 +14,12 @@ const AI_AGENT_PLACEHOLDER_STRINGS = ['undefined', 'null'];
 async function stripEmptyQueryParams(this: IExecuteSingleFunctions, requestOptions: IHttpRequestOptions): Promise<IHttpRequestOptions> {
 	if (requestOptions.qs) {
 		for (const key of Object.keys(requestOptions.qs)) {
-			const value = requestOptions.qs[key];
+			const rawValue = requestOptions.qs[key];
+			const value = Array.isArray(rawValue) ? rawValue[0] : rawValue;
 			if (value === '' || value == null || AI_AGENT_PLACEHOLDER_STRINGS.includes(value as string)) {
 				delete requestOptions.qs[key];
+			} else {
+				requestOptions.qs[key] = value;
 			}
 		}
 	}
