@@ -10,8 +10,6 @@ export class SearchApi implements ICredentialType {
 	name = 'searchApi';
 	displayName = 'SearchApi API';
 
-	// Uses the link to this tutorial as an example
-	// Replace with your own docs links when building your own nodes
 	documentationUrl = 'https://www.searchapi.io/docs/google';
 	icon: Icon = 'file:../nodes/SearchApi/searchApi.svg';
 	properties: INodeProperties[] = [
@@ -21,26 +19,30 @@ export class SearchApi implements ICredentialType {
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
-            required: true,
+			required: true,
 		},
 	];
+
+	// Sent as a bearer token rather than an api_key query parameter, so the key
+	// does not end up in request URLs, execution data or proxy logs.
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
-        properties: {
-			qs: { api_key: '={{ $credentials.apiKey }}' },
-            headers: {
-                "X-SearchApi-Source": "N8N"
-            }
-        }
+		properties: {
+			headers: {
+				Authorization: '=Bearer {{ $credentials.apiKey }}',
+				'X-SearchApi-Source': 'N8N',
+			},
+		},
 	};
+
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://www.searchapi.io/api/v1/me',
 			method: 'GET',
-			qs: { api_key: '={{ $credentials.apiKey }}' },
 			headers: {
-				"X-SearchApi-Source": "N8N"
-			}
-		}
-	}
+				Authorization: '=Bearer {{ $credentials.apiKey }}',
+				'X-SearchApi-Source': 'N8N',
+			},
+		},
+	};
 }
