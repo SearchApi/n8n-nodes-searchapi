@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Google-Encoded Location (uule)',
+        displayName: 'Google-Encoded Location',
         name: 'uule',
         type: 'string',
         default: '',
@@ -51,7 +51,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -75,7 +75,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -100,7 +100,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
+        displayName: 'Google Domain',
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
@@ -114,7 +114,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Interface Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -150,7 +150,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -175,7 +175,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

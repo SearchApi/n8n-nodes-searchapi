@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -36,7 +36,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Chinese Language (ct)',
+        displayName: 'Chinese Language',
         name: 'ct',
         type: 'options',
         options: [
@@ -65,7 +65,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Time Period (gpc)',
+        displayName: 'Time Period',
         name: 'gpc',
         type: 'string',
         default: '',
@@ -89,7 +89,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
+        displayName: 'Page Number',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -107,7 +107,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Per Page (num)',
+        displayName: 'Results Per Page',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -135,7 +135,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

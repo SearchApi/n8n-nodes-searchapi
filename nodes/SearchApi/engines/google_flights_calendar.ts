@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Departure Id (departure_id)',
+    displayName: 'Departure ID',
     name: 'departure_id',
     type: 'string',
     required: true,
@@ -30,7 +30,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Arrival Id (arrival_id)',
+    displayName: 'Arrival ID',
     name: 'arrival_id',
     type: 'string',
     required: true,
@@ -46,7 +46,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Outbound Date (outbound_date)',
+    displayName: 'Outbound Date',
     name: 'outbound_date',
     type: 'string',
     required: true,
@@ -62,7 +62,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Return Date (return_date)',
+    displayName: 'Return Date',
     name: 'return_date',
     type: 'string',
     default: '',
@@ -84,7 +84,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Outbound Date End (outbound_date_end)',
+        displayName: 'Outbound Date End',
         name: 'outbound_date_end',
         type: 'string',
         default: '',
@@ -98,7 +98,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Outbound Date Start (outbound_date_start)',
+        displayName: 'Outbound Date Start',
         name: 'outbound_date_start',
         type: 'string',
         default: '',
@@ -112,7 +112,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Return Date End (return_date_end)',
+        displayName: 'Return Date End',
         name: 'return_date_end',
         type: 'string',
         default: '',
@@ -126,7 +126,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Return Date Start (return_date_start)',
+        displayName: 'Return Date Start',
         name: 'return_date_start',
         type: 'string',
         default: '',
@@ -150,7 +150,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Carry On Bags (carry_on_bags)',
+        displayName: 'Carry On Bags',
         name: 'carry_on_bags',
         type: 'number',
         typeOptions: {
@@ -167,7 +167,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Checked Bags (checked_bags)',
+        displayName: 'Checked Bags',
         name: 'checked_bags',
         type: 'number',
         typeOptions: {
@@ -184,12 +184,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Emissions (emissions)',
+        displayName: 'Emissions',
         name: 'emissions',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Less emisions only', value: '1' },
+          { name: 'Less Emisions Only', value: '1' },
         ],
         default: '',
         description: 'Defines the emission level of the flight. Use 1 to show only flights with lower than typical emissions for that route.',
@@ -202,7 +202,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Excluded Airlines (excluded_airlines)',
+        displayName: 'Excluded Airlines',
         name: 'excluded_airlines',
         type: 'string',
         default: '',
@@ -216,7 +216,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Excluded Connecting Airports (excluded_connecting_airports)',
+        displayName: 'Excluded Connecting Airports',
         name: 'excluded_connecting_airports',
         type: 'string',
         default: '',
@@ -230,14 +230,14 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Flight Type (flight_type)',
+        displayName: 'Flight Type',
         name: 'flight_type',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Multi city', value: 'multi_city' },
-          { name: 'One way', value: 'one_way' },
-          { name: 'Round trip', value: 'round_trip' },
+          { name: 'Multi City', value: 'multi_city' },
+          { name: 'One Way', value: 'one_way' },
+          { name: 'Round Trip', value: 'round_trip' },
         ],
         default: '',
         description: 'Defines the type of the flights',
@@ -250,7 +250,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Included Airlines (included_airlines)',
+        displayName: 'Included Airlines',
         name: 'included_airlines',
         type: 'string',
         default: '',
@@ -264,7 +264,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Included Connecting Airports (included_connecting_airports)',
+        displayName: 'Included Connecting Airports',
         name: 'included_connecting_airports',
         type: 'string',
         default: '',
@@ -278,7 +278,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Layover Duration Max (layover_duration_max)',
+        displayName: 'Layover Duration Max',
         name: 'layover_duration_max',
         type: 'number',
         typeOptions: {
@@ -297,7 +297,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Layover Duration Min (layover_duration_min)',
+        displayName: 'Layover Duration Min',
         name: 'layover_duration_min',
         type: 'number',
         typeOptions: {
@@ -315,7 +315,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Max Flight Duration (max_flight_duration)',
+        displayName: 'Max Flight Duration',
         name: 'max_flight_duration',
         type: 'number',
         typeOptions: {
@@ -334,7 +334,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Max Price (max_price)',
+        displayName: 'Max Price',
         name: 'max_price',
         type: 'number',
         typeOptions: {
@@ -353,7 +353,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Outbound Times (outbound_times)',
+        displayName: 'Outbound Times',
         name: 'outbound_times',
         type: 'string',
         default: '',
@@ -367,7 +367,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Return Times (return_times)',
+        displayName: 'Return Times',
         name: 'return_times',
         type: 'string',
         default: '',
@@ -381,13 +381,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Separate Tickets (separate_tickets)',
+        displayName: 'Separate Tickets',
         name: 'separate_tickets',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Hide separate & self-transfer tickets', value: '1' },
-          { name: 'Show separate tickets', value: '0' },
+          { name: 'Hide Separate & Self-Transfer Tickets', value: '1' },
+          { name: 'Show Separate Tickets', value: '0' },
         ],
         default: '',
         description: 'Defines whether to display separate tickets. The default value is 0. Set to 1 to hide separate and self-transfer tickets, or 0 to show them.',
@@ -400,14 +400,14 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Stops (stops)',
+        displayName: 'Stops',
         name: 'stops',
         type: 'options',
         options: [
           { name: 'Any', value: 'any' },
           { name: 'Nonstop', value: 'nonstop' },
-          { name: 'One stop or fewer', value: 'one_stop_or_fewer' },
-          { name: 'Two stops or fewer', value: 'two_stops_or_fewer' },
+          { name: 'One Stop or Fewer', value: 'one_stop_or_fewer' },
+          { name: 'Two Stops or Fewer', value: 'two_stops_or_fewer' },
         ],
         default: 'any',
         description: 'Defines the number of stops during the flight',
@@ -420,15 +420,15 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Travel Class (travel_class)',
+        displayName: 'Travel Class',
         name: 'travel_class',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
           { name: 'Business', value: 'business' },
           { name: 'Economy', value: 'economy' },
-          { name: 'First class', value: 'first_class' },
-          { name: 'Premium economy', value: 'premium_economy' },
+          { name: 'First Class', value: 'first_class' },
+          { name: 'Premium Economy', value: 'premium_economy' },
         ],
         default: '',
         description: 'Defines the travel class',
@@ -451,7 +451,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Adults (adults)',
+        displayName: 'Adults',
         name: 'adults',
         type: 'number',
         typeOptions: {
@@ -469,7 +469,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Children (children)',
+        displayName: 'Children',
         name: 'children',
         type: 'number',
         typeOptions: {
@@ -487,7 +487,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Infants In Seat (infants_in_seat)',
+        displayName: 'Infants In Seat',
         name: 'infants_in_seat',
         type: 'number',
         typeOptions: {
@@ -505,7 +505,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Infants On Lap (infants_on_lap)',
+        displayName: 'Infants On Lap',
         name: 'infants_on_lap',
         type: 'number',
         typeOptions: {
@@ -533,7 +533,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -564,7 +564,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Currency (currency)',
+        displayName: 'Currency',
         name: 'currency',
         type: 'options',
         options: currencyOptions([
@@ -586,7 +586,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -622,7 +622,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

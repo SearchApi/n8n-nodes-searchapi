@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Page ID (page_id)',
+    displayName: 'Page ID',
     name: 'page_id',
     type: 'string',
     required: true,
@@ -36,7 +36,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Data Retention (zero_retention)',
+        displayName: 'Zero Data Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

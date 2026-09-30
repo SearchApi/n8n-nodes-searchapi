@@ -21,7 +21,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Advertiser (advertiser)',
+        displayName: 'Advertiser',
         name: 'advertiser',
         type: 'string',
         default: '',
@@ -35,7 +35,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Country (country)',
+        displayName: 'Country',
         name: 'country',
         type: 'options',
         options: countryOptions([
@@ -66,7 +66,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Keyword (q)',
+        displayName: 'Keyword',
         name: 'q',
         type: 'string',
         default: '',
@@ -80,7 +80,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'string',
         default: '',
@@ -104,7 +104,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -129,7 +129,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

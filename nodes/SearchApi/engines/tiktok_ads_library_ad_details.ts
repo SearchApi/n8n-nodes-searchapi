@@ -13,12 +13,12 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Ad ID (ad_id)',
+    displayName: 'Ad ID',
     name: 'ad_id',
     type: 'string',
     required: true,
     default: '',
-    description: 'The unique identifier of the TikTok Ad. You can obtain this from the TikTok Ads Library API results (the id field of each ad).',
+    description: 'The unique identifier of the TikTok Ad. You can obtain this from the TikTok Ads Library API results (the ID field of each ad).',
     displayOptions,
     routing: {
       request: {
@@ -36,7 +36,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

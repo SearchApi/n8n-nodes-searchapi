@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Video ID (video_id)',
+    displayName: 'Video ID',
     name: 'video_id',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Language (lang)',
+        displayName: 'Language',
         name: 'lang',
         type: 'options',
         options: languageOptions([
@@ -72,7 +72,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Only Available (only_available)',
+        displayName: 'Only Available',
         name: 'only_available',
         type: 'boolean',
         default: false,
@@ -86,7 +86,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Transcript Name (transcript_name)',
+        displayName: 'Transcript Name',
         name: 'transcript_name',
         type: 'string',
         default: '',
@@ -100,7 +100,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Transcript Type (transcript_type)',
+        displayName: 'Transcript Type',
         name: 'transcript_type',
         type: 'options',
         options: [
@@ -129,7 +129,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

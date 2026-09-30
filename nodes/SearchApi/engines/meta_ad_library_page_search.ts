@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (country)',
+        displayName: 'Country',
         name: 'country',
         type: 'options',
         options: countryOptions([
@@ -78,16 +78,16 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Ad Type (ad_type)',
+        displayName: 'Ad Type',
         name: 'ad_type',
         type: 'options',
         options: [
           { name: 'All', value: 'all' },
           { name: 'Any', value: '' },
-          { name: 'Credit ads', value: 'credit_ads' },
-          { name: 'Employment ads', value: 'employment_ads' },
-          { name: 'Housing ads', value: 'housing_ads' },
-          { name: 'Political and issue ads', value: 'political_and_issue_ads' },
+          { name: 'Credit Ads', value: 'credit_ads' },
+          { name: 'Employment Ads', value: 'employment_ads' },
+          { name: 'Housing Ads', value: 'housing_ads' },
+          { name: 'Political and Issue Ads', value: 'political_and_issue_ads' },
         ],
         default: '',
         description: 'Specifies the type of ads to return. Default is all. Supported values include: all, political_and_issue_ads, housing_ads, employment_ads, credit_ads. Note: Availability may depend on the selected country.',
@@ -110,7 +110,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

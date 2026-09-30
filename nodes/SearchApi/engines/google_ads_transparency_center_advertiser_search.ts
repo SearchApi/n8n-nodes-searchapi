@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Num Advertisers (num_advertisers)',
+        displayName: 'Num Advertisers',
         name: 'num_advertisers',
         type: 'number',
         typeOptions: {
@@ -54,7 +54,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Num Domains (num_domains)',
+        displayName: 'Num Domains',
         name: 'num_domains',
         type: 'number',
         typeOptions: {
@@ -71,7 +71,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Region (region)',
+        displayName: 'Region',
         name: 'region',
         type: 'options',
         options: countryOptions([
@@ -112,7 +112,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

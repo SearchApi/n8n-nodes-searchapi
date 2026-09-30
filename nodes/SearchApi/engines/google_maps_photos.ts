@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Place ID (place_id)',
+    displayName: 'Place ID',
     name: 'place_id',
     type: 'string',
     default: '',
@@ -28,7 +28,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Data ID (data_id)',
+    displayName: 'Data ID',
     name: 'data_id',
     type: 'string',
     default: '',
@@ -50,7 +50,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Category ID (category_id)',
+        displayName: 'Category ID',
         name: 'category_id',
         type: 'string',
         default: '',
@@ -74,7 +74,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -99,7 +99,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

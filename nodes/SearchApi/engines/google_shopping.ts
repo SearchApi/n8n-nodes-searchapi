@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -58,7 +58,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
+        displayName: 'Google Domain',
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
@@ -72,7 +72,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -108,7 +108,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Encoded Location (uule)',
+        displayName: 'Encoded Location',
         name: 'uule',
         type: 'string',
         default: '',
@@ -122,7 +122,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -146,7 +146,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Condition (condition)',
+        displayName: 'Condition',
         name: 'condition',
         type: 'options',
         options: [
@@ -165,7 +165,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Include Base Images (include_base_images)',
+        displayName: 'Include Base Images',
         name: 'include_base_images',
         type: 'boolean',
         default: false,
@@ -179,7 +179,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Include Favicon (include_favicon)',
+        displayName: 'Include Favicon',
         name: 'include_favicon',
         type: 'boolean',
         default: false,
@@ -193,7 +193,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Is Free Delivery (is_free_delivery)',
+        displayName: 'Is Free Delivery',
         name: 'is_free_delivery',
         type: 'boolean',
         default: false,
@@ -207,7 +207,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Is On Sale (is_on_sale)',
+        displayName: 'Is On Sale',
         name: 'is_on_sale',
         type: 'boolean',
         default: false,
@@ -221,7 +221,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Is Small Business (is_small_business)',
+        displayName: 'Is Small Business',
         name: 'is_small_business',
         type: 'boolean',
         default: false,
@@ -235,7 +235,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Price Max (price_max)',
+        displayName: 'Price Max',
         name: 'price_max',
         type: 'string',
         default: '',
@@ -249,7 +249,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Price Min (price_min)',
+        displayName: 'Price Min',
         name: 'price_min',
         type: 'string',
         default: '',
@@ -263,7 +263,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Shopping Filters (shoprs)',
+        displayName: 'Shopping Filters',
         name: 'shoprs',
         type: 'string',
         default: '',
@@ -277,15 +277,15 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Price high to low', value: 'price_high_to_low' },
-          { name: 'Price low to high', value: 'price_low_to_high' },
+          { name: 'Price High to Low', value: 'price_high_to_low' },
+          { name: 'Price Low to High', value: 'price_low_to_high' },
           { name: 'Relevance', value: 'relevance' },
-          { name: 'Review score', value: 'review_score' },
+          { name: 'Review Score', value: 'review_score' },
         ],
         default: '',
         description: 'Sorts the shopping results by the specified criteria. If shoprs is also provided, it takes priority and this parameter is ignored.',
@@ -301,7 +301,7 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Page Number (page)',
+    displayName: 'Page Number',
     name: 'page',
     type: 'number',
     typeOptions: {
@@ -327,7 +327,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

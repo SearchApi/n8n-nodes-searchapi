@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Locale (locale)',
+        displayName: 'Locale',
         name: 'locale',
         type: 'options',
         options: localeOptions([
@@ -70,14 +70,14 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Safe (safe)',
+        displayName: 'Safe',
         name: 'safe',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
           { name: 'Moderate', value: 'moderate' },
           { name: 'Off', value: 'off' },
-          { name: 'on', value: 'on' },
+          { name: 'On', value: 'on' },
         ],
         default: '',
         description: 'Filter level for adult content',
@@ -90,16 +90,16 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Any time', value: 'any_time' },
-          { name: 'Past day', value: 'past_day' },
-          { name: 'Past month', value: 'past_month' },
-          { name: 'Past week', value: 'past_week' },
-          { name: 'Past year', value: 'past_year' },
+          { name: 'Any Time', value: 'any_time' },
+          { name: 'Past Day', value: 'past_day' },
+          { name: 'Past Month', value: 'past_month' },
+          { name: 'Past Week', value: 'past_week' },
+          { name: 'Past Year', value: 'past_year' },
         ],
         default: '',
         description: 'Filters results by date. Supports a custom date range using the format YYYY-MM-DD..YYYY-MM-DD.',
@@ -122,7 +122,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -147,7 +147,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

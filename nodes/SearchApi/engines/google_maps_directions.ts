@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'From (from)',
+    displayName: 'From',
     name: 'from',
     type: 'string',
     required: true,
@@ -30,7 +30,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'To (to)',
+    displayName: 'To',
     name: 'to',
     type: 'string',
     required: true,
@@ -53,7 +53,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Avoid (avoid)',
+        displayName: 'Avoid',
         name: 'avoid',
         type: 'options',
         options: [
@@ -73,13 +73,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Distance Units (distance_units)',
+        displayName: 'Distance Units',
         name: 'distance_units',
         type: 'options',
         options: [
           { name: 'Automatic', value: 'automatic' },
-          { name: 'km', value: 'km' },
-          { name: 'mi', value: 'mi' },
+          { name: 'Km', value: 'km' },
+          { name: 'Mi', value: 'mi' },
         ],
         default: 'automatic',
         description: 'Unit of distance measurements in the response. Options: automatic (Default), km (Kilometers), mi (Miles). Not supported when travel_mode is flying or transit.',
@@ -92,7 +92,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Prefer (prefer)',
+        displayName: 'Prefer',
         name: 'prefer',
         type: 'options',
         options: [
@@ -100,7 +100,7 @@ const properties: INodeProperties[] = [
           { name: 'Bus', value: 'bus' },
           { name: 'Subway', value: 'subway' },
           { name: 'Train', value: 'train' },
-          { name: 'Tram and light rail', value: 'tram_and_light_rail' },
+          { name: 'Tram and Light Rail', value: 'tram_and_light_rail' },
         ],
         default: '',
         description: 'Preferred transit types for transit directions. Options: bus, subway, train, tram_and_light_rail. Example: ["bus", "subway"]. Only supported when travel_mode is transit.',
@@ -113,14 +113,14 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Route (route)',
+        displayName: 'Route',
         name: 'route',
         type: 'options',
         options: [
           { name: 'Best', value: 'best' },
-          { name: 'Fewer transfers', value: 'fewer_transfers' },
-          { name: 'Less walking', value: 'less_walking' },
-          { name: 'Wheelchair accessible', value: 'wheelchair_accessible' },
+          { name: 'Fewer Transfers', value: 'fewer_transfers' },
+          { name: 'Less Walking', value: 'less_walking' },
+          { name: 'Wheelchair Accessible', value: 'wheelchair_accessible' },
         ],
         default: 'best',
         description: 'Route preference for transit directions. Options: best (Default), fewer_transfers, less_walking, wheelchair_accessible. Only supported when travel_mode is transit.',
@@ -133,7 +133,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time (time)',
+        displayName: 'Time',
         name: 'time',
         type: 'string',
         default: '',
@@ -147,7 +147,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Travel Mode (travel_mode)',
+        displayName: 'Travel Mode',
         name: 'travel_mode',
         type: 'options',
         options: [
@@ -169,7 +169,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Waypoints (waypoints)',
+        displayName: 'Waypoints',
         name: 'waypoints',
         type: 'string',
         default: '',
@@ -193,7 +193,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -224,7 +224,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -260,7 +260,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

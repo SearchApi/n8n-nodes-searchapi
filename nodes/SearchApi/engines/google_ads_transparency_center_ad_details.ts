@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Advertiser ID (advertiser_id)',
+    displayName: 'Advertiser ID',
     name: 'advertiser_id',
     type: 'string',
     required: true,
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Creative ID (creative_id)',
+    displayName: 'Creative ID',
     name: 'creative_id',
     type: 'string',
     required: true,
@@ -52,7 +52,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

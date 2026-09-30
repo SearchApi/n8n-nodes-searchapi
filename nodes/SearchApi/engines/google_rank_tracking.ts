@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Device (device)',
+        displayName: 'Device',
         name: 'device',
         type: 'options',
         options: [
@@ -66,7 +66,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Encoded Location (uule)',
+        displayName: 'Encoded Location',
         name: 'uule',
         type: 'string',
         default: '',
@@ -80,7 +80,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -104,7 +104,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -135,7 +135,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
+        displayName: 'Google Domain',
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
@@ -149,7 +149,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -175,7 +175,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language Restrict (lr)',
+        displayName: 'Language Restrict',
         name: 'lr',
         type: 'options',
         options: languageOptions([
@@ -206,7 +206,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page (page)',
+        displayName: 'Page',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -225,7 +225,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Count (num)',
+        displayName: 'Results Count',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -244,13 +244,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Safe (safe)',
+        displayName: 'Safe',
         name: 'safe',
         type: 'options',
         options: [
-          { name: 'Blur explicit images', value: 'blur' },
+          { name: 'Blur Explicit Images', value: 'blur' },
           { name: 'Disable SafeSearch', value: 'off' },
-          { name: 'Enable strict SafeSearch', value: 'active' },
+          { name: 'Enable Strict SafeSearch', value: 'active' },
         ],
         default: 'blur',
         description: 'Toggles the SafeSearch feature',
@@ -273,7 +273,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

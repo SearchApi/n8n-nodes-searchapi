@@ -21,7 +21,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Advertiser ID (advertiser_id)',
+        displayName: 'Advertiser ID',
         name: 'advertiser_id',
         type: 'string',
         default: '',
@@ -35,7 +35,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Domain (domain)',
+        displayName: 'Domain',
         name: 'domain',
         type: 'options',
         options: [
@@ -69,7 +69,7 @@ const properties: INodeProperties[] = [
           { name: 'Google.co.bw', value: 'google.co.bw' },
           { name: 'Google.co.ck', value: 'google.co.ck' },
           { name: 'Google.co.cr', value: 'google.co.cr' },
-          { name: 'Google.co.id', value: 'google.co.id' },
+          { name: 'Google.co.ID', value: 'google.co.id' },
           { name: 'Google.co.il', value: 'google.co.il' },
           { name: 'Google.co.in', value: 'google.co.in' },
           { name: 'Google.co.jp', value: 'google.co.jp' },
@@ -253,7 +253,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Ad Format (ad_format)',
+        displayName: 'Ad Format',
         name: 'ad_format',
         type: 'options',
         options: [
@@ -273,15 +273,15 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Platform (platform)',
+        displayName: 'Platform',
         name: 'platform',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Google maps', value: 'google_maps' },
-          { name: 'Google play', value: 'google_play' },
-          { name: 'Google search', value: 'google_search' },
-          { name: 'Google shopping', value: 'google_shopping' },
+          { name: 'Google Maps', value: 'google_maps' },
+          { name: 'Google Play', value: 'google_play' },
+          { name: 'Google Search', value: 'google_search' },
+          { name: 'Google Shopping', value: 'google_shopping' },
           { name: 'Youtube', value: 'youtube' },
         ],
         default: '',
@@ -295,7 +295,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Region (region)',
+        displayName: 'Region',
         name: 'region',
         type: 'options',
         options: countryOptions([
@@ -326,13 +326,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Last 30 days', value: 'last_30_days' },
-          { name: 'Last 7 days', value: 'last_7_days' },
+          { name: 'Last 30 Days', value: 'last_30_days' },
+          { name: 'Last 7 Days', value: 'last_7_days' },
           { name: 'Today', value: 'today' },
           { name: 'Yesterday', value: 'yesterday' },
         ],
@@ -357,7 +357,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -372,7 +372,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Per Page (num)',
+        displayName: 'Results Per Page',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -401,7 +401,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

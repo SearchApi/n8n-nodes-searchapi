@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Place ID (place_id)',
+    displayName: 'Place ID',
     name: 'place_id',
     type: 'string',
     default: '',
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Data ID (data_id)',
+    displayName: 'Data ID',
     name: 'data_id',
     type: 'string',
     default: '',
@@ -51,7 +51,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -82,7 +82,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -118,7 +118,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

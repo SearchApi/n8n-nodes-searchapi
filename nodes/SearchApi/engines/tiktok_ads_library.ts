@@ -21,11 +21,11 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Advertiser ID (advertiser_id)',
+        displayName: 'Advertiser ID',
         name: 'advertiser_id',
         type: 'string',
         default: '',
-        description: 'Specifies the unique advertiser ID to search for ads from a specific advertiser. You can obtain the advertiser ID by: Using the TikTok Ads Library Ad Details API (the advertiser.id field) Inspecting the adv_biz_ids URL parameter in the TikTok Ads Library UI.',
+        description: 'Specifies the unique advertiser ID to search for ads from a specific advertiser. You can obtain the advertiser ID by: Using the TikTok Ads Library Ad Details API (the advertiser object) or inspecting the adv_biz_ids URL parameter in the TikTok Ads Library UI.',
         routing: {
           request: {
             qs: {
@@ -35,7 +35,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Search Query (q)',
+        displayName: 'Search Query',
         name: 'q',
         type: 'string',
         default: '',
@@ -59,7 +59,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (country)',
+        displayName: 'Country',
         name: 'country',
         type: 'options',
         options: countryOptions([
@@ -88,17 +88,17 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Last shown date newest to oldest', value: 'last_shown_date_newest_to_oldest' },
-          { name: 'Last shown date oldest to newest', value: 'last_shown_date_oldest_to_newest' },
-          { name: 'Published date newest to oldest', value: 'published_date_newest_to_oldest' },
-          { name: 'Published date oldest to newest', value: 'published_date_oldest_to_newest' },
-          { name: 'Unique users seen high to low', value: 'unique_users_seen_high_to_low' },
-          { name: 'Unique users seen low to high', value: 'unique_users_seen_low_to_high' },
+          { name: 'Last Shown Date Newest to Oldest', value: 'last_shown_date_newest_to_oldest' },
+          { name: 'Last Shown Date Oldest to Newest', value: 'last_shown_date_oldest_to_newest' },
+          { name: 'Published Date Newest to Oldest', value: 'published_date_newest_to_oldest' },
+          { name: 'Published Date Oldest to Newest', value: 'published_date_oldest_to_newest' },
+          { name: 'Unique Users Seen High to Low', value: 'unique_users_seen_high_to_low' },
+          { name: 'Unique Users Seen Low to High', value: 'unique_users_seen_low_to_high' },
         ],
         default: '',
         description: 'Specifies the sorting order for ads. If not specified, defaults to last_shown_date_newest_to_oldest.',
@@ -111,7 +111,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'string',
         default: '',
@@ -135,7 +135,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -160,7 +160,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

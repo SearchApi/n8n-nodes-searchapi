@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     default: '',
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Kgmid (kgmid)',
+    displayName: 'Kgmid',
     name: 'kgmid',
     type: 'string',
     default: '',
@@ -44,7 +44,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Device (device)',
+    displayName: 'Device',
     name: 'device',
     type: 'options',
     options: [
@@ -71,7 +71,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Encoded Location (uule)',
+        displayName: 'Encoded Location',
         name: 'uule',
         type: 'string',
         default: '',
@@ -85,7 +85,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -109,7 +109,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -140,7 +140,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Country Restrict (cr)',
+        displayName: 'Country Restrict',
         name: 'cr',
         type: 'options',
         options: countryOptions([
@@ -170,7 +170,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
+        displayName: 'Google Domain',
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
@@ -184,7 +184,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -210,7 +210,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language Restrict (lr)',
+        displayName: 'Language Restrict',
         name: 'lr',
         type: 'options',
         options: languageOptions([
@@ -241,12 +241,12 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Filter (filter)',
+        displayName: 'Filter',
         name: 'filter',
         type: 'options',
         options: [
-          { name: 'Disable "Duplicate Content" and "Host Crowding" filters', value: '0' },
-          { name: 'Enable "Duplicate Content" and "Host Crowding" filters', value: '1' },
+          { name: 'Disable "Duplicate Content" and "Host Crowding" Filters', value: '0' },
+          { name: 'Enable "Duplicate Content" and "Host Crowding" Filters', value: '1' },
         ],
         default: '1',
         description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Defaults to 1 (enabled).',
@@ -259,12 +259,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Nfpr (nfpr)',
+        displayName: 'Nfpr',
         name: 'nfpr',
         type: 'options',
         options: [
-          { name: 'Exclude auto-corrected results', value: '1' },
-          { name: 'Include auto-corrected results', value: '0' },
+          { name: 'Exclude Auto-Corrected Results', value: '1' },
+          { name: 'Include Auto-Corrected Results', value: '0' },
         ],
         default: '0',
         description: 'Controls whether results from auto-corrected spelling queries are included. Set to 1 to exclude auto-corrected results. Defaults to 0 (auto-corrected results included).',
@@ -277,13 +277,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Safe (safe)',
+        displayName: 'Safe',
         name: 'safe',
         type: 'options',
         options: [
-          { name: 'Blur explicit images', value: 'blur' },
+          { name: 'Blur Explicit Images', value: 'blur' },
           { name: 'Disable SafeSearch', value: 'off' },
-          { name: 'Enable strict SafeSearch', value: 'active' },
+          { name: 'Enable Strict SafeSearch', value: 'active' },
         ],
         default: 'blur',
         description: 'Toggles the SafeSearch feature, which filters adult content from search results using Google\'s proprietary keyword, phrase, and URL analysis. Defaults to blur.',
@@ -296,20 +296,20 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Last 1 minute', value: 'last_1_minute' },
-          { name: 'Last 15 minutes', value: 'last_15_minutes' },
-          { name: 'Last 30 minutes', value: 'last_30_minutes' },
-          { name: 'Last 5 minutes', value: 'last_5_minutes' },
-          { name: 'Last day', value: 'last_day' },
-          { name: 'Last hour', value: 'last_hour' },
-          { name: 'Last month', value: 'last_month' },
-          { name: 'Last week', value: 'last_week' },
-          { name: 'Last year', value: 'last_year' },
+          { name: 'Last 1 Minute', value: 'last_1_minute' },
+          { name: 'Last 15 Minutes', value: 'last_15_minutes' },
+          { name: 'Last 30 Minutes', value: 'last_30_minutes' },
+          { name: 'Last 5 Minutes', value: 'last_5_minutes' },
+          { name: 'Last Day', value: 'last_day' },
+          { name: 'Last Hour', value: 'last_hour' },
+          { name: 'Last Month', value: 'last_month' },
+          { name: 'Last Week', value: 'last_week' },
+          { name: 'Last Year', value: 'last_year' },
         ],
         default: '',
         description: 'Restricts results to URLs based on date. Use time_period_min or time_period_max for a custom date range.',
@@ -322,7 +322,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period Max (time_period_max)',
+        displayName: 'Time Period Max',
         name: 'time_period_max',
         type: 'string',
         default: '',
@@ -336,7 +336,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period Min (time_period_min)',
+        displayName: 'Time Period Min',
         name: 'time_period_min',
         type: 'string',
         default: '',
@@ -350,7 +350,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Verbatim (verbatim)',
+        displayName: 'Verbatim',
         name: 'verbatim',
         type: 'options',
         options: [
@@ -378,7 +378,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
+        displayName: 'Page Number',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -396,7 +396,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Per Page (num)',
+        displayName: 'Results Per Page',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -417,7 +417,7 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Optimization Strategy (optimization_strategy)',
+    displayName: 'Optimization Strategy',
     name: 'optimization_strategy',
     type: 'options',
     options: [
@@ -443,7 +443,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

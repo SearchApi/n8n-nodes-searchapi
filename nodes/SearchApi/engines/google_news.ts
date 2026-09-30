@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Device (device)',
+        displayName: 'Device',
         name: 'device',
         type: 'options',
         options: [
@@ -66,7 +66,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -80,7 +80,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'UULE (uule)',
+        displayName: 'UULE',
         name: 'uule',
         type: 'string',
         default: '',
@@ -104,7 +104,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -135,7 +135,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'CR (cr)',
+        displayName: 'CR',
         name: 'cr',
         type: 'options',
         options: countryOptions([
@@ -165,7 +165,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Google Domain (google_domain)',
+        displayName: 'Google Domain',
         name: 'google_domain',
         type: 'string',
         default: 'google.com',
@@ -179,7 +179,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -199,7 +199,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'LR (lr)',
+        displayName: 'LR',
         name: 'lr',
         type: 'options',
         options: languageOptions([
@@ -230,12 +230,12 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Filter (filter)',
+        displayName: 'Filter',
         name: 'filter',
         type: 'options',
         options: [
-          { name: 'Disable "Duplicate Content" and "Host Crowding" filters', value: '0' },
-          { name: 'Enable "Duplicate Content" and "Host Crowding" filters', value: '1' },
+          { name: 'Disable "Duplicate Content" and "Host Crowding" Filters', value: '0' },
+          { name: 'Enable "Duplicate Content" and "Host Crowding" Filters', value: '1' },
         ],
         default: '1',
         description: 'Controls whether the "Duplicate Content" and "Host Crowding" filters are enabled. Set the value to 1 to enable these filters, which is the default setting. To disable these filters, set the value to 0.',
@@ -248,12 +248,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'NFPR (nfpr)',
+        displayName: 'NFPR',
         name: 'nfpr',
         type: 'options',
         options: [
-          { name: 'Exclude auto-corrected results', value: '1' },
-          { name: 'Include auto-corrected results', value: '0' },
+          { name: 'Exclude Auto-Corrected Results', value: '1' },
+          { name: 'Include Auto-Corrected Results', value: '0' },
         ],
         default: '0',
         description: 'Controls whether results from queries that have been auto-corrected for spelling errors are included. To exclude these auto-corrected results, set the value to 1. By default, the value is 0, meaning auto-corrected results are included.',
@@ -266,12 +266,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Most recent', value: 'most_recent' },
+          { name: 'Most Recent', value: 'most_recent' },
         ],
         default: '',
         description: 'By default, news results are sorted by relevance. To get the most recent articles, set it to most_recent.',
@@ -284,20 +284,20 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Last 1 minute', value: 'last_1_minute' },
-          { name: 'Last 15 minutes', value: 'last_15_minutes' },
-          { name: 'Last 30 minutes', value: 'last_30_minutes' },
-          { name: 'Last 5 minutes', value: 'last_5_minutes' },
-          { name: 'Last day', value: 'last_day' },
-          { name: 'Last hour', value: 'last_hour' },
-          { name: 'Last month', value: 'last_month' },
-          { name: 'Last week', value: 'last_week' },
-          { name: 'Last year', value: 'last_year' },
+          { name: 'Last 1 Minute', value: 'last_1_minute' },
+          { name: 'Last 15 Minutes', value: 'last_15_minutes' },
+          { name: 'Last 30 Minutes', value: 'last_30_minutes' },
+          { name: 'Last 5 Minutes', value: 'last_5_minutes' },
+          { name: 'Last Day', value: 'last_day' },
+          { name: 'Last Hour', value: 'last_hour' },
+          { name: 'Last Month', value: 'last_month' },
+          { name: 'Last Week', value: 'last_week' },
+          { name: 'Last Year', value: 'last_year' },
         ],
         default: '',
         description: 'Restricts results to URLs based on date. Supported values are: last_hour - data from the past hour. last_day - data from the past 24 hours. last_week - data from the past week. last_month - data from the past month. last_year - data from the past year. Using time_period_min or time_period_max parameters, you can specify a custom time period. Note, that the time_period_min and time_period_max parameters could be used separately as well.',
@@ -310,7 +310,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period Max (time_period_max)',
+        displayName: 'Time Period Max',
         name: 'time_period_max',
         type: 'string',
         default: '',
@@ -324,7 +324,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period Min (time_period_min)',
+        displayName: 'Time Period Min',
         name: 'time_period_min',
         type: 'string',
         default: '',
@@ -348,7 +348,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page (page)',
+        displayName: 'Page',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -376,7 +376,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

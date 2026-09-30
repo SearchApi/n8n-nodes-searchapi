@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Device (device)',
+        displayName: 'Device',
         name: 'device',
         type: 'options',
         options: [
@@ -66,7 +66,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Latitude (lat)',
+        displayName: 'Latitude',
         name: 'lat',
         type: 'string',
         default: '',
@@ -80,7 +80,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Location (location)',
+        displayName: 'Location',
         name: 'location',
         type: 'string',
         default: '',
@@ -94,7 +94,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Longitude (lon)',
+        displayName: 'Longitude',
         name: 'lon',
         type: 'string',
         default: '',
@@ -108,7 +108,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Market Code (market_code)',
+        displayName: 'Market Code',
         name: 'market_code',
         type: 'options',
         options: [
@@ -120,7 +120,7 @@ const properties: INodeProperties[] = [
           { name: 'en-au', value: 'en-au' },
           { name: 'en-ca', value: 'en-ca' },
           { name: 'en-gb', value: 'en-gb' },
-          { name: 'en-id', value: 'en-id' },
+          { name: 'En-ID', value: 'en-id' },
           { name: 'en-in', value: 'en-in' },
           { name: 'en-my', value: 'en-my' },
           { name: 'en-nz', value: 'en-nz' },
@@ -173,7 +173,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country Code (country_code)',
+        displayName: 'Country Code',
         name: 'country_code',
         type: 'options',
         options: countryOptions([
@@ -192,7 +192,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (language)',
+        displayName: 'Language',
         name: 'language',
         type: 'options',
         options: languageOptions([
@@ -222,7 +222,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Filters (filters)',
+        displayName: 'Filters',
         name: 'filters',
         type: 'string',
         default: '',
@@ -236,7 +236,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Safe Search (safe_search)',
+        displayName: 'Safe Search',
         name: 'safe_search',
         type: 'options',
         options: [
@@ -265,7 +265,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
+        displayName: 'Page Number',
         name: 'page',
         type: 'string',
         default: '1',
@@ -279,7 +279,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Per Page (num)',
+        displayName: 'Results Per Page',
         name: 'num',
         type: 'string',
         default: '10',
@@ -303,7 +303,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

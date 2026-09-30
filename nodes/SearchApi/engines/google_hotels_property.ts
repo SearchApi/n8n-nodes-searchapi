@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Property Token (property_token)',
+    displayName: 'Property Token',
     name: 'property_token',
     type: 'string',
     required: true,
@@ -31,7 +31,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Check In Date (check_in_date)',
+    displayName: 'Check In Date',
     name: 'check_in_date',
     type: 'string',
     required: true,
@@ -47,7 +47,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Check Out Date (check_out_date)',
+    displayName: 'Check Out Date',
     name: 'check_out_date',
     type: 'string',
     required: true,
@@ -70,7 +70,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -98,7 +98,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Currency (currency)',
+        displayName: 'Currency',
         name: 'currency',
         type: 'options',
         options: currencyOptions([
@@ -120,7 +120,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -151,7 +151,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Expanded Search (expanded_search)',
+        displayName: 'Expanded Search',
         name: 'expanded_search',
         type: 'boolean',
         default: false,
@@ -165,7 +165,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Free Cancellation (free_cancellation)',
+        displayName: 'Free Cancellation',
         name: 'free_cancellation',
         type: 'boolean',
         default: false,
@@ -189,7 +189,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Adults (adults)',
+        displayName: 'Adults',
         name: 'adults',
         type: 'number',
         typeOptions: {
@@ -208,7 +208,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Children Ages (children_ages)',
+        displayName: 'Children Ages',
         name: 'children_ages',
         type: 'string',
         default: '',
@@ -232,7 +232,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,
