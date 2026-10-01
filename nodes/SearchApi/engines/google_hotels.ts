@@ -371,7 +371,7 @@ const properties: INodeProperties[] = [
         name: 'brands',
         type: 'string',
         default: '',
-        description: 'A comma-separated list of hotel brands to include in the search results, allowing users to filter by preferred hotel chains. The possible values can be obtained from the initial request response under the brands[0].ID key.',
+        description: 'A comma-separated list of hotel brands to include in the search results, allowing users to filter by preferred hotel chains. The possible values are the brand identifiers returned in the brands array of an initial request.',
         routing: {
           request: {
             qs: {

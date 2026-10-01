@@ -69,7 +69,8 @@ const properties: INodeProperties[] = [
           { name: 'Google.co.bw', value: 'google.co.bw' },
           { name: 'Google.co.ck', value: 'google.co.ck' },
           { name: 'Google.co.cr', value: 'google.co.cr' },
-          { name: 'Google.co.ID', value: 'google.co.id' },
+          // eslint-disable-next-line n8n-nodes-base/node-param-display-name-miscased-id
+          { name: 'Google.co.id', value: 'google.co.id' },
           { name: 'Google.co.il', value: 'google.co.il' },
           { name: 'Google.co.in', value: 'google.co.in' },
           { name: 'Google.co.jp', value: 'google.co.jp' },

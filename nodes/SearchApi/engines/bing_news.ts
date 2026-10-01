@@ -29,10 +29,10 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Search Query',
+    displayName: 'Filters',
     name: 'search_query',
     type: 'collection',
-    placeholder: 'Add Search Query',
+    placeholder: 'Add Filters',
     default: {},
     options: [
       {
