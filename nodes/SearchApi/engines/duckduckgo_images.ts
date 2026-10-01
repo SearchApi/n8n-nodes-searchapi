@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Locale (locale)',
+        displayName: 'Locale',
         name: 'locale',
         type: 'options',
         options: localeOptions([
@@ -70,7 +70,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Color (color)',
+        displayName: 'Color',
         name: 'color',
         type: 'options',
         options: [
@@ -101,7 +101,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Image Type (image_type)',
+        displayName: 'Image Type',
         name: 'image_type',
         type: 'options',
         options: [
@@ -123,7 +123,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Layout (layout)',
+        displayName: 'Layout',
         name: 'layout',
         type: 'options',
         options: [
@@ -143,16 +143,16 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'License (license)',
+        displayName: 'License',
         name: 'license',
         type: 'options',
         options: [
           { name: 'Any', value: 'any' },
           { name: 'Modify', value: 'modify' },
-          { name: 'Modify commercially', value: 'modify_commercially' },
+          { name: 'Modify Commercially', value: 'modify_commercially' },
           { name: 'Public', value: 'public' },
           { name: 'Share', value: 'share' },
-          { name: 'Share commercially', value: 'share_commercially' },
+          { name: 'Share Commercially', value: 'share_commercially' },
         ],
         default: 'any',
         description: 'Filters images by license',
@@ -165,7 +165,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Size (size)',
+        displayName: 'Size',
         name: 'size',
         type: 'options',
         options: [
@@ -186,16 +186,16 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Any time', value: 'any_time' },
-          { name: 'Past day', value: 'past_day' },
-          { name: 'Past month', value: 'past_month' },
-          { name: 'Past week', value: 'past_week' },
-          { name: 'Past year', value: 'past_year' },
+          { name: 'Any Time', value: 'any_time' },
+          { name: 'Past Day', value: 'past_day' },
+          { name: 'Past Month', value: 'past_month' },
+          { name: 'Past Week', value: 'past_week' },
+          { name: 'Past Year', value: 'past_year' },
         ],
         default: '',
         description: 'Filters results by date',
@@ -218,7 +218,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -243,7 +243,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

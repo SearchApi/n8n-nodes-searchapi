@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Place ID (place_id)',
+    displayName: 'Place ID',
     name: 'place_id',
     type: 'string',
     default: '',
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Data ID (data_id)',
+    displayName: 'Data ID',
     name: 'data_id',
     type: 'string',
     default: '',
@@ -51,13 +51,13 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
-          { name: 'Highest rating', value: 'highest_rating' },
-          { name: 'Lowest rating', value: 'lowest_rating' },
-          { name: 'Most relevant', value: 'most_relevant' },
+          { name: 'Highest Rating', value: 'highest_rating' },
+          { name: 'Lowest Rating', value: 'lowest_rating' },
+          { name: 'Most Relevant', value: 'most_relevant' },
           { name: 'Newest', value: 'newest' },
         ],
         default: 'most_relevant',
@@ -71,7 +71,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Topic ID (topic_id)',
+        displayName: 'Topic ID',
         name: 'topic_id',
         type: 'string',
         default: '',
@@ -95,7 +95,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -126,7 +126,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -162,7 +162,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -177,7 +177,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Number of Reviews (num)',
+        displayName: 'Number of Reviews',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -206,7 +206,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

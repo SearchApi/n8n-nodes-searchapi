@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Check In Date (check_in_date)',
+    displayName: 'Check In Date',
     name: 'check_in_date',
     type: 'string',
     required: true,
@@ -30,7 +30,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Check Out Date (check_out_date)',
+    displayName: 'Check Out Date',
     name: 'check_out_date',
     type: 'string',
     required: true,
@@ -53,7 +53,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Bounding Box (bounding_box)',
+        displayName: 'Bounding Box',
         name: 'bounding_box',
         type: 'string',
         default: '',
@@ -67,7 +67,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Search Query (q)',
+        displayName: 'Search Query',
         name: 'q',
         type: 'string',
         default: '',
@@ -91,7 +91,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -122,7 +122,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Currency (currency)',
+        displayName: 'Currency',
         name: 'currency',
         type: 'options',
         options: currencyOptions([
@@ -144,7 +144,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -180,38 +180,38 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Amenities (amenities)',
+        displayName: 'Amenities',
         name: 'amenities',
         type: 'options',
         options: [
-          { name: 'Air-conditioned (16)', value: '16' },
-          { name: 'Air-conditioned (40)', value: '40' },
-          { name: 'All-inclusive available', value: '52' },
+          { name: 'Air-Conditioned (16)', value: '16' },
+          { name: 'Air-Conditioned (40)', value: '40' },
+          { name: 'All-Inclusive Available', value: '52' },
           { name: 'Any', value: '' },
           { name: 'Bar', value: '15' },
-          { name: 'Beach access (11)', value: '11' },
-          { name: 'Beach access (20)', value: '20' },
+          { name: 'Beach Access (11)', value: '11' },
+          { name: 'Beach Access (20)', value: '20' },
           { name: 'Crib', value: '18' },
-          { name: 'EV charger', value: '61' },
-          { name: 'Fitness centre', value: '7' },
-          { name: 'Free breakfast', value: '9' },
-          { name: 'Free parking', value: '1' },
+          { name: 'EV Charger', value: '61' },
+          { name: 'Fitness Centre', value: '7' },
+          { name: 'Free Breakfast', value: '9' },
+          { name: 'Free Parking', value: '1' },
           { name: 'Free Wi-Fi (29)', value: '29' },
           { name: 'Free Wi-Fi (35)', value: '35' },
-          { name: 'Hot tub', value: '2' },
-          { name: 'Indoor pool', value: '4' },
-          { name: 'Kid-friendly (12)', value: '12' },
-          { name: 'Kid-friendly (21)', value: '21' },
-          { name: 'Outdoor pool', value: '5' },
+          { name: 'Hot Tub', value: '2' },
+          { name: 'Indoor Pool', value: '4' },
+          { name: 'Kid-Friendly (12)', value: '12' },
+          { name: 'Kid-Friendly (21)', value: '21' },
+          { name: 'Outdoor Pool', value: '5' },
           { name: 'Parking', value: '3' },
-          { name: 'Pet-friendly (19)', value: '19' },
-          { name: 'Pet-friendly (24)', value: '24' },
+          { name: 'Pet-Friendly (19)', value: '19' },
+          { name: 'Pet-Friendly (24)', value: '24' },
           { name: 'Pool (32)', value: '32' },
           { name: 'Pool (6)', value: '6' },
           { name: 'Restaurant', value: '8' },
-          { name: 'Room service', value: '22' },
+          { name: 'Room Service', value: '22' },
           { name: 'Spa', value: '10' },
-          { name: 'Wheelchair accessible', value: '53' },
+          { name: 'Wheelchair Accessible', value: '53' },
         ],
         default: '',
         description: 'Defines a list of amenities that allows multiple categories that are separated by a comma. For example: 1,2. Check the full list of supported Google Hotels amenities values.',
@@ -224,7 +224,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Price Max (price_max)',
+        displayName: 'Price Max',
         name: 'price_max',
         type: 'number',
         typeOptions: {
@@ -241,7 +241,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Price Min (price_min)',
+        displayName: 'Price Min',
         name: 'price_min',
         type: 'number',
         typeOptions: {
@@ -258,12 +258,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Property Type (property_type)',
+        displayName: 'Property Type',
         name: 'property_type',
         type: 'options',
         options: [
           { name: 'Hotel', value: 'hotel' },
-          { name: 'Vacation rental', value: 'vacation_rental' },
+          { name: 'Vacation Rental', value: 'vacation_rental' },
         ],
         default: 'hotel',
         description: 'Defines the category of accommodation to search for. The hotel option also includes vacation rentals.',
@@ -276,7 +276,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Property Types (property_types)',
+        displayName: 'Property Types',
         name: 'property_types',
         type: 'options',
         options: [
@@ -291,12 +291,12 @@ const properties: INodeProperties[] = [
           { name: 'Chalets', value: '4' },
           { name: 'Cottages', value: '5' },
           { name: 'Gîtes', value: '6' },
-          { name: 'Holiday villages', value: '7' },
+          { name: 'Holiday Villages', value: '7' },
           { name: 'Hostels', value: '14' },
           { name: 'Houseboats', value: '9' },
           { name: 'Houses', value: '8' },
           { name: 'Inns', value: '15' },
-          { name: 'Japanese-style Business Hotels', value: '23' },
+          { name: 'Japanese-Style Business Hotels', value: '23' },
           { name: 'Minshuku', value: '22' },
           { name: 'Motels', value: '16' },
           { name: 'Other (11)', value: '11' },
@@ -317,7 +317,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Rating (rating)',
+        displayName: 'Rating',
         name: 'rating',
         type: 'options',
         options: [
@@ -337,13 +337,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
-          { name: 'Highest rating', value: 'highest_rating' },
-          { name: 'Lowest price', value: 'lowest_price' },
-          { name: 'Most reviewed', value: 'most_reviewed' },
+          { name: 'Highest Rating', value: 'highest_rating' },
+          { name: 'Lowest Price', value: 'lowest_price' },
+          { name: 'Most Reviewed', value: 'most_reviewed' },
           { name: 'Relevance', value: 'relevance' },
         ],
         default: 'relevance',
@@ -367,11 +367,11 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Brands (brands)',
+        displayName: 'Brands',
         name: 'brands',
         type: 'string',
         default: '',
-        description: 'A comma-separated list of hotel brands to include in the search results, allowing users to filter by preferred hotel chains. The possible values can be obtained from the initial request response under the brands[0].id key.',
+        description: 'A comma-separated list of hotel brands to include in the search results, allowing users to filter by preferred hotel chains. The possible values are the brand identifiers returned in the brands array of an initial request.',
         routing: {
           request: {
             qs: {
@@ -381,7 +381,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Eco Certified (eco_certified)',
+        displayName: 'Eco Certified',
         name: 'eco_certified',
         type: 'boolean',
         default: false,
@@ -395,7 +395,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'For Displaced Individuals (for_displaced_individuals)',
+        displayName: 'For Displaced Individuals',
         name: 'for_displaced_individuals',
         type: 'boolean',
         default: false,
@@ -409,7 +409,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Free Cancellation (free_cancellation)',
+        displayName: 'Free Cancellation',
         name: 'free_cancellation',
         type: 'boolean',
         default: false,
@@ -423,7 +423,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Hotel Class (hotel_class)',
+        displayName: 'Hotel Class',
         name: 'hotel_class',
         type: 'options',
         options: [
@@ -444,7 +444,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Special Offers (special_offers)',
+        displayName: 'Special Offers',
         name: 'special_offers',
         type: 'boolean',
         default: false,
@@ -468,7 +468,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Bathrooms (bathrooms)',
+        displayName: 'Bathrooms',
         name: 'bathrooms',
         type: 'number',
         typeOptions: {
@@ -487,7 +487,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Bedrooms (bedrooms)',
+        displayName: 'Bedrooms',
         name: 'bedrooms',
         type: 'number',
         typeOptions: {
@@ -516,7 +516,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Adults (adults)',
+        displayName: 'Adults',
         name: 'adults',
         type: 'number',
         typeOptions: {
@@ -535,7 +535,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Children Ages (children_ages)',
+        displayName: 'Children Ages',
         name: 'children_ages',
         type: 'string',
         default: '',
@@ -559,7 +559,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -584,7 +584,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

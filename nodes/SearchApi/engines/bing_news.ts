@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     default: '',
@@ -29,14 +29,14 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Search Query',
+    displayName: 'Filters',
     name: 'search_query',
     type: 'collection',
-    placeholder: 'Add Search Query',
+    placeholder: 'Add Filters',
     default: {},
     options: [
       {
-        displayName: 'Category (category)',
+        displayName: 'Category',
         name: 'category',
         type: 'string',
         default: '',
@@ -60,7 +60,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Device (device)',
+        displayName: 'Device',
         name: 'device',
         type: 'options',
         options: [
@@ -89,7 +89,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Market Code (market_code)',
+        displayName: 'Market Code',
         name: 'market_code',
         type: 'options',
         options: [
@@ -100,7 +100,7 @@ const properties: INodeProperties[] = [
           { name: 'en-au', value: 'en-au' },
           { name: 'en-ca', value: 'en-ca' },
           { name: 'en-gb', value: 'en-gb' },
-          { name: 'en-id', value: 'en-id' },
+          { name: 'En-ID', value: 'en-id' },
           { name: 'en-in', value: 'en-in' },
           { name: 'en-my', value: 'en-my' },
           { name: 'en-nz', value: 'en-nz' },
@@ -152,7 +152,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country Code (country_code)',
+        displayName: 'Country Code',
         name: 'country_code',
         type: 'options',
         options: countryOptions([
@@ -171,7 +171,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (language)',
+        displayName: 'Language',
         name: 'language',
         type: 'options',
         options: languageOptions([
@@ -201,7 +201,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Safe Search (safe_search)',
+        displayName: 'Safe Search',
         name: 'safe_search',
         type: 'options',
         options: [
@@ -220,12 +220,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Most recent', value: 'most_recent' },
+          { name: 'Most Recent', value: 'most_recent' },
         ],
         default: '',
         description: 'By default, news results are sorted by relevance. To get the most recent articles, set it to most_recent.',
@@ -238,21 +238,21 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Last 15 minutes', value: 'last_15_minutes' },
-          { name: 'Last 24 hours', value: 'last_24_hours' },
-          { name: 'Last 30 days', value: 'last_30_days' },
-          { name: 'Last 30 minutes', value: 'last_30_minutes' },
-          { name: 'Last 4 hours', value: 'last_4_hours' },
-          { name: 'Last 5 minutes', value: 'last_5_minutes' },
-          { name: 'Last 6 hours', value: 'last_6_hours' },
-          { name: 'Last 7 days', value: 'last_7_days' },
-          { name: 'Last hour', value: 'last_hour' },
-          { name: 'Last minute', value: 'last_minute' },
+          { name: 'Last 15 Minutes', value: 'last_15_minutes' },
+          { name: 'Last 24 Hours', value: 'last_24_hours' },
+          { name: 'Last 30 Days', value: 'last_30_days' },
+          { name: 'Last 30 Minutes', value: 'last_30_minutes' },
+          { name: 'Last 4 Hours', value: 'last_4_hours' },
+          { name: 'Last 5 Minutes', value: 'last_5_minutes' },
+          { name: 'Last 6 Hours', value: 'last_6_hours' },
+          { name: 'Last 7 Days', value: 'last_7_days' },
+          { name: 'Last Hour', value: 'last_hour' },
+          { name: 'Last Minute', value: 'last_minute' },
         ],
         default: '',
         description: 'Filters search results by publication time period. By default, returns all articles without a time filter.',
@@ -275,7 +275,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Page Number (page)',
+        displayName: 'Page Number',
         name: 'page',
         type: 'number',
         typeOptions: {
@@ -293,7 +293,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Results Per Page (num)',
+        displayName: 'Results Per Page',
         name: 'num',
         type: 'number',
         typeOptions: {
@@ -321,7 +321,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

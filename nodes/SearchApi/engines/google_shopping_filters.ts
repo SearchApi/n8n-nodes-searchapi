@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'All Filters Token (all_filters_token)',
+    displayName: 'All Filters Token',
     name: 'all_filters_token',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

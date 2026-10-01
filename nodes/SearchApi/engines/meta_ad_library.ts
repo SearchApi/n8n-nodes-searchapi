@@ -21,7 +21,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location ID (location_id)',
+        displayName: 'Location ID',
         name: 'location_id',
         type: 'string',
         default: '',
@@ -35,7 +35,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Page ID (page_id)',
+        displayName: 'Page ID',
         name: 'page_id',
         type: 'string',
         default: '',
@@ -49,7 +49,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Search Query (q)',
+        displayName: 'Search Query',
         name: 'q',
         type: 'string',
         default: '',
@@ -73,7 +73,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Content Languages (content_languages)',
+        displayName: 'Content Languages',
         name: 'content_languages',
         type: 'options',
         options: languageOptions([
@@ -102,7 +102,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Country (country)',
+        displayName: 'Country',
         name: 'country',
         type: 'options',
         options: countryOptions([
@@ -143,7 +143,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Active Status (active_status)',
+        displayName: 'Active Status',
         name: 'active_status',
         type: 'options',
         options: [
@@ -163,16 +163,16 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Ad Type (ad_type)',
+        displayName: 'Ad Type',
         name: 'ad_type',
         type: 'options',
         options: [
           { name: 'All', value: 'all' },
           { name: 'Any', value: '' },
-          { name: 'Credit ads', value: 'credit_ads' },
-          { name: 'Employment ads', value: 'employment_ads' },
-          { name: 'Housing ads', value: 'housing_ads' },
-          { name: 'Political and issue ads', value: 'political_and_issue_ads' },
+          { name: 'Credit Ads', value: 'credit_ads' },
+          { name: 'Employment Ads', value: 'employment_ads' },
+          { name: 'Housing Ads', value: 'housing_ads' },
+          { name: 'Political and Issue Ads', value: 'political_and_issue_ads' },
         ],
         default: '',
         description: 'Specifies the type of ads to return. Default is all. Supported values include: all, political_and_issue_ads, housing_ads, employment_ads, credit_ads. Note: Availability may depend on the selected country. Check the full list of supported Meta Ad Library countries and their supported ad_type.',
@@ -185,7 +185,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'End Date (end_date)',
+        displayName: 'End Date',
         name: 'end_date',
         type: 'string',
         default: '',
@@ -199,14 +199,14 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Media Type (media_type)',
+        displayName: 'Media Type',
         name: 'media_type',
         type: 'options',
         options: [
           { name: 'All', value: 'all' },
           { name: 'Any', value: '' },
           { name: 'Image', value: 'image' },
-          { name: 'Image and meme', value: 'image_and_meme' },
+          { name: 'Image and Meme', value: 'image_and_meme' },
           { name: 'Meme', value: 'meme' },
           { name: 'None', value: 'none' },
           { name: 'Video', value: 'video' },
@@ -222,12 +222,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Platforms (platforms)',
+        displayName: 'Platforms',
         name: 'platforms',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Audience network', value: 'audience_network' },
+          { name: 'Audience Network', value: 'audience_network' },
           { name: 'Facebook', value: 'facebook' },
           { name: 'Instagram', value: 'instagram' },
           { name: 'Messenger', value: 'messenger' },
@@ -244,13 +244,13 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Sort By (sort_by)',
+        displayName: 'Sort By',
         name: 'sort_by',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Impressions high to low', value: 'impressions_high_to_low' },
-          { name: 'Most recent', value: 'most_recent' },
+          { name: 'Impressions High to Low', value: 'impressions_high_to_low' },
+          { name: 'Most Recent', value: 'most_recent' },
         ],
         default: '',
         description: 'Specifies the sort order of results. Supported values are: most_recent, impressions_high_to_low. Default is impressions_high_to_low.',
@@ -263,7 +263,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Start Date (start_date)',
+        displayName: 'Start Date',
         name: 'start_date',
         type: 'string',
         default: '',
@@ -287,7 +287,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -312,7 +312,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

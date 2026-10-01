@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -30,7 +30,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Location Coordinates (ll)',
+    displayName: 'Location Coordinates',
     name: 'll',
     type: 'string',
     default: '',
@@ -52,7 +52,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -83,7 +83,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Interface Language (hl)',
+        displayName: 'Interface Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -112,7 +112,7 @@ const properties: INodeProperties[] = [
     displayOptions,
   },
   {
-    displayName: 'Page (page)',
+    displayName: 'Page',
     name: 'page',
     type: 'number',
     typeOptions: {
@@ -138,7 +138,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

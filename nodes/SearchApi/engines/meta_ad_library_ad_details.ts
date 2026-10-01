@@ -20,7 +20,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Ad Archive ID (ad_archive_id)',
+        displayName: 'Ad Archive ID',
         name: 'ad_archive_id',
         type: 'string',
         default: '',
@@ -34,7 +34,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Ad Details Token (ad_details_token)',
+        displayName: 'Ad Details Token',
         name: 'ad_details_token',
         type: 'string',
         typeOptions: { password: true },
@@ -59,7 +59,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'URL (url)',
+    displayName: 'URL',
     name: 'url',
     type: 'string',
     required: true,
@@ -36,7 +36,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Crop (crop)',
+        displayName: 'Crop',
         name: 'crop',
         type: 'string',
         default: '',
@@ -50,7 +50,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Crop ID (crop_id)',
+        displayName: 'Crop ID',
         name: 'crop_id',
         type: 'string',
         default: '',
@@ -74,7 +74,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

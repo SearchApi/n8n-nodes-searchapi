@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     required: true,
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Locale (locale)',
+        displayName: 'Locale',
         name: 'locale',
         type: 'options',
         options: localeOptions([
@@ -70,7 +70,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Duration (duration)',
+        displayName: 'Duration',
         name: 'duration',
         type: 'options',
         options: [
@@ -90,12 +90,12 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'License (license)',
+        displayName: 'License',
         name: 'license',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Creative common', value: 'creative_common' },
+          { name: 'Creative Common', value: 'creative_common' },
           { name: 'Youtube', value: 'youtube' },
         ],
         default: '',
@@ -109,7 +109,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Resolution (resolution)',
+        displayName: 'Resolution',
         name: 'resolution',
         type: 'options',
         options: [
@@ -128,16 +128,16 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Time Period (time_period)',
+        displayName: 'Time Period',
         name: 'time_period',
         type: 'options',
         options: [
           { name: 'Any', value: '' },
-          { name: 'Any time', value: 'any_time' },
-          { name: 'Past day', value: 'past_day' },
-          { name: 'Past month', value: 'past_month' },
-          { name: 'Past week', value: 'past_week' },
-          { name: 'Past year', value: 'past_year' },
+          { name: 'Any Time', value: 'any_time' },
+          { name: 'Past Day', value: 'past_day' },
+          { name: 'Past Month', value: 'past_month' },
+          { name: 'Past Week', value: 'past_week' },
+          { name: 'Past Year', value: 'past_year' },
         ],
         default: '',
         description: 'Filters results by date',
@@ -160,7 +160,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Next Page Token (next_page_token)',
+        displayName: 'Next Page Token',
         name: 'next_page_token',
         type: 'string',
         typeOptions: { password: true },
@@ -185,7 +185,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,
