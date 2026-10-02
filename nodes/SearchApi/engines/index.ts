@@ -48,3 +48,8 @@ export { duckduckgo } from './duckduckgo';
 export { duckduckgo_light } from './duckduckgo_light';
 export { duckduckgo_images } from './duckduckgo_images';
 export { duckduckgo_videos } from './duckduckgo_videos';
+export { google_ai_mode } from './google_ai_mode';
+export { google_ai_overview } from './google_ai_overview';
+export { chatgpt } from './chatgpt';
+export { gemini } from './gemini';
+export { bing_copilot } from './bing_copilot';
