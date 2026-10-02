@@ -14,7 +14,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Search Query (q)',
+    displayName: 'Search Query',
     name: 'q',
     type: 'string',
     default: '',
@@ -29,7 +29,7 @@ const properties: INodeProperties[] = [
     },
   },
   {
-    displayName: 'Image URL (url)',
+    displayName: 'Image URL',
     name: 'url',
     type: 'string',
     default: '',
@@ -51,21 +51,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Location (location)',
-        name: 'location',
-        type: 'string',
-        default: '',
-        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
-        routing: {
-          request: {
-            qs: {
-              location: '={{$value}}',
-            },
-          },
-        },
-      },
-      {
-        displayName: 'Encoded Location (uule)',
+        displayName: 'Encoded Location',
         name: 'uule',
         type: 'string',
         default: '',
@@ -74,6 +60,20 @@ const properties: INodeProperties[] = [
           request: {
             qs: {
               uule: '={{$value}}',
+            },
+          },
+        },
+      },
+      {
+        displayName: 'Location',
+        name: 'location',
+        type: 'string',
+        default: '',
+        description: 'Specifies the canonical location of the search. If multiple locations match your input, the most popular one will be selected. For example, location=New York selects New York,United States, or location=London selects London TV Region,England,United Kingdom.',
+        routing: {
+          request: {
+            qs: {
+              location: '={{$value}}',
             },
           },
         },
@@ -89,7 +89,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Country (gl)',
+        displayName: 'Country',
         name: 'gl',
         type: 'options',
         options: countryOptions([
@@ -120,7 +120,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Language (hl)',
+        displayName: 'Language',
         name: 'hl',
         type: 'options',
         options: languageOptions([
@@ -156,7 +156,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

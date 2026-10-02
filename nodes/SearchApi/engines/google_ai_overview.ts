@@ -13,13 +13,13 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Page Token (page_token)',
+    displayName: 'Page Token',
     name: 'page_token',
     type: 'string',
     required: true,
     typeOptions: { password: true },
     default: '',
-    description: 'Base64-encoded page token containing the query and parameters for fetching the AI Overview content. Take it from the ai_overview.page_token field of a Google engine response.',
+    description: 'Base64-encoded page token containing the query and parameters for fetching the AI Overview content. Google only returns ai_overview.page_token when it defers the overview, and the token expires in under 1 minute, so chain this node right after the Google node and pass the token straight through.',
     displayOptions,
     routing: {
       request: {
@@ -37,7 +37,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Link (link)',
+        displayName: 'Link',
         name: 'link',
         type: 'options',
         options: [
@@ -65,7 +65,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,

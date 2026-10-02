@@ -13,7 +13,7 @@ const resource: INodePropertyOptions = {
 
 const properties: INodeProperties[] = [
   {
-    displayName: 'Prompt (q)',
+    displayName: 'Prompt',
     name: 'q',
     type: 'string',
     required: true,
@@ -36,7 +36,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Expand Entities (expand_entities)',
+        displayName: 'Expand Entities',
         name: 'expand_entities',
         type: 'boolean',
         default: false,
@@ -50,7 +50,7 @@ const properties: INodeProperties[] = [
         },
       },
       {
-        displayName: 'Web Search (web_search)',
+        displayName: 'Web Search',
         name: 'web_search',
         type: 'boolean',
         default: false,
@@ -74,7 +74,7 @@ const properties: INodeProperties[] = [
     default: {},
     options: [
       {
-        displayName: 'Zero Retention (zero_retention)',
+        displayName: 'Zero Retention',
         name: 'zero_retention',
         type: 'boolean',
         default: false,
